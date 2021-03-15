@@ -3,6 +3,8 @@
 
 #include <string.h>
 
+#include "Sword.hpp"
+
 using namespace std;
 
 namespace HE_Arc::RPG
@@ -15,6 +17,7 @@ namespace HE_Arc::RPG
             int intelligence;
             double hp;
             string name;
+            Sword sword;
 
         public:
             Hero();
