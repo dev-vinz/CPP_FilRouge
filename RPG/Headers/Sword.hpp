@@ -5,13 +5,18 @@ namespace HE_Arc::RPG
 {
     class Sword
     {
-        private:
-            int damage;
+    private:
+        // Atributes
+        int damage;
 
-        public:
-            Sword(int _damage);
+    public:
+        // Constructors and Destructor
+        Sword();
+        Sword(int _damage);
+        Sword(const Sword &);
 
-            int getDamage() const;
+        // Methods int
+        int getDamage() const { return this->damage; }
     };
 }
 

@@ -3,19 +3,25 @@
 namespace HE_Arc::RPG
 {
     /**
+     * Default constructor
+     */
+    Sword::Sword()
+    {
+    }
+
+    /**
      * Constructor with initialization
      * @param _damage The damage made by the sword
      */
     Sword::Sword(int _damage) : damage(_damage)
     {
-
     }
 
     /**
-     * Get the damage of the sword
+     * Constructor per copy
+     * @param s The sword to copy
      */
-    int Sword::getDamage() const
+    Sword::Sword(const Sword &s) : damage(s.damage)
     {
-        return this->damage;
     }
 }
