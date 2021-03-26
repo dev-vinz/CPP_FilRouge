@@ -5,7 +5,7 @@ namespace HE_Arc::RPG
     /**
      * Default constructor
      */
-    Sword::Sword()
+    Sword::Sword() : damage(0)
     {
     }
 

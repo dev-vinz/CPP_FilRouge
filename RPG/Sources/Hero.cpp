@@ -9,10 +9,8 @@ namespace HE_Arc::RPG
     /**
      * Default constructor
      */
-    Hero::Hero() : strength(0), agility(0), intelligence(0), hp(0), name("no_name")
+    Hero::Hero() : strength(0), agility(0), intelligence(0), hp(0), name("no_name"), sword(new Sword)
     {
-        this->sword = new Sword;
-        this->sword = nullptr;
     }
 
     /**
@@ -23,10 +21,8 @@ namespace HE_Arc::RPG
      * @param _hp The HP
      * @param _name The name
      */
-    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, std::string _name) : strength(_strength), agility(_agility), intelligence(_intelligence), hp(_hp), name(_name)
+    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword *_sword) : strength(_strength), agility(_agility), intelligence(_intelligence), hp(_hp), name(_name), sword(_sword)
     {
-        this->sword = new Sword;
-        this->sword = nullptr;
     }
 
     /**
@@ -65,7 +61,7 @@ namespace HE_Arc::RPG
              << "HERO : " << this->name
              << "\n=================\n"
              << "\nstrength : " << this->strength
-             << "\nagility : " << this->getagility()
+             << "\nagility : " << this->getAgility()
              << "\nintelligence : " << this->intelligence
              << "\nHP : " << this->hp
              << endl;
@@ -100,7 +96,7 @@ namespace HE_Arc::RPG
                  << "HERO : " << h.name
                  << "\n=================\n"
                  << "\nstrength : " << h.strength
-                 << "\nagility : " << h.getagility()
+                 << "\nagility : " << h.getAgility()
                  << "\nintelligence : " << h.intelligence
                  << "\nHP : " << h.hp;
     }

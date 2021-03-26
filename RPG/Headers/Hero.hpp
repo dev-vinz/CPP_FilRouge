@@ -29,12 +29,12 @@ namespace HE_Arc::RPG
     public:
         // Constructors and Destructor
         Hero();
-        Hero(int _strength, int _agility, int _intelligence, double _hp, string _name);
+        Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword *_sword);
         Hero(const Hero &);
         ~Hero();
 
         // Methods int
-        int getagility() const { return this->agility; }
+        int getAgility() const { return this->agility; }
 
         // Methods void
         void interact(const Hero &);
