@@ -3,7 +3,7 @@
 
 #include <string.h>
 
-#include "Sword.hpp"
+#include "..\..\weapons\include\Sword.hpp"
 
 using namespace std;
 

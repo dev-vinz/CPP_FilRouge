@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../Headers/Hero.hpp"
+#include "..\include\Hero.hpp"
 
 using namespace std;
 

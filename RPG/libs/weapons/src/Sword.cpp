@@ -1,14 +1,7 @@
-#include "../Headers/Sword.hpp"
+#include "..\include\Sword.hpp"
 
 namespace HE_Arc::RPG
 {
-    /**
-     * Default constructor
-     */
-    Sword::Sword() : damage(0)
-    {
-    }
-
     /**
      * Constructor with initialization
      * @param _damage The damage made by the sword

@@ -11,8 +11,7 @@ namespace HE_Arc::RPG
 
     public:
         // Constructors and Destructor
-        Sword();
-        Sword(int _damage);
+        Sword(int _damage = 0);
         Sword(const Sword &);
 
         // Methods int
