@@ -1,6 +1,7 @@
-#ifndef HERO_H
-#define HERO_H
+#ifndef HERO_HPP
+#define HERO_HPP
 
+#include <iostream>
 #include <string.h>
 
 #include "..\..\weapons\include\Sword.hpp"
@@ -11,7 +12,7 @@ namespace HE_Arc::RPG
 {
     class Hero
     {
-    private:
+    protected:
         // Attributes
         int strength;
         int agility;
@@ -33,12 +34,13 @@ namespace HE_Arc::RPG
         Hero(const Hero &);
         ~Hero();
 
-        // Methods int
+        // Getters
         int getAgility() const { return this->agility; }
+        string getName() const { return this->name; }
 
-        // Methods void
-        void interact(const Hero &);
-        void show();
+        // Methods virtual
+        void virtual interact(const Hero &) = 0;
+        void virtual show() const;
 
         // Override operator
         Hero &operator=(const Hero &);

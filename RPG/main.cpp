@@ -1,6 +1,9 @@
 #include <iostream>
 
 #include "libs\actors\include\Hero.hpp"
+#include "libs\actors\include\Necromancer.hpp"
+#include "libs\actors\include\Warrior.hpp"
+#include "libs\actors\include\Wizard.hpp"
 // https://medium.com/swlh/c-project-structure-for-cmake-67d60135f6f5
 
 using namespace std;
@@ -8,17 +11,21 @@ using namespace HE_Arc::RPG;
 
 int main()
 {
-    Hero myHeroOne = Hero(10, 5, 1, 20, "Voldemort", new Sword());
-    Hero myHeroTwo(2, 2, 10, 10, "Gandalf", new Sword());
-    Hero myHeroThree;
+    Wizard myHeroOne(7, 8, 10, 150, "Voldemort", 10);
+    Warrior myHeroTwo(10, 2, 0, 200, "Garrosh");
+    Necromancer myHeroThree(6, 6, 10, 100, "Gul'dan", 8);
+    Wizard myHeroFour;
 
-    cout << myHeroOne << endl;
-    myHeroTwo.show();
-    cout << myHeroThree << endl;
+    myHeroOne.show();
+    cout << myHeroTwo << endl;
+    myHeroThree.show();
+    cout << myHeroFour << endl;
 
     cout << endl;
 
+    myHeroOne.castSpell();
     myHeroTwo.interact(myHeroOne);
+    myHeroThree.riseUndead();
 
     return 0;
 }

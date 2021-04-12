@@ -1,5 +1,5 @@
-#ifndef SWORD_H
-#define SWORD_H
+#ifndef SWORD_HPP
+#define SWORD_HPP
 
 namespace HE_Arc::RPG
 {

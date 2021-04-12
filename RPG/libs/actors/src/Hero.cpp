@@ -1,15 +1,11 @@
-#include <iostream>
-
 #include "..\include\Hero.hpp"
-
-using namespace std;
 
 namespace HE_Arc::RPG
 {
     /**
      * Default constructor
      */
-    Hero::Hero() : strength(0), agility(0), intelligence(0), hp(0), name("no_name"), sword(new Sword)
+    Hero::Hero() : strength(0), agility(0), intelligence(0), hp(0), name("no_name"), sword(new Sword())
     {
     }
 
@@ -20,6 +16,7 @@ namespace HE_Arc::RPG
      * @param _intelligence The intelligence
      * @param _hp The HP
      * @param _name The name
+     * @param _sword The sword
      */
     Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword *_sword) : strength(_strength), agility(_agility), intelligence(_intelligence), hp(_hp), name(_name), sword(_sword)
     {
@@ -44,18 +41,9 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Make two heroes interact each other
-     * @param otherHero The other hero
-     */
-    void Hero::interact(const Hero &otherHero)
-    {
-        std::cout << "Hello valiant " << otherHero.name << " ! I'm " << this->name << endl;
-    }
-
-    /**
      * Show the different attributes of the hero
      */
-    void Hero::show()
+    void Hero::show() const
     {
         cout << "\n=================\n"
              << "HERO : " << this->name
