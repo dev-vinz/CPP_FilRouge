@@ -13,7 +13,7 @@ namespace HE_Arc::RPG
     {
     public:
         // Constructors and destructor
-        Warrior(int _strength = 0, int _agility = 0, int _intelligence = 0, double _hp = 0, string _name = "no_name");
+        Warrior(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pStuff);
 
         // Override methods
         void interact(const Hero &) override;

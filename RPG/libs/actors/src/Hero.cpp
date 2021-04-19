@@ -3,32 +3,16 @@
 namespace HE_Arc::RPG
 {
     /**
-     * Default constructor
-     */
-    Hero::Hero() : strength(0), agility(0), intelligence(0), hp(0), name("no_name"), sword(new Sword())
-    {
-    }
-
-    /**
      * Constructor with initialization of all parameters
      * @param _strength The strength
      * @param _agility The agility
      * @param _intelligence The intelligence
      * @param _hp The HP
      * @param _name The name
-     * @param _sword The sword
+     * @param _pStuff The stuff
      */
-    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword *_sword) : strength(_strength), agility(_agility), intelligence(_intelligence), hp(_hp), name(_name), sword(_sword)
+    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pStuff) : strength(_strength), agility(_agility), intelligence(_intelligence), hp(_hp), name(_name), pStuff(_pStuff)
     {
-    }
-
-    /**
-     * Constructor per copy
-     * @param h The hero to copy
-     */
-    Hero::Hero(const Hero &h) : strength(h.strength), agility(h.agility), intelligence(h.intelligence), hp(h.hp), name(h.name)
-    {
-        this->sword = new Sword(*h.sword);
     }
 
     /**
@@ -36,8 +20,8 @@ namespace HE_Arc::RPG
      */
     Hero::~Hero()
     {
-        delete this->sword;
-        this->sword = nullptr;
+        delete this->pStuff;
+        this->pStuff = nullptr;
     }
 
     /**
@@ -52,24 +36,8 @@ namespace HE_Arc::RPG
              << "\nagility : " << this->getAgility()
              << "\nintelligence : " << this->intelligence
              << "\nHP : " << this->hp
+             << "\nStuff : " << this->pStuff->getName()
              << endl;
-    }
-
-    /**
-     * Override of operator =
-     * @param h The hero
-     * @returns The hero copied
-     */
-    Hero &Hero::operator=(const Hero &h)
-    {
-        this->strength = h.strength;
-        this->agility = h.agility;
-        this->intelligence = h.intelligence;
-        this->hp = h.hp;
-        this->name = h.name;
-        this->sword = new Sword(*h.sword);
-
-        return *this;
     }
 
     /**

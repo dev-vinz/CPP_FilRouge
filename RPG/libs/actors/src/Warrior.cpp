@@ -9,8 +9,9 @@ namespace HE_Arc::RPG
      * @param _intelligence The intelligence
      * @param _hp The HP
      * @param _name The name
+     * @param _pStuff The stuff
      */
-    Warrior::Warrior(int _strength, int _agility, int _intelligence, double _hp, string _name) : Hero(_strength, _agility, _intelligence, _hp, _name, new Sword())
+    Warrior::Warrior(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pStuff) : Hero(_strength, _agility, _intelligence, _hp, _name, _pStuff)
     {
     }
 

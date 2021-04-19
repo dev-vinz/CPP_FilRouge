@@ -17,4 +17,22 @@ namespace HE_Arc::RPG
     Sword::Sword(const Sword &s) : damage(s.damage)
     {
     }
+
+    /**
+     * Get the sword's damage
+     * @returns The damage
+     */
+    int Sword::getFeature() const
+    {
+        return this->damage;
+    }
+
+    /**
+     * Get the name
+     * @returns The name
+     */
+    string Sword::getName() const
+    {
+        return "Sword";
+    }
 }

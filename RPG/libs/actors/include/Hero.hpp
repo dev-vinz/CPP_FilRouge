@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string.h>
 
-#include "..\..\weapons\include\Sword.hpp"
+#include "..\..\stuff\include\IObject.hpp"
 
 using namespace std;
 
@@ -14,25 +14,25 @@ namespace HE_Arc::RPG
     {
     protected:
         // Attributes
-        int strength;
-        int agility;
-        int intelligence;
+        int strength = 0;
+        int agility = 0;
+        int intelligence = 0;
 
-        double hp;
+        double hp = 0;
 
-        string name;
+        string name = "no_name";
 
-        Sword *sword;
+        IObject *pStuff = nullptr;
 
         // Friend methods
         friend ostream &operator<<(ostream &, const Hero &);
 
     public:
         // Constructors and Destructor
-        Hero();
-        Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, Sword *_sword);
-        Hero(const Hero &);
-        ~Hero();
+        Hero() = default;
+        Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pStuff);
+        Hero(const Hero &) = delete;
+        virtual ~Hero();
 
         // Getters
         int getAgility() const { return this->agility; }
@@ -43,7 +43,7 @@ namespace HE_Arc::RPG
         void virtual show() const;
 
         // Override operator
-        Hero &operator=(const Hero &);
+        Hero &operator=(const Hero &) = delete;
     };
 }
 

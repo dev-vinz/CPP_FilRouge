@@ -13,11 +13,12 @@ namespace HE_Arc::RPG
     {
     protected:
         // Attributes
-        int mana;
+        int mana = 0;
 
     public:
         // Constructors and destructor
-        Wizard(int _strength = 0, int _agility = 0, int _intelligence = 0, double _hp = 0, string _name = "no_name", int _mana = 0);
+        Wizard() = default;
+        Wizard(int _strength, int _agility, int _intelligence, double _hp, int _mana, string _name, IObject *_pStuff);
 
         // Methods void
         void castSpell();

@@ -11,7 +11,7 @@ namespace HE_Arc::RPG
      * @param _name The name
      * @param _mana The mana
      */
-    Necromancer::Necromancer(int _strength, int _agility, int _intelligence, double _hp, string _name, int _mana) : Wizard(_strength, _agility, _intelligence, _hp, _name, _mana)
+    Necromancer::Necromancer(int _strength, int _agility, int _intelligence, double _hp, int _mana, string _name, IObject *_pStuff) : Wizard(_strength, _agility, _intelligence, _hp, _mana, _name, _pStuff)
     {
     }
 
