@@ -16,11 +16,14 @@ namespace HE_Arc::RPG
         int mana = 0;
 
     public:
-        // Constructors and destructor
+        // Constructors and Destructor
         Wizard() = default;
         Wizard(int _strength, int _agility, int _intelligence, double _hp, int _mana, string _name, IObject *_pStuff);
 
-        // Methods void
+        // Getters
+        int getMana() const { return this->mana; }
+
+        // Void methods
         void castSpell();
 
         // Override methods

@@ -39,14 +39,14 @@ namespace HE_Arc::RPG
     void Wizard::show() const
     {
         cout << "\n=================\n"
-             << "WIZARD : " << this->name
+             << "WIZARD : " << this->getName()
              << "\n=================\n"
-             << "\nstrength : " << this->strength
+             << "\nstrength : " << this->getStrength()
              << "\nagility : " << this->getAgility()
-             << "\nintelligence : " << this->intelligence
-             << "\nHP : " << this->hp
-             << "\nmana : " << this->mana
-             << "\nStuff : " << this->pStuff->getName()
+             << "\nintelligence : " << this->getIntelligence()
+             << "\nHP : " << this->getHp()
+             << "\nmana : " << this->getMana()
+             << "\nStuff : " << this->getStuff()->getName()
              << endl;
     }
 }

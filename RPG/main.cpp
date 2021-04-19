@@ -40,6 +40,25 @@ int main()
     myHeroTwo->interact(*myHeroOne);
     myHeroThree->riseUndead();
 
+    cout << endl;
+
+    myHeroFive->backPack.pack(new Sword());
+    myHeroFive->backPack.pack(new Sword(1));
+    myHeroFive->backPack.pack(new Sword(2));
+    myHeroFive->backPack.pack(new Shield(3));
+    myHeroFive->backPack.pack(new Shield(4));
+    myHeroFive->backPack.pack(new Potion(5));
+    myHeroFive->backPack.pack(new Potion(6));
+
+    for (int k = 0; k < 7; k++)
+    {
+        IObject* myItem = myHeroFive->backPack.unPack();
+        cout << myItem->getName() << "\t" << myItem->getFeature() << endl;
+
+        delete myItem;
+        myItem = nullptr;
+    }
+
     for_each(myList.begin(), myList.end(), [](Hero *h) {
         delete h;
         h = nullptr;

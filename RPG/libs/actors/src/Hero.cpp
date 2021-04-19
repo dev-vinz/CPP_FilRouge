@@ -30,13 +30,13 @@ namespace HE_Arc::RPG
     void Hero::show() const
     {
         cout << "\n=================\n"
-             << "HERO : " << this->name
+             << "HERO : " << this->getName()
              << "\n=================\n"
-             << "\nstrength : " << this->strength
+             << "\nstrength : " << this->getStrength()
              << "\nagility : " << this->getAgility()
-             << "\nintelligence : " << this->intelligence
-             << "\nHP : " << this->hp
-             << "\nStuff : " << this->pStuff->getName()
+             << "\nintelligence : " << this->getIntelligence()
+             << "\nHP : " << this->getHp()
+             << "\nStuff : " << this->getStuff()->getName()
              << endl;
     }
 

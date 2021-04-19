@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string.h>
 
+#include "..\..\stuff\include\BackPack.hpp"
 #include "..\..\stuff\include\IObject.hpp"
 
 using namespace std;
@@ -34,9 +35,16 @@ namespace HE_Arc::RPG
         Hero(const Hero &) = delete;
         virtual ~Hero();
 
+        // Attributes
+        BackPack backPack;
+
         // Getters
+        int getStrength() const { return this->strength; }
         int getAgility() const { return this->agility; }
+        int getIntelligence() const { return this->intelligence; }
+        double getHp() const { return this->hp; }
         string getName() const { return this->name; }
+        IObject* getStuff() const { return this->pStuff; }
 
         // Methods virtual
         void virtual interact(const Hero &) = 0;
