@@ -3,7 +3,7 @@
 namespace HE_Arc::RPG
 {
     /**
-     * Constructor with initializer
+     * @brief Constructor with initializer
      * @param _power The power of the potion
      */
     Potion::Potion(int _power) : power(_power)
@@ -11,7 +11,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Constructor per copy
+     * @brief Constructor per copy
      * @param p The potion to copy
      */
     Potion::Potion(const Potion &p) : power(p.power)
@@ -19,7 +19,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Get the potion's power
+     * @brief Get the potion's power
      * @returns The power
      */
     int Potion::getFeature() const
@@ -28,7 +28,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Get the name
+     * @brief Get the name
      * @returns The name
      */
     string Potion::getName() const

@@ -12,21 +12,16 @@ namespace HE_Arc::RPG
     class Wizard : public Hero
     {
     protected:
-        // Attributes
         int mana = 0;
 
     public:
-        // Constructors and Destructor
         Wizard() = default;
-        Wizard(int _strength, int _agility, int _intelligence, double _hp, int _mana, string _name, IObject *_pStuff);
+        Wizard(string _name, int _agility, int _intelligence, int _strength, double _hp, int _mana, IObject *_pStuff);
 
-        // Getters
-        int getMana() const { return this->mana; }
+        int getMana() const;
 
-        // Void methods
         void castSpell();
 
-        // Override methods
         void interact(const Hero &) override;
         void show() const override;
     };

@@ -14,10 +14,9 @@ namespace HE_Arc::RPG
     class Hero
     {
     protected:
-        // Attributes
-        int strength = 0;
         int agility = 0;
         int intelligence = 0;
+        int strength = 0;
 
         double hp = 0;
 
@@ -25,32 +24,26 @@ namespace HE_Arc::RPG
 
         IObject *pStuff = nullptr;
 
-        // Friend methods
         friend ostream &operator<<(ostream &, const Hero &);
 
     public:
-        // Constructors and Destructor
         Hero() = default;
-        Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pStuff);
+        Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff);
         Hero(const Hero &) = delete;
         virtual ~Hero();
 
-        // Attributes
         BackPack backPack;
 
-        // Getters
-        int getStrength() const { return this->strength; }
-        int getAgility() const { return this->agility; }
-        int getIntelligence() const { return this->intelligence; }
-        double getHp() const { return this->hp; }
-        string getName() const { return this->name; }
-        IObject* getStuff() const { return this->pStuff; }
+        string getName() const;
+        int getAgility() const;
+        int getIntelligence() const;
+        int getStrength() const;
+        double getHp() const;
+        IObject *getStuff() const;
 
-        // Methods virtual
         void virtual interact(const Hero &) = 0;
         void virtual show() const;
 
-        // Override operator
         Hero &operator=(const Hero &) = delete;
     };
 }

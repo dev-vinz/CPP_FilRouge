@@ -13,22 +13,19 @@ namespace HE_Arc::RPG
     class BackPack
     {
     private:
-        // Attributes
         stack<IObject *> mStack;
 
     public:
-        // Constructors and Destructor
         BackPack() = default;
         ~BackPack() = default;
 
-        // Bool methods
         bool isNotEmpty() const;
 
-        // Void methods
-        void pack(IObject *);
+        int getSize() const;
 
-        // IObject methods
         IObject *unPack();
+
+        void pack(IObject *);
     };
 }
 

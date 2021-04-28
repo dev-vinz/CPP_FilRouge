@@ -3,7 +3,7 @@
 namespace HE_Arc::RPG
 {
     /**
-     * Constructor with initialization
+     * @brief Constructor with initialization
      * @param _damage The damage made by the sword
      */
     Sword::Sword(int _damage) : damage(_damage)
@@ -11,7 +11,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Constructor per copy
+     * @brief Constructor per copy
      * @param s The sword to copy
      */
     Sword::Sword(const Sword &s) : damage(s.damage)
@@ -19,7 +19,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Get the sword's damage
+     * @brief Get the sword's damage
      * @returns The damage
      */
     int Sword::getFeature() const
@@ -28,7 +28,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Get the name
+     * @brief Get the name
      * @returns The name
      */
     string Sword::getName() const

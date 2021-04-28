@@ -3,7 +3,7 @@
 namespace HE_Arc::RPG
 {
     /**
-     * Constructor with initialization
+     * @brief Constructor with initialization
      * @param _solidity The solidity of the shield
      */
     Shield::Shield(int _solidity) : solidity(_solidity)
@@ -11,7 +11,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Constructor per copy
+     * @brief Constructor per copy
      * @param s The shield to copy
      */
     Shield::Shield(const Shield &s) : solidity(s.solidity)
@@ -19,7 +19,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Get the shields' solidity
+     * @brief Get the shields' solidity
      * @returns The solidity
      */
     int Shield::getFeature() const
@@ -28,7 +28,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Get the name
+     * @brief Get the name
      * @returns The name
      */
     string Shield::getName() const

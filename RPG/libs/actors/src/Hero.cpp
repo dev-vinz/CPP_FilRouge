@@ -3,20 +3,20 @@
 namespace HE_Arc::RPG
 {
     /**
-     * Constructor with initialization of all parameters
-     * @param _strength The strength
+     * @brief Constructor with initialization of all parameters
+     * @param _name The name
      * @param _agility The agility
      * @param _intelligence The intelligence
+     * @param _strength The strength
      * @param _hp The HP
-     * @param _name The name
      * @param _pStuff The stuff
      */
-    Hero::Hero(int _strength, int _agility, int _intelligence, double _hp, string _name, IObject *_pStuff) : strength(_strength), agility(_agility), intelligence(_intelligence), hp(_hp), name(_name), pStuff(_pStuff)
+    Hero::Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff) : name(_name), agility(_agility), intelligence(_intelligence), strength(_strength), hp(_hp), pStuff(_pStuff)
     {
     }
 
     /**
-     * Destructor
+     * @brief Destructor, delete the pointer on stuff
      */
     Hero::~Hero()
     {
@@ -25,23 +25,77 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * Show the different attributes of the hero
+     * @brief Get the name
+     * @returns The name
+     */
+    string Hero::getName() const
+    {
+        return this->name;
+    }
+
+    /**
+     * @brief Get the agility
+     * @returns The agility
+     */
+    int Hero::getAgility() const
+    {
+        return this->agility;
+    }
+
+    /**
+     * @brief Get the intelligence
+     * @returns The intelligence
+     */
+    int Hero::getIntelligence() const
+    {
+        return this->intelligence;
+    }
+
+    /**
+     * @brief Get the strength
+     * @returns The strength
+     */
+    int Hero::getStrength() const
+    {
+        return this->strength;
+    }
+
+    /**
+     * @brief Get the HP
+     * @returns The HP
+     */
+    double Hero::getHp() const
+    {
+        return this->hp;
+    }
+
+    /**
+     * @brief Get the pointer on stuff
+     * @returns The pointer
+     */
+    IObject *Hero::getStuff() const
+    {
+        return this->pStuff;
+    }
+
+    /**
+     * @brief Show the different attributes of the hero
      */
     void Hero::show() const
     {
         cout << "\n=================\n"
              << "HERO : " << this->getName()
              << "\n=================\n"
-             << "\nstrength : " << this->getStrength()
-             << "\nagility : " << this->getAgility()
-             << "\nintelligence : " << this->getIntelligence()
+             << "\nAgility : " << this->getAgility()
+             << "\nIntelligence : " << this->getIntelligence()
+             << "\nStrength : " << this->getStrength()
              << "\nHP : " << this->getHp()
              << "\nStuff : " << this->getStuff()->getName()
              << endl;
     }
 
     /**
-     * Override of operator <<
+     * @brief Override of operator <<
      * @param s The stream
      * @param h The hero
      * @returns The stream
@@ -49,11 +103,12 @@ namespace HE_Arc::RPG
     ostream &operator<<(ostream &s, const Hero &h)
     {
         return s << "\n=================\n"
-                 << "HERO : " << h.name
+                 << "HERO : " << h.getName()
                  << "\n=================\n"
-                 << "\nstrength : " << h.strength
-                 << "\nagility : " << h.getAgility()
-                 << "\nintelligence : " << h.intelligence
-                 << "\nHP : " << h.hp;
+                 << "\nAgility : " << h.getAgility()
+                 << "\nIntelligence : " << h.getIntelligence()
+                 << "\nStrength : " << h.getStrength()
+                 << "\nHP : " << h.getHp()
+                 << "\nStuff : " << h.getStuff()->getName();
     }
 }

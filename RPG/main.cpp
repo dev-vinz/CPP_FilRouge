@@ -17,11 +17,11 @@ using namespace HE_Arc::RPG;
 
 int main()
 {
-    Wizard *myHeroOne = new Wizard(7, 8, 10, 150, 10, "Voldemort", new Potion(900));
-    Warrior *myHeroTwo = new Warrior(10, 2, 0, 200, "Garrosh", new Shield(500));
-    Necromancer *myHeroThree = new Necromancer(6, 6, 10, 100, 8, "Gul'dan", new Potion());
-    Wizard *myHeroFour = new Wizard(10, 10, 10, 100, 5, "Harry Potter", new Potion(100));
-    Warrior *myHeroFive = new Warrior(100, 100, 100, 1000, "Arès", new Sword(10000));
+    Wizard *myHeroOne = new Wizard("Voldemort", 7, 10, 8, 150, 10, new Potion(900));
+    Warrior *myHeroTwo = new Warrior("Garrosh", 2, 0, 10, 200, new Shield(500));
+    Necromancer *myHeroThree = new Necromancer("Gul'dan", 6, 10, 6, 8, 100, new Potion());
+    Wizard *myHeroFour = new Wizard("Harry Potter", 10, 10, 10, 100, 5, new Potion(100));
+    Warrior *myHeroFive = new Warrior("Arès", 100, 100, 100, 1000, new Sword(10000));
 
     list<Hero *> myList;
 
@@ -50,9 +50,11 @@ int main()
     myHeroFive->backPack.pack(new Potion(5));
     myHeroFive->backPack.pack(new Potion(6));
 
-    for (int k = 0; k < 7; k++)
+    int sizeBackpack = myHeroFive->backPack.getSize();
+
+    for (int k = 0; k < sizeBackpack; k++)
     {
-        IObject* myItem = myHeroFive->backPack.unPack();
+        IObject *myItem = myHeroFive->backPack.unPack();
         cout << myItem->getName() << "\t" << myItem->getFeature() << endl;
 
         delete myItem;

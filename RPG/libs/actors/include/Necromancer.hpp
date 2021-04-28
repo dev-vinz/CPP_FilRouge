@@ -12,10 +12,8 @@ namespace HE_Arc::RPG
     class Necromancer : public Wizard
     {
     public:
-        // Constructors and Destructor
-        Necromancer(int _strength, int _agility, int _intelligence, double _hp, int _mana, string _name, IObject *_pStuff);
+        Necromancer(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff);
 
-        // Void methods
         void riseUndead();
     };
 }
