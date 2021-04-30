@@ -11,8 +11,9 @@ namespace HE_Arc::RPG
      * @param _mana The mana
      * @param _hp The HP
      * @param _pStuff The stuff
+     * @param _isPlayer Is it the player
      */
-    Necromancer::Necromancer(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff) : Wizard(_name, _agility, _intelligence, _strength, _mana, _hp, _pStuff)
+    Necromancer::Necromancer(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff, bool _isPlayer) : Wizard(_name, _agility, _intelligence, _strength, _mana, _hp, _pStuff, _isPlayer)
     {
     }
 

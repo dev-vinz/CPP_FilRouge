@@ -1,15 +1,9 @@
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <list>
 
-#include "libs\actors\include\Hero.hpp"
-#include "libs\actors\include\Necromancer.hpp"
-#include "libs\actors\include\Warrior.hpp"
-#include "libs\actors\include\Wizard.hpp"
-
-#include "libs\stuff\include\Potion.hpp"
-#include "libs\stuff\include\Shield.hpp"
-#include "libs\stuff\include\Sword.hpp"
+#include "libs\game\include\Game.hpp"
 
 using namespace std;
 using namespace HE_Arc::RPG;
@@ -21,9 +15,11 @@ using namespace HE_Arc::RPG;
     2) Commands to control the hero, like status, attack, dodge, block etc
 */
 
-int newMain()
+int main()
 {
-    cout << "Hello World !" << endl;
+    Game myGame;
+
+    myGame.display();
 
     return 0;
 }

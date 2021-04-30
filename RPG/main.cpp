@@ -15,7 +15,7 @@
 using namespace std;
 using namespace HE_Arc::RPG;
 
-int main()
+int oldMain()
 {
     Wizard *myHeroOne = new Wizard("Voldemort", 7, 10, 8, 150, 10, new Potion(900));
     Warrior *myHeroTwo = new Warrior("Garrosh", 2, 0, 10, 200, new Shield(500));
@@ -50,9 +50,7 @@ int main()
     myHeroFive->backPack.pack(new Potion(5));
     myHeroFive->backPack.pack(new Potion(6));
 
-    int sizeBackpack = myHeroFive->backPack.getSize();
-
-    for (int k = 0; k < sizeBackpack; k++)
+    while (myHeroFive->backPack.isNotEmpty())
     {
         IObject *myItem = myHeroFive->backPack.unPack();
         cout << myItem->getName() << "\t" << myItem->getFeature() << endl;

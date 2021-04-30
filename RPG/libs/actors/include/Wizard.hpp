@@ -15,8 +15,9 @@ namespace HE_Arc::RPG
         int mana = 0;
 
     public:
-        Wizard() = default;
-        Wizard(string _name, int _agility, int _intelligence, int _strength, double _hp, int _mana, IObject *_pStuff);
+        Wizard() = delete;
+        Wizard(string _name, int _agility, int _intelligence, int _strength, double _hp, int _mana, IObject *_pStuff, bool _isPlayer = false);
+        virtual ~Wizard() override = default;
 
         int getMana() const;
 

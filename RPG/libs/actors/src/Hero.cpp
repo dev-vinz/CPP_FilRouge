@@ -10,8 +10,9 @@ namespace HE_Arc::RPG
      * @param _strength The strength
      * @param _hp The HP
      * @param _pStuff The stuff
+     * @param _isPlayer Is it the player
      */
-    Hero::Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff) : name(_name), agility(_agility), intelligence(_intelligence), strength(_strength), hp(_hp), pStuff(_pStuff)
+    Hero::Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer) : name(_name), agility(_agility), intelligence(_intelligence), strength(_strength), hp(_hp), pStuff(_pStuff), isPlayer(_isPlayer)
     {
     }
 
@@ -20,8 +21,11 @@ namespace HE_Arc::RPG
      */
     Hero::~Hero()
     {
-        delete this->pStuff;
-        this->pStuff = nullptr;
+        if (this->pStuff != nullptr)
+        {
+            delete this->pStuff;
+            this->pStuff = nullptr;
+        }
     }
 
     /**
@@ -76,6 +80,44 @@ namespace HE_Arc::RPG
     IObject *Hero::getStuff() const
     {
         return this->pStuff;
+    }
+
+    /**
+     * @brief Check if this object is the player
+     * @returns True if it is
+     */
+    bool Hero::getIsPlayer() const
+    {
+        return this->isPlayer;
+    }
+
+    /**
+     * @brief Get the position in X
+     * @returns The X position
+     */
+    int Hero::getPosX() const
+    {
+        return this->posX;
+    }
+
+    /**
+     * @brief Get the position in Y
+     * @returns The Y position
+     */
+    int Hero::getPosY() const
+    {
+        return this->posY;
+    }
+
+    /**
+     * @brief Set the position X and Y
+     * @param _x The position
+     * @param _y The position
+     */
+    void Hero::setPosXY(int _x, int _y)
+    {
+        this->posX = _x;
+        this->posY = _y;
     }
 
     /**

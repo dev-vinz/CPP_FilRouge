@@ -12,7 +12,9 @@ namespace HE_Arc::RPG
     class Warrior : public Hero
     {
     public:
-        Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff);
+        Warrior() = delete;
+        Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer = false);
+        virtual ~Warrior() override = default;
 
         void interact(const Hero &) override;
     };

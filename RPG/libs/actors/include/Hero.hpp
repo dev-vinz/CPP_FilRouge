@@ -14,21 +14,26 @@ namespace HE_Arc::RPG
     class Hero
     {
     protected:
+        string name = "no_name";
+
         int agility = 0;
         int intelligence = 0;
         int strength = 0;
 
         double hp = 0;
 
-        string name = "no_name";
-
         IObject *pStuff = nullptr;
+
+        bool isPlayer;
+
+        int posX;
+        int posY;
 
         friend ostream &operator<<(ostream &, const Hero &);
 
     public:
-        Hero() = default;
-        Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff);
+        Hero() = delete;
+        Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer = false);
         Hero(const Hero &) = delete;
         virtual ~Hero();
 
@@ -40,6 +45,12 @@ namespace HE_Arc::RPG
         int getStrength() const;
         double getHp() const;
         IObject *getStuff() const;
+        bool getIsPlayer() const;
+
+        int getPosX() const;
+        int getPosY() const;
+
+        void setPosXY(int, int);
 
         void virtual interact(const Hero &) = 0;
         void virtual show() const;

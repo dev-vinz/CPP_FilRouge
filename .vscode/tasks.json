@@ -9,6 +9,7 @@
                 "-g",
                 "${fileDirname}\\*.cpp",
                 "${fileDirname}\\libs\\actors\\src\\*.cpp",
+                "${fileDirname}\\libs\\game\\src\\*.cpp",
                 "${fileDirname}\\libs\\stuff\\src\\*.cpp",
                 "-o",
                 "${fileDirname}\\bin\\${fileBasenameNoExtension}.exe"
