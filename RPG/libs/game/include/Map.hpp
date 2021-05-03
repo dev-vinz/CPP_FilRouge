@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <vector>
 
 #include "..\..\actors\include\Hero.hpp"
 
@@ -30,7 +31,7 @@ namespace HE_Arc::RPG
 
         bool isCaseEmpty(int _x, int _y) const;
 
-        void display(const Hero *) const;
+        void display(const Hero &, const vector<Hero *>) const;
         void update(Hero *);
     };
 }

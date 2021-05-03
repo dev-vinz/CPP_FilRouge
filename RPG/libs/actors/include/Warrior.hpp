@@ -17,6 +17,7 @@ namespace HE_Arc::RPG
         virtual ~Warrior() override = default;
 
         void interact(const Hero &) override;
+        void show() const override;
     };
 }
 

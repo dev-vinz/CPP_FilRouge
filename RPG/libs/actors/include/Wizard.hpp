@@ -16,7 +16,7 @@ namespace HE_Arc::RPG
 
     public:
         Wizard() = delete;
-        Wizard(string _name, int _agility, int _intelligence, int _strength, double _hp, int _mana, IObject *_pStuff, bool _isPlayer = false);
+        Wizard(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff, bool _isPlayer = false);
         virtual ~Wizard() override = default;
 
         int getMana() const;
@@ -24,7 +24,7 @@ namespace HE_Arc::RPG
         void castSpell();
 
         void interact(const Hero &) override;
-        void show() const override;
+        virtual void show() const override;
     };
 }
 

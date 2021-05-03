@@ -9,13 +9,11 @@ namespace HE_Arc::RPG
     Game::Game()
     {
         this->currentMap = Map();
-        this->player = new Wizard("Severus Rogue", 7, 10, 8, 150, 10, new Potion(900), true);
+        this->player = nullptr;
 
         // We fix 4% from the map' size as opponents
         int rndOpp = trunc(0.04 * this->currentMap.getWidth() * this->currentMap.getHeight());
         this->nbOpponents = rndOpp;
-
-        this->setPositions();
     }
 
     /**
@@ -27,9 +25,7 @@ namespace HE_Arc::RPG
     Game::Game(int _width, int _height, int _nbOpponents) : nbOpponents(_nbOpponents)
     {
         this->currentMap = Map(_width, _height);
-        this->player = new Wizard("Ron", 7, 10, 8, 150, 10, new Potion(900));
-
-        this->setPositions();
+        this->player = nullptr;
     }
 
     /**
@@ -45,15 +41,6 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * @brief Get the current Hero
-     * @returns The Hero
-     */
-    Hero *Game::getPlayer() const
-    {
-        return this->player;
-    }
-
-    /**
      * @brief Get the map
      * @returns The map
      */
@@ -63,11 +50,53 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Get the current Hero
+     * @returns The Hero
+     */
+    Hero *Game::getPlayer() const
+    {
+        return this->player;
+    }
+
+    /**
+     * @brief Choose the player between three
+     * @param _name The player's name
+     */
+    void Game::choosePlayer(string _name)
+    {
+        Hero *choiceOne = new Warrior(_name, 1, 1, 10, 100, new Sword(50), true);
+        Hero *choiceTwo = new Wizard(_name, 10, 10, 10, 8, 100, new Potion(900, Agility), true);
+        Hero *choiceThree = new Necromancer(_name, 9, 9, 9, 9, 90, new Potion(10, Heal), true);
+
+        vector<Hero *> heroesAvailable = {choiceOne, choiceTwo, choiceThree};
+
+        int choice = -1;
+
+        while (choice < 1 || choice > 3)
+        {
+            cout << "Please choose your type of hero with 1, 2 or 3 :" << endl
+                 << "(1) Warrior" << endl
+                 << "(2) Wizard" << endl
+                 << "(3) Necromancer" << endl
+                 << ">>> ";
+
+            cin >> choice;
+        }
+
+        this->player = heroesAvailable.at(choice - 1);
+
+        cout << "Here's your Hero : " << endl;
+        this->player->show();
+
+        this->setPositions();
+    }
+
+    /**
      * @brief Display the game
      */
     void Game::display() const
     {
-        this->currentMap.display(this->player);
+        this->currentMap.display(*this->player, this->listOpponents);
     }
 
     // =============================================

@@ -5,14 +5,24 @@
 
 namespace HE_Arc::RPG
 {
+    enum Type
+    {
+        Agility = 0,
+        Heal = 1,
+        Strength = 2
+    };
+
     class Potion : public IObject
     {
     private:
         int power = 0;
+        Type utility = Heal;
+
+        string enumToStr[3] = {"Agility", "Heal", "Strength"};
 
     public:
         Potion() = default;
-        Potion(int _power);
+        Potion(int _power, Type _utility);
         Potion(const Potion &);
 
         int getFeature() const override;

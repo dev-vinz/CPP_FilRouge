@@ -1,10 +1,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
+#include <algorithm>
 #include <iostream>
 #include <cmath>
 #include <ctime>
-#include <list>
+#include <vector>
+#include <windows.h>
 
 #include "Map.hpp"
 
@@ -28,7 +30,7 @@ namespace HE_Arc::RPG
         int nbOpponents;
 
         Hero *player;
-        list<Hero *> listOpponents;
+        vector<Hero *> listOpponents;
 
         void setPositions();
 
@@ -37,10 +39,10 @@ namespace HE_Arc::RPG
         Game(int _width, int _height, int _nbOpponents);
         ~Game();
 
+        Map getMap() const;
         Hero *getPlayer() const;
 
-        Map getMap() const;
-
+        void choosePlayer(string _name);
         void display() const;
     };
 }

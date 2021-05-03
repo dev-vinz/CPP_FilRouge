@@ -17,6 +17,8 @@ namespace HE_Arc::RPG
         virtual ~Necromancer() override = default;
 
         void riseUndead();
+
+        void show() const override;
     };
 }
 

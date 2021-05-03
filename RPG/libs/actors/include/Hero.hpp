@@ -53,7 +53,7 @@ namespace HE_Arc::RPG
         void setPosXY(int, int);
 
         void virtual interact(const Hero &) = 0;
-        void virtual show() const;
+        void virtual show() const = 0;
 
         Hero &operator=(const Hero &) = delete;
     };

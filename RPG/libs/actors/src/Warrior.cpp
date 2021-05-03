@@ -24,4 +24,20 @@ namespace HE_Arc::RPG
     {
         cout << this->name << " punch " << otherHero.getName() << "'s face" << endl;
     }
+
+    /**
+     * @brief Show the different attributes of the warrior
+     */
+    void Warrior::show() const
+    {
+        cout << "\n=================\n"
+             << "WARRIOR : " << this->getName()
+             << "\n=================\n"
+             << "\nAgility : " << this->getAgility()
+             << "\nIntelligence : " << this->getIntelligence()
+             << "\nStrength : " << this->getStrength()
+             << "\nHP : " << this->getHp()
+             << "\nStuff : " << this->getStuff()->getName()
+             << endl;
+    }
 }

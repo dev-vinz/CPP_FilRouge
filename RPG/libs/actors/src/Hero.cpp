@@ -121,22 +121,6 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * @brief Show the different attributes of the hero
-     */
-    void Hero::show() const
-    {
-        cout << "\n=================\n"
-             << "HERO : " << this->getName()
-             << "\n=================\n"
-             << "\nAgility : " << this->getAgility()
-             << "\nIntelligence : " << this->getIntelligence()
-             << "\nStrength : " << this->getStrength()
-             << "\nHP : " << this->getHp()
-             << "\nStuff : " << this->getStuff()->getName()
-             << endl;
-    }
-
-    /**
      * @brief Override of operator <<
      * @param s The stream
      * @param h The hero

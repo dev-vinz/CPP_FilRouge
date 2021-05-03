@@ -60,8 +60,9 @@ namespace HE_Arc::RPG
     /**
      * @brief Display the map with all positions
      * @param player The hero
+     * @param opponents The opponents
      */
-    void Map::display(const Hero *player) const
+    void Map::display(const Hero &player, const vector<Hero *> opponents) const
     {
         cout << endl;
 
@@ -77,13 +78,26 @@ namespace HE_Arc::RPG
 
             for (int w = 0; w < this->width; w++)
             {
-                if (player->getPosX() == w && player->getPosY() == h)
+                if (player.getPosX() == w && player.getPosY() == h)
                 {
                     cout << "| X ";
                 }
                 else
                 {
-                    cout << "|   ";
+                    bool isOpp = false;
+                    for (auto &opp : opponents)
+                    {
+                        if (opp->getPosX() == w && opp->getPosY() == h)
+                        {
+                            isOpp = true;
+                            cout << "| O ";
+                        }
+                    }
+
+                    if (!isOpp)
+                    {
+                        cout << "|   ";
+                    }
                 }
             }
 
@@ -110,10 +124,15 @@ namespace HE_Arc::RPG
         Coordinates pCoordinates = {player->getPosX(), player->getPosY()};
         this->positions.insert(make_pair(player, pCoordinates));
 
-        cout << "Map::update()" << endl;
+        cout << endl
+             << "=============" << endl
+             << "Map::update()" << endl;
+
         for (auto &item : this->positions)
         {
             cout << item.first->getName() << " : " << item.second[0] << " ; " << item.second[1] << endl;
         }
+
+        cout << "=============" << endl;
     }
 }

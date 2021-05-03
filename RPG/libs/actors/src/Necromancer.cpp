@@ -24,4 +24,21 @@ namespace HE_Arc::RPG
     {
         cout << this->name << " rise undead" << endl;
     }
+
+    /**
+     * @brief Show the different attributes of the necromancer
+     */
+    void Necromancer::show() const
+    {
+        cout << "\n=================\n"
+             << "NECROMANCER : " << this->getName()
+             << "\n=================\n"
+             << "\nAgility : " << this->getAgility()
+             << "\nIntelligence : " << this->getIntelligence()
+             << "\nStrength : " << this->getStrength()
+             << "\nMana : " << this->getMana()
+             << "\nHP : " << this->getHp()
+             << "\nStuff : " << this->getStuff()->getName()
+             << endl;
+    }
 }

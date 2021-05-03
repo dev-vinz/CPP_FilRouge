@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <iostream>
 #include <list>
+#include <stdlib.h>
 
 #include "libs\game\include\Game.hpp"
 
@@ -17,7 +18,14 @@ using namespace HE_Arc::RPG;
 
 int main()
 {
+    string name;
+    cout << "What's your name ? " << endl << ">>> ";
+
+    getline(cin, name);
+
     Game myGame;
+
+    myGame.choosePlayer(name);
 
     myGame.display();
 
