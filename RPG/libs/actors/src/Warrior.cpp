@@ -14,6 +14,7 @@ namespace HE_Arc::RPG
      */
     Warrior::Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer) : Hero(_name, _agility, _intelligence, _strength, _hp, _pStuff, _isPlayer)
     {
+        this->currentHp = _hp;
     }
 
     /**
@@ -36,7 +37,8 @@ namespace HE_Arc::RPG
              << "\nAgility : " << this->getAgility()
              << "\nIntelligence : " << this->getIntelligence()
              << "\nStrength : " << this->getStrength()
-             << "\nHP : " << this->getHp()
+             << "\nHP : " << this->hp
+             << "\nCurrent HP :" << this->getHp()
              << "\nStuff : " << this->getStuff()->getName()
              << endl;
     }

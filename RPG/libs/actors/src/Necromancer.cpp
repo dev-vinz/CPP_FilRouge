@@ -15,6 +15,7 @@ namespace HE_Arc::RPG
      */
     Necromancer::Necromancer(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff, bool _isPlayer) : Wizard(_name, _agility, _intelligence, _strength, _mana, _hp, _pStuff, _isPlayer)
     {
+        this->currentHp = _hp;
     }
 
     /**
@@ -37,7 +38,8 @@ namespace HE_Arc::RPG
              << "\nIntelligence : " << this->getIntelligence()
              << "\nStrength : " << this->getStrength()
              << "\nMana : " << this->getMana()
-             << "\nHP : " << this->getHp()
+             << "\nHP : " << this->hp
+             << "\nCurrent HP :" << this->getHp()
              << "\nStuff : " << this->getStuff()->getName()
              << endl;
     }

@@ -21,6 +21,7 @@ namespace HE_Arc::RPG
         int strength = 0;
 
         double hp = 0;
+        double currentHp = 0;
 
         IObject *pStuff = nullptr;
 

@@ -28,6 +28,15 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Get the potion's utility
+     * @returns The utility
+     */
+    Type Potion::getUtility() const
+    {
+        return this->utility;
+    }
+
+    /**
      * @brief Get the name
      * @returns The name
      */

@@ -24,8 +24,10 @@ namespace HE_Arc::RPG
         Potion() = default;
         Potion(int _power, Type _utility);
         Potion(const Potion &);
+        virtual ~Potion() override = default;
 
         int getFeature() const override;
+        Type getUtility() const;
 
         string getName() const override;
     };

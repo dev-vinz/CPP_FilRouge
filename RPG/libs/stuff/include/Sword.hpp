@@ -14,6 +14,7 @@ namespace HE_Arc::RPG
         Sword() = default;
         Sword(int _damage);
         Sword(const Sword &);
+        virtual ~Sword() override = default;
 
         int getFeature() const override;
 

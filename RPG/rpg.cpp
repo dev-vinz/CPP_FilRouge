@@ -18,16 +18,18 @@ using namespace HE_Arc::RPG;
 
 int main()
 {
+    Game myGame(10, 9, 3);
+
     string name;
-    cout << "What's your name ? " << endl << ">>> ";
+    cout << "What's your name ? " << endl
+         << ">>> ";
 
     getline(cin, name);
 
-    Game myGame;
-
     myGame.choosePlayer(name);
+    myGame.initialize();
 
-    myGame.display();
+    myGame.play();
 
     return 0;
 }

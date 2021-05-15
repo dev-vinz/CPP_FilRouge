@@ -12,7 +12,7 @@ namespace HE_Arc::RPG
      * @param _pStuff The stuff
      * @param _isPlayer Is it the player
      */
-    Hero::Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer) : name(_name), agility(_agility), intelligence(_intelligence), strength(_strength), hp(_hp), pStuff(_pStuff), isPlayer(_isPlayer)
+    Hero::Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer) : name(_name), agility(_agility), intelligence(_intelligence), strength(_strength), hp(_hp), currentHp(_hp), pStuff(_pStuff), isPlayer(_isPlayer)
     {
     }
 
@@ -70,7 +70,7 @@ namespace HE_Arc::RPG
      */
     double Hero::getHp() const
     {
-        return this->hp;
+        return this->currentHp;
     }
 
     /**
