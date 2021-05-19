@@ -64,6 +64,118 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Choose the player between three
+     * @param _name The player's name
+     */
+    void Game::choosePlayer(string _name)
+    {
+        int choice = -1;
+
+        while (choice < 1 || choice > 3)
+        {
+            cin.clear();
+            cout << " Please choose your type of hero with 1, 2 or 3 :" << endl
+                 << " (1) Warrior" << endl
+                 << " (2) Wizard" << endl
+                 << " (3) Necromancer" << endl
+                 << " >>> ";
+
+            cin >> choice;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        }
+
+        switch (choice)
+        {
+        case 1:
+            this->player = new Warrior(_name, 1, 1, 10, 100, new Sword(50), true);
+            break;
+        case 2:
+            this->player = new Wizard(_name, 10, 10, 10, 8, 100, new Potion(900, Agility), true);
+            break;
+        case 3:
+            this->player = new Necromancer(_name, 9, 9, 9, 9, 90, new Potion(10, Heal), true);
+            break;
+        default:
+            cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
+            exit(-1);
+        }
+
+        if (not Game::VJ_DEBUG_LOG)
+            system("CLS");
+
+        cout << " Here's your Hero : " << endl;
+        this->player->show();
+
+        cout << endl;
+
+        if (not Game::VJ_DEBUG_LOG)
+        {
+            char waiting[] = {'/', '-', '\\', '|'};
+
+            for (int t = 25; t > 0; t--)
+            {
+                usleep(200000);
+                cout << "\r  " << waiting[t % 4] << " Loading ...\r";
+            }
+
+            system("CLS");
+        }
+    }
+
+    /**
+     * @brief Initialize the game, the opponents, the potions
+     */
+    void Game::initialize()
+    {
+        RandomGenerator random;
+
+        for (int k = 0; k < this->nbOpponents; k++)
+        {
+            this->listOpponents.push_back(new Warrior(random.getRandomName(), k, k, k, k, new Shield(0)));
+        }
+
+        int start = random.getRandomNumber(3);
+        for (int k = 0; k < this->nbPotions; k++)
+        {
+            Type _type = (Type)((start + k) % 3);
+            this->listPotions.push_back(new Potion(10, _type));
+        }
+
+        this->setPositions();
+    }
+
+    /**
+     * @brief Play the game
+     */
+    void Game::play()
+    {
+        this->isPlaying = true;
+
+        while (this->isPlaying)
+        {
+            this->display();
+
+            char movement;
+            do
+            {
+                cout << " Choose your movement (w, a, s, d, n, q) : ";
+                cin >> movement;
+                string _endLine;
+                getline(cin, _endLine);
+            } while (this->checkMovement(movement, this->player));
+
+            this->applyMovements(movement);
+
+            cout << endl
+                 << "===========================================================================================" << endl;
+        }
+    }
+
+    // =============================================
+    // Private Methods
+    // =============================================
+
+    /**
      * @brief Checks the next hero's movement
      * @param _movement The movement
      * @param _hero The hero
@@ -242,162 +354,6 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * @brief Choose the player between three
-     * @param _name The player's name
-     */
-    void Game::choosePlayer(string _name)
-    {
-        int choice = -1;
-
-        while (choice < 1 || choice > 3)
-        {
-            cin.clear();
-            cout << " Please choose your type of hero with 1, 2 or 3 :" << endl
-                 << " (1) Warrior" << endl
-                 << " (2) Wizard" << endl
-                 << " (3) Necromancer" << endl
-                 << " >>> ";
-
-            cin >> choice;
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-        }
-
-        switch (choice)
-        {
-        case 1:
-            this->player = new Warrior(_name, 1, 1, 10, 100, new Sword(50), true);
-            break;
-        case 2:
-            this->player = new Wizard(_name, 10, 10, 10, 8, 100, new Potion(900, Agility), true);
-            break;
-        case 3:
-            this->player = new Necromancer(_name, 9, 9, 9, 9, 90, new Potion(10, Heal), true);
-            break;
-        default:
-            cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
-            exit(-1);
-        }
-
-        if (not Game::VJ_DEBUG_LOG)
-            system("CLS");
-
-        cout << " Here's your Hero : " << endl;
-        this->player->show();
-
-        cout << endl;
-
-        if (not Game::VJ_DEBUG_LOG)
-        {
-            char waiting[] = {'/', '-', '\\', '|'};
-
-            for (int t = 25; t > 0; t--)
-            {
-                usleep(200000);
-                cout << "\r  " << waiting[t % 4] << " Loading ...\r";
-            }
-
-            system("CLS");
-        }
-    }
-
-    /**
-     * @brief Display the game
-     */
-    void Game::display() const
-    {
-        if (not Game::VJ_DEBUG_LOG)
-            system("CLS");
-
-        this->currentMap.display(*this->player, this->listOpponents, this->listPotions);
-
-        int width = this->currentMap.getWidth() * 4 + 1;
-        int middle = width / 2;
-
-        cout << " ";
-
-        for (int k = 0; k < width; k++)
-            cout << "=";
-
-        cout << endl
-             << " ";
-
-        for (int k = 0; k < middle - 7; k++)
-            cout << "=";
-
-        cout << " INSTRUCTIONS ";
-
-        for (int k = middle + 7; k < width; k++)
-            cout << "=";
-
-        cout << endl
-             << "           w (up)" << endl
-             << " a (left)  s (down)  d (right)" << endl
-             << endl
-             << " Not moving : n" << endl
-             << " Quit the game : q" << endl;
-
-        cout << " ";
-
-        for (int k = 0; k < width; k++)
-            cout << "=";
-
-        cout << endl;
-    }
-
-    /**
-     * @brief Initialize the game, the opponents, the potions
-     */
-    void Game::initialize()
-    {
-        RandomGenerator random;
-
-        for (int k = 0; k < this->nbOpponents; k++)
-        {
-            this->listOpponents.push_back(new Warrior(random.getRandomName(), k, k, k, k, new Shield(0)));
-        }
-
-        int start = random.getRandomNumber(3);
-        for (int k = 0; k < this->nbPotions; k++)
-        {
-            Type _type = (Type)((start + k) % 3);
-            this->listPotions.push_back(new Potion(10, _type));
-        }
-
-        this->setPositions();
-    }
-
-    /**
-     * @brief Play the game
-     */
-    void Game::play()
-    {
-        this->isPlaying = true;
-
-        while (this->isPlaying)
-        {
-            this->display();
-
-            char movement;
-            do
-            {
-                cout << " Choose your movement (w, a, s, d, n, q) : ";
-                cin >> movement;
-                string _endLine;
-                getline(cin, _endLine);
-            } while (this->checkMovement(movement, this->player));
-
-            this->applyMovements(movement);
-
-            cout << endl
-                 << "===========================================================================================" << endl;
-        }
-    }
-
-    // =============================================
-    // Private Methods
-    // =============================================
-
-    /**
      * @brief Catch a potion and add it to the backpack
      * @param _x The position X
      * @param _y The position Y
@@ -459,6 +415,50 @@ namespace HE_Arc::RPG
                  << "BackPack After :" << endl;
             this->player->backPack.show(Game::VJ_DEBUG_LOG);
         }
+    }
+
+    /**
+     * @brief Display the game
+     */
+    void Game::display() const
+    {
+        if (not Game::VJ_DEBUG_LOG)
+            system("CLS");
+
+        this->currentMap.display(*this->player, this->listOpponents, this->listPotions);
+
+        int width = this->currentMap.getWidth() * 4 + 1;
+        int middle = width / 2;
+
+        cout << " ";
+
+        for (int k = 0; k < width; k++)
+            cout << "=";
+
+        cout << endl
+             << " ";
+
+        for (int k = 0; k < middle - 7; k++)
+            cout << "=";
+
+        cout << " INSTRUCTIONS ";
+
+        for (int k = middle + 7; k < width; k++)
+            cout << "=";
+
+        cout << endl
+             << "           w (up)" << endl
+             << " a (left)  s (down)  d (right)" << endl
+             << endl
+             << " Not moving : n" << endl
+             << " Quit the game : q" << endl;
+
+        cout << " ";
+
+        for (int k = 0; k < width; k++)
+            cout << "=";
+
+        cout << endl;
     }
 
     /**

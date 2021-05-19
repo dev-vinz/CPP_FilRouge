@@ -41,7 +41,11 @@ namespace HE_Arc::RPG
         vector<Hero *> listOpponents;
         vector<Potion *> listPotions;
 
+        bool checkMovement(char _movement, Hero *);
+
+        void applyMovements(char _movement);
         void catchPotion(int _x, int _y);
+        void display() const;
         void setPositions();
 
     public:
@@ -52,11 +56,7 @@ namespace HE_Arc::RPG
         Map getMap() const;
         vector<Hero *> getOpponents() const;
 
-        bool checkMovement(char _movement, Hero *);
-
-        void applyMovements(char _movement);
         void choosePlayer(string _name);
-        void display() const;
         void initialize();
         void play();
 
