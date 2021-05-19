@@ -41,6 +41,7 @@ namespace HE_Arc::RPG
         vector<Hero *> listOpponents;
         vector<Potion *> listPotions;
 
+        void catchPotion(int _x, int _y);
         void setPositions();
 
     public:
@@ -49,7 +50,6 @@ namespace HE_Arc::RPG
         ~Game();
 
         Map getMap() const;
-        Hero *getPlayer() const;
         vector<Hero *> getOpponents() const;
 
         bool checkMovement(char _movement, Hero *);

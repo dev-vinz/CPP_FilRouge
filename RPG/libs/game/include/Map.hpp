@@ -43,6 +43,8 @@ namespace HE_Arc::RPG
 
         Hero *whoIs(int _x, int _y) const;
 
+        Potion *whichIs(int _x, int _y) const;
+
         void display(const Hero &, const vector<Hero *>, const vector<Potion *>) const;
         void update(vector<Potion *>);
         void update(vector<Hero *>);

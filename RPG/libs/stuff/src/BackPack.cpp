@@ -40,4 +40,26 @@ namespace HE_Arc::RPG
     {
         this->mStack.push(_pObject);
     }
+
+    /**
+     * @brief Show the backpack - only in debug mode
+     * @param _isDebug True if we're in debug mode
+     */
+    void BackPack::show(bool _isDebug)
+    {
+        if (not _isDebug)
+            return;
+
+        if (this->mStack.empty())
+            return;
+
+        IObject *top = this->mStack.top();
+        this->mStack.pop();
+
+        cout << "x " << top->getName() << endl;
+
+        this->show(_isDebug);
+
+        this->mStack.push(top);
+    }
 }

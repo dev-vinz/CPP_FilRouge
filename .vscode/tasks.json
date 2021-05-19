@@ -13,7 +13,7 @@
 				"${fileDirname}\\libs\\stuff\\src\\*.cpp",
 				"${fileDirname}\\libs\\utils\\src\\*.cpp",
 				"-I",
-				"C:\\DEV\\.vcpkg-root\\installed\\x64-windows\\include",
+				"C:\\DEV\\.vcpkg\\installed\\x64-windows\\include",
 				"-o",
 				"${fileDirname}\\bin\\${fileBasenameNoExtension}.exe"
 			],

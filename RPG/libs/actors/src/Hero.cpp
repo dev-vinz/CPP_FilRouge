@@ -128,13 +128,13 @@ namespace HE_Arc::RPG
      */
     ostream &operator<<(ostream &s, const Hero &h)
     {
-        return s << "\n=================\n"
-                 << "HERO : " << h.getName()
-                 << "\n=================\n"
-                 << "\nAgility : " << h.getAgility()
-                 << "\nIntelligence : " << h.getIntelligence()
-                 << "\nStrength : " << h.getStrength()
-                 << "\nHP : " << h.getHp()
-                 << "\nStuff : " << h.getStuff()->getName();
+        return s << "\n =================\n"
+                 << " HERO : " << h.getName()
+                 << "\n =================\n"
+                 << "\n Agility : " << h.getAgility()
+                 << "\n Intelligence : " << h.getIntelligence()
+                 << "\n Strength : " << h.getStrength()
+                 << "\n HP : " << h.getHp()
+                 << "\n Stuff : " << h.getStuff()->getName();
     }
 }

@@ -55,15 +55,6 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * @brief Get the current Hero
-     * @returns The Hero
-     */
-    Hero *Game::getPlayer() const
-    {
-        return this->player;
-    }
-
-    /**
      * @brief Get the list of opponents
      * @returns The opponents
      */
@@ -171,7 +162,7 @@ namespace HE_Arc::RPG
             break;
         case 'q':
             this->isPlaying = false;
-            break;
+            return;
         default:
             cout << "[ERROR : applyMovements] Houston we have a problem, there's another movement detected (_movement = " << _movement << ")" << endl;
             exit(-1);
@@ -179,6 +170,9 @@ namespace HE_Arc::RPG
 
         this->player->setPosXY(posX, posY);
         listHeroes.push_back(this->player);
+
+        if (this->currentMap.whatIs(posX, posY) == _Potion)
+            this->catchPotion(posX, posY);
 
         RandomGenerator random;
 
@@ -244,6 +238,7 @@ namespace HE_Arc::RPG
         }
 
         this->currentMap.update(listHeroes);
+        this->currentMap.update(this->listPotions);
     }
 
     /**
@@ -257,11 +252,11 @@ namespace HE_Arc::RPG
         while (choice < 1 || choice > 3)
         {
             cin.clear();
-            cout << "Please choose your type of hero with 1, 2 or 3 :" << endl
-                 << "(1) Warrior" << endl
-                 << "(2) Wizard" << endl
-                 << "(3) Necromancer" << endl
-                 << ">>> ";
+            cout << " Please choose your type of hero with 1, 2 or 3 :" << endl
+                 << " (1) Warrior" << endl
+                 << " (2) Wizard" << endl
+                 << " (3) Necromancer" << endl
+                 << " >>> ";
 
             cin >> choice;
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -286,7 +281,7 @@ namespace HE_Arc::RPG
         if (not Game::VJ_DEBUG_LOG)
             system("CLS");
 
-        cout << "Here's your Hero : " << endl;
+        cout << " Here's your Hero : " << endl;
         this->player->show();
 
         cout << endl;
@@ -298,7 +293,7 @@ namespace HE_Arc::RPG
             for (int t = 25; t > 0; t--)
             {
                 usleep(200000);
-                cout << "\r  " << waiting[t % 4] << " Please wait...\r";
+                cout << "\r  " << waiting[t % 4] << " Loading ...\r";
             }
 
             system("CLS");
@@ -335,11 +330,13 @@ namespace HE_Arc::RPG
             cout << "=";
 
         cout << endl
-             << "          w (up)" << endl
-             << "a (left)  s (down)  d (right)" << endl
+             << "           w (up)" << endl
+             << " a (left)  s (down)  d (right)" << endl
              << endl
-             << "Not moving : n" << endl
-             << "Quit the game : q" << endl;
+             << " Not moving : n" << endl
+             << " Quit the game : q" << endl;
+
+        cout << " ";
 
         for (int k = 0; k < width; k++)
             cout << "=";
@@ -383,7 +380,7 @@ namespace HE_Arc::RPG
             char movement;
             do
             {
-                cout << "Choose your movement (w, a, s, d, n, q) : ";
+                cout << " Choose your movement (w, a, s, d, n, q) : ";
                 cin >> movement;
                 string _endLine;
                 getline(cin, _endLine);
@@ -399,6 +396,70 @@ namespace HE_Arc::RPG
     // =============================================
     // Private Methods
     // =============================================
+
+    /**
+     * @brief Catch a potion and add it to the backpack
+     * @param _x The position X
+     * @param _y The position Y
+     */
+    void Game::catchPotion(int _x, int _y)
+    {
+        Potion *anyPotion = this->currentMap.whichIs(_x, _y);
+
+        if (anyPotion == nullptr)
+        {
+            cout << "[ERROR : catchPotion] Potion = nullptr" << endl;
+            exit(-1);
+        }
+
+        vector<Potion *>::iterator iterator = find(this->listPotions.begin(), this->listPotions.end(), anyPotion);
+        int index = -1;
+
+        if (iterator != this->listPotions.end())
+        {
+            index = iterator - this->listPotions.begin();
+        }
+        else
+        {
+            cout << "[ERROR : catchPotion] Potion isn't in list anymore";
+            exit(-1);
+        }
+
+        if (Game::VJ_DEBUG_LOG)
+        {
+            cout << "BackPack Before :" << endl;
+            this->player->backPack.show(Game::VJ_DEBUG_LOG);
+
+            cout << endl
+                 << "List of Potion Before :" << endl;
+
+            for (auto &item : this->listPotions)
+            {
+                cout << item->getName() << endl;
+            }
+
+            cout << endl
+                 << "Index : " << index << endl;
+        }
+
+        this->listPotions.erase(this->listPotions.begin() + index);
+        this->player->backPack.pack(anyPotion);
+
+        if (Game::VJ_DEBUG_LOG)
+        {
+            cout << endl
+                 << "List of Potion After :" << endl;
+
+            for (auto &item : this->listPotions)
+            {
+                cout << item->getName() << endl;
+            }
+
+            cout << endl
+                 << "BackPack After :" << endl;
+            this->player->backPack.show(Game::VJ_DEBUG_LOG);
+        }
+    }
 
     /**
      * @brief Set the positions

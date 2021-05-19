@@ -21,8 +21,8 @@ int main()
     Game myGame(10, 9, 3);
 
     string name;
-    cout << "What's your name ? " << endl
-         << ">>> ";
+    cout << " What's your name ? " << endl
+         << " >>> ";
 
     getline(cin, name);
 

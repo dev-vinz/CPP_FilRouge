@@ -26,6 +26,7 @@ namespace HE_Arc::RPG
         IObject *unPack();
 
         void pack(IObject *);
+        void show(bool);
     };
 }
 

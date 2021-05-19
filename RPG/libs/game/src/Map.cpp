@@ -67,7 +67,7 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * @brief Tell which hero is in this case
+     * @brief Tell which hero is in the case
      * @param _x The position X
      * @param _y The position Y
      * @returns The hero, or nullptr
@@ -83,6 +83,25 @@ namespace HE_Arc::RPG
         }
 
         return hero;
+    }
+
+    /**
+     * @brief Tell which potion is in the case
+     * @param _x The position X
+     * @param _y The position Y
+     * @returns The potion, or nullptr
+     */
+    Potion *Map::whichIs(int _x, int _y) const
+    {
+        Potion *potion = nullptr;
+
+        for (auto &item : this->potionPositions)
+        {
+            if (item.second[0] == _x && item.second[1] == _y)
+                potion = item.first;
+        }
+
+        return potion;
     }
 
     /**
@@ -262,7 +281,7 @@ namespace HE_Arc::RPG
         // Search for Potion
         for (auto &item : this->potionPositions)
         {
-            if (item.second[0] == _x && item.second[0] == _y)
+            if (item.second[0] == _x && item.second[1] == _y)
                 _what = _Potion;
         }
 
