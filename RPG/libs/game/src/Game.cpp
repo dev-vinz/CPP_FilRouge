@@ -155,6 +155,30 @@ namespace HE_Arc::RPG
         {
             this->display();
 
+            if (this->currentMap.isOpponentNear(this->player->getPosX(), this->player->getPosY()))
+            {
+                Hero *opponent = this->currentMap.getOpponentNear(this->player->getPosX(), this->player->getPosY());
+
+                cout << " There's an opponent nearly !" << endl
+                     << " Do you want to fight " << opponent->getName() << " ?" << endl;
+
+                char fight;
+                do
+                {
+                    cout << " [Y] Yes, sure !" << endl
+                         << " [N] No thank's" << endl
+                         << " >>> ";
+
+                    cin >> fight;
+                    string _endLine;
+                    getline(cin, _endLine);
+
+                    fight = tolower(fight, locale());
+                } while (!this->checkFight(fight));
+
+                this->display();
+            }
+
             char movement;
             do
             {
@@ -162,7 +186,9 @@ namespace HE_Arc::RPG
                 cin >> movement;
                 string _endLine;
                 getline(cin, _endLine);
-            } while (this->checkMovement(movement, this->player));
+
+                movement = tolower(movement, locale());
+            } while (not this->checkMovement(movement, this->player));
 
             this->applyMovements(movement);
 
@@ -176,10 +202,37 @@ namespace HE_Arc::RPG
     // =============================================
 
     /**
+     * @brief Checks the next player's action
+     * @param _action The action
+     * @returns True if the check is correct
+     */
+    bool Game::checkAction(char _action)
+    {
+        return true;
+    }
+
+    /**
+     * @brief Checks if the player wants to fight or not
+     * @param _fight Yes or no
+     * @returns True if the check is correct
+     */
+    bool Game::checkFight(char _fight)
+    {
+        char tabFight[] = {'y', 'n'};
+        char *exceptedLastIndex = find(begin(tabFight), end(tabFight), _fight);
+
+        // If the element is not found, std::find returns the end of the range (last indice of tabFight)
+        if (exceptedLastIndex == end(tabFight))
+            return false;
+
+        return true;
+    }
+
+    /**
      * @brief Checks the next hero's movement
      * @param _movement The movement
      * @param _hero The hero
-     * @returns True if there is an error
+     * @returns True if the check is correct
      */
     bool Game::checkMovement(char _movement, Hero *_hero)
     {
@@ -189,7 +242,7 @@ namespace HE_Arc::RPG
 
         // If the element is not found, std::find returns the end of the range (last indice of tabMovements)
         if (exceptedLastIndex == end(tabMovements))
-            return true;
+            return false;
 
         int posX = _hero->getPosX();
         int posY = _hero->getPosY();
@@ -210,7 +263,7 @@ namespace HE_Arc::RPG
             break;
         case 'n':
         case 'q':
-            return false;
+            return true;
         default:
             cout << "[ERROR : CheckMovement] Houston we have a problem, there's another movement detected (_movement = " << _movement << ")" << endl;
             exit(-1);
@@ -220,28 +273,28 @@ namespace HE_Arc::RPG
         {
             if (_hero->getIsPlayer())
             {
-                cout << "The case (" << posX << "; " << posY << ") is busy by " << this->currentMap.whoIs(posX, posY)->getName() << endl;
+                cout << " The case (" << posX << "; " << posY << ") is busy by " << this->currentMap.whoIs(posX, posY)->getName() << endl;
             }
 
-            return true;
+            return false;
         }
 
         if (posY == this->currentMap.getHeight() || posY < 0 || posX == this->currentMap.getWidth() || posX < 0)
         {
             if (_hero->getIsPlayer())
             {
-                cout << "You're not in the map anymore with this movement" << endl;
+                cout << " You're not in the map anymore with this movement" << endl;
             }
 
-            return true;
+            return false;
         }
 
         if (this->currentMap.whatIs(posX, posY) == _Potion && not _hero->getIsPlayer())
         {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -290,7 +343,8 @@ namespace HE_Arc::RPG
 
         for (Hero *opp : this->listOpponents)
         {
-            bool isError = false;
+            int count = 0;
+            bool isMovementCorrect = false;
             int rndNb;
 
             this->currentMap.update(listHeroes);
@@ -299,30 +353,35 @@ namespace HE_Arc::RPG
             {
                 do
                 {
-                    rndNb = random.getRandomNumber(4);
+                    rndNb = random.getRandomNumber(5);
 
                     posX = opp->getPosX();
                     posY = opp->getPosY();
 
+                    count++;
+
                     switch (rndNb)
                     {
                     case 0:
-                        isError = this->checkMovement('w', opp);
+                        isMovementCorrect = this->checkMovement('w', opp);
                         break;
                     case 1:
-                        isError = this->checkMovement('a', opp);
+                        isMovementCorrect = this->checkMovement('a', opp);
                         break;
                     case 2:
-                        isError = this->checkMovement('s', opp);
+                        isMovementCorrect = this->checkMovement('s', opp);
                         break;
                     case 3:
-                        isError = this->checkMovement('d', opp);
+                        isMovementCorrect = this->checkMovement('d', opp);
+                        break;
+                    case 4:
+                        isMovementCorrect = this->checkMovement('n', opp);
                         break;
                     default:
                         cout << "[ERROR : applyMovements] Problem with getRandomNumber(int _max) = " << rndNb << endl;
                         exit(-1);
                     }
-                } while (isError);
+                } while (!isMovementCorrect);
 
                 switch (rndNb)
                 {
@@ -337,6 +396,8 @@ namespace HE_Arc::RPG
                     break;
                 case 3:
                     posX++;
+                    break;
+                case 4:
                     break;
                 default:
                     cout << "[ERROR : applyMovements] Forgot a case in second switch (rndNb = " << rndNb << ")" << endl;

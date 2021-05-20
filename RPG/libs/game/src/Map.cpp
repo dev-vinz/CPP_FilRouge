@@ -67,6 +67,73 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Check if there's an opponent nearly
+     * @param _x The position X
+     * @param _y The position Y
+     * @returns True if it is
+     */
+    bool Map::isOpponentNear(int _x, int _y) const
+    {
+        bool _up = this->whatIs(_x, _y - 1) == _Hero;
+        bool _down = this->whatIs(_x, _y + 1) == _Hero;
+        bool _left = this->whatIs(_x - 1, _y) == _Hero;
+        bool _right = this->whatIs(_x + 1, _y) == _Hero;
+
+        bool _upLeft = this->whatIs(_x - 1, _y - 1) == _Hero;
+        bool _upRight = this->whatIs(_x + 1, _y - 1) == _Hero;
+        bool _downLeft = this->whatIs(_x - 1, _y + 1) == _Hero;
+        bool _downRight = this->whatIs(_x + 1, _y + 1) == _Hero;
+
+        return _up || _down || _left || _right || _upLeft || _upRight || _downLeft || _downRight;
+    }
+
+    /**
+     * @brief Get the opponent near
+     * @param _x The position X
+     * @param _y The position Y
+     * @returns The opponent, or nullptr
+     */
+    Hero *Map::getOpponentNear(int _x, int _y) const
+    {
+        Hero *opponent = nullptr;
+
+        if (!this->isCaseEmpty(_x, _y - 1) && this->whatIs(_x, _y - 1) == _Hero)
+        {
+            opponent = this->whoIs(_x, _y - 1);
+        }
+        else if (!this->isCaseEmpty(_x, _y + 1) && this->whatIs(_x, _y + 1) == _Hero)
+        {
+            opponent = this->whoIs(_x, _y + 1);
+        }
+        else if (!this->isCaseEmpty(_x - 1, _y) && this->whatIs(_x - 1, _y) == _Hero)
+        {
+            opponent = this->whoIs(_x - 1, _y);
+        }
+        else if (!this->isCaseEmpty(_x + 1, _y) && this->whatIs(_x + 1, _y) == _Hero)
+        {
+            opponent = this->whoIs(_x + 1, _y);
+        }
+        else if (!this->isCaseEmpty(_x - 1, _y - 1) && this->whatIs(_x - 1, _y - 1) == _Hero)
+        {
+            opponent = this->whoIs(_x - 1, _y - 1);
+        }
+        else if (!this->isCaseEmpty(_x + 1, _y - 1) && this->whatIs(_x + 1, _y - 1) == _Hero)
+        {
+            opponent = this->whoIs(_x + 1, _y - 1);
+        }
+        else if (!this->isCaseEmpty(_x - 1, _y + 1) && this->whatIs(_x - 1, _y + 1) == _Hero)
+        {
+            opponent = this->whoIs(_x - 1, _y + 1);
+        }
+        else if (!this->isCaseEmpty(_x + 1, _y + 1) && this->whatIs(_x + 1, _y + 1) == _Hero)
+        {
+            opponent = this->whoIs(_x + 1, _y + 1);
+        }
+
+        return opponent;
+    }
+
+    /**
      * @brief Tell which hero is in the case
      * @param _x The position X
      * @param _y The position Y

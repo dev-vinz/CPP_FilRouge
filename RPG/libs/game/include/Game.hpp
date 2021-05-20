@@ -41,6 +41,8 @@ namespace HE_Arc::RPG
         vector<Hero *> listOpponents;
         vector<Potion *> listPotions;
 
+        bool checkAction(char _action);
+        bool checkFight(char _fight);
         bool checkMovement(char _movement, Hero *);
 
         void applyMovements(char _movement);
@@ -60,7 +62,7 @@ namespace HE_Arc::RPG
         void initialize();
         void play();
 
-        static const bool VJ_DEBUG_LOG = false;
+        static const bool VJ_DEBUG_LOG = true;
     };
 }
 

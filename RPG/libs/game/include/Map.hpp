@@ -40,7 +40,9 @@ namespace HE_Arc::RPG
         int getHeight() const;
 
         bool isCaseEmpty(int _x, int _y) const;
+        bool isOpponentNear(int _x, int _y) const;
 
+        Hero *getOpponentNear(int _x, int _y) const;
         Hero *whoIs(int _x, int _y) const;
 
         Potion *whichIs(int _x, int _y) const;
