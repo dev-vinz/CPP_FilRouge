@@ -18,6 +18,13 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Display the warrior's attacks
+     */
+    void Warrior::displayAttacks() const
+    {
+    }
+
+    /**
      * @brief Interact a warrior with an other Hero
      * @param otherHero The other hero
      */

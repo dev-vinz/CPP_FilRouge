@@ -121,6 +121,57 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Use the object
+     * @param _object The object
+     */
+    void Hero::useObject(IObject *_object)
+    {
+        Potion *ptrPotion = dynamic_cast<Potion *>(_object);
+
+        if (ptrPotion != nullptr)
+        {
+            switch (ptrPotion->getUtility())
+            {
+            case Agility:
+                this->agility += ptrPotion->getFeature();
+                break;
+            case Heal:
+                if (this->currentHp + ptrPotion->getFeature() > this->hp)
+                {
+                    this->currentHp = this->hp;
+                }
+                else
+                {
+                    this->currentHp += ptrPotion->getFeature();
+                }
+                break;
+            case Strength:
+                this->strength += ptrPotion->getFeature();
+                break;
+            default:
+                cout << "[ERROR : Hero::useObject()] : Unknown potion" << endl;
+                exit(-1);
+            }
+        }
+        else
+        {
+            cout << "[WARNING : Hero::userObject()] : Object is not a potion" << endl;
+        }
+    }
+
+    /**
+     * @brief Show the battle statistics
+     */
+    void Hero::showStatistics() const
+    {
+        cout << " ========================================" << endl
+             << "                        HP : " << fixed << setprecision(1) << this->getHp() << endl
+             << "    " << left << setfill(' ') << setw(20) << this->getName() << "Strength : " << fixed << setprecision(1) << this->getStrength() << endl
+             << "                        Agility : " << fixed << setprecision(1) << this->getAgility() << endl
+             << " ========================================" << endl;
+    }
+
+    /**
      * @brief Override of operator <<
      * @param s The stream
      * @param h The hero

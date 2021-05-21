@@ -23,6 +23,7 @@ namespace HE_Arc::RPG
 
         void castSpell();
 
+        virtual void displayAttacks() const override;
         void interact(const Hero &) override;
         virtual void show() const override;
     };

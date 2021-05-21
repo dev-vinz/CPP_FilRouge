@@ -11,6 +11,7 @@
 #include <winsock2.h> // Sinon ça fout un warning bizarre (cpr)
 #include <windows.h>
 
+#include "Battle.hpp"
 #include "Map.hpp"
 
 #include "..\..\actors\include\Hero.hpp"
@@ -22,6 +23,7 @@
 #include "..\..\stuff\include\Shield.hpp"
 #include "..\..\stuff\include\Sword.hpp"
 
+#include "..\..\utils\include\ConsoleController.hpp"
 #include "..\..\utils\include\RandomGenerator.hpp"
 
 using namespace std;
@@ -41,10 +43,10 @@ namespace HE_Arc::RPG
         vector<Hero *> listOpponents;
         vector<Potion *> listPotions;
 
-        bool checkAction(char _action);
-        bool checkFight(char _fight);
-        bool checkMovement(char _movement, Hero *);
+        bool checkFight(char _fight) const;
+        bool checkMovement(char _movement, Hero *) const;
 
+        void applyFight(char _fight, Hero *);
         void applyMovements(char _movement);
         void catchPotion(int _x, int _y);
         void display() const;

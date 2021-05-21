@@ -27,6 +27,13 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Display the necromancer's attacks
+     */
+    void Necromancer::displayAttacks() const
+    {
+    }
+
+    /**
      * @brief Show the different attributes of the necromancer
      */
     void Necromancer::show() const

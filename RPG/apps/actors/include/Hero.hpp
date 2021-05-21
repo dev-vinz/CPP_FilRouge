@@ -1,11 +1,13 @@
 #ifndef HERO_HPP
 #define HERO_HPP
 
+#include <iomanip>
 #include <iostream>
 #include <string.h>
 
 #include "..\..\stuff\include\BackPack.hpp"
 #include "..\..\stuff\include\IObject.hpp"
+#include "..\..\stuff\include\Potion.hpp"
 
 using namespace std;
 
@@ -53,8 +55,12 @@ namespace HE_Arc::RPG
 
         void setPosXY(int, int);
 
+        void useObject(IObject *);
+
+        void virtual displayAttacks() const = 0;
         void virtual interact(const Hero &) = 0;
         void virtual show() const = 0;
+        void virtual showStatistics() const;
 
         Hero &operator=(const Hero &) = delete;
     };

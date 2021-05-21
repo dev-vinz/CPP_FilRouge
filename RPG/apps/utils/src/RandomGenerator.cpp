@@ -75,7 +75,7 @@ namespace HE_Arc::RPG
     {
         const string nameUrl = RandomGenerator::BASE_URL + "/Name?nameType=firstname&quantity=1";
 
-        ifstream myKeys(this->projectPath + "\\settings\\Keys.json");
+        ifstream myKeys(this->projectPath + "\\settings\\Data.json");
         json jsonKey;
 
         myKeys >> jsonKey;

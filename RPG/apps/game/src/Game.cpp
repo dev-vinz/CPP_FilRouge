@@ -75,9 +75,9 @@ namespace HE_Arc::RPG
         {
             cin.clear();
             cout << " Please choose your type of hero with 1, 2 or 3 :" << endl
-                 << " (1) Warrior" << endl
-                 << " (2) Wizard" << endl
-                 << " (3) Necromancer" << endl
+                 << " [1] Warrior" << endl
+                 << " [2] Wizard" << endl
+                 << " [3] Necromancer" << endl
                  << " >>> ";
 
             cin >> choice;
@@ -138,7 +138,7 @@ namespace HE_Arc::RPG
         for (int k = 0; k < this->nbPotions; k++)
         {
             Type _type = (Type)((start + k) % 3);
-            this->listPotions.push_back(new Potion(10, _type));
+            this->listPotions.push_back(new Potion(random.getRandomNumber(7, 12), _type));
         }
 
         this->setPositions();
@@ -150,6 +150,7 @@ namespace HE_Arc::RPG
     void Game::play()
     {
         this->isPlaying = true;
+        string _endLine;
 
         while (this->isPlaying)
         {
@@ -170,21 +171,30 @@ namespace HE_Arc::RPG
                          << " >>> ";
 
                     cin >> fight;
-                    string _endLine;
                     getline(cin, _endLine);
 
                     fight = tolower(fight, locale());
                 } while (!this->checkFight(fight));
 
+                this->applyFight(fight, opponent);
+
                 this->display();
+            }
+
+            if (!this->isPlaying)
+            {
+                if (!Game::VJ_DEBUG_LOG)
+                    system("CLS");
+
+                break;
             }
 
             char movement;
             do
             {
                 cout << " Choose your movement (w, a, s, d, n, q) : ";
+
                 cin >> movement;
-                string _endLine;
                 getline(cin, _endLine);
 
                 movement = tolower(movement, locale());
@@ -202,27 +212,14 @@ namespace HE_Arc::RPG
     // =============================================
 
     /**
-     * @brief Checks the next player's action
-     * @param _action The action
-     * @returns True if the check is correct
-     */
-    bool Game::checkAction(char _action)
-    {
-        return true;
-    }
-
-    /**
      * @brief Checks if the player wants to fight or not
      * @param _fight Yes or no
      * @returns True if the check is correct
      */
-    bool Game::checkFight(char _fight)
+    bool Game::checkFight(char _fight) const
     {
         char tabFight[] = {'y', 'n'};
-        char *exceptedLastIndex = find(begin(tabFight), end(tabFight), _fight);
-
-        // If the element is not found, std::find returns the end of the range (last indice of tabFight)
-        if (exceptedLastIndex == end(tabFight))
+        if (!ConsoleController::checkInput(tabFight, _fight))
             return false;
 
         return true;
@@ -234,14 +231,11 @@ namespace HE_Arc::RPG
      * @param _hero The hero
      * @returns True if the check is correct
      */
-    bool Game::checkMovement(char _movement, Hero *_hero)
+    bool Game::checkMovement(char _movement, Hero *_hero) const
     {
         char tabMovements[] = {'w', 'a', 's', 'd', 'n', 'q'};
 
-        char *exceptedLastIndex = find(begin(tabMovements), end(tabMovements), _movement);
-
-        // If the element is not found, std::find returns the end of the range (last indice of tabMovements)
-        if (exceptedLastIndex == end(tabMovements))
+        if (!ConsoleController::checkInput(tabMovements, _movement))
             return false;
 
         int posX = _hero->getPosX();
@@ -295,6 +289,29 @@ namespace HE_Arc::RPG
         }
 
         return true;
+    }
+
+    /**
+     * @brief Apply the player's choice about fight
+     * @param _fight Yes (y) or no (n)
+     * @param _opponent The opponent
+     */
+    void Game::applyFight(char _fight, Hero *_opponent)
+    {
+        if (_fight == 'y')
+        {
+            Battle anyBattle(this->player, _opponent);
+            Hero *winner = anyBattle.getWinner();
+
+            if (winner == this->player)
+            {
+                if (Game::VJ_DEBUG_LOG)
+                {
+                    cout << "PLAYER HAS WON" << endl;
+                    this->isPlaying = false;
+                }
+            }
+        }
     }
 
     /**

@@ -16,6 +16,7 @@ namespace HE_Arc::RPG
         Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer = false);
         virtual ~Warrior() override = default;
 
+        void displayAttacks() const override;
         void interact(const Hero &) override;
         void show() const override;
     };

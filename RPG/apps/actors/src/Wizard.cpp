@@ -36,6 +36,16 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Display the wizard's attacks
+     */
+    void Wizard::displayAttacks() const
+    {
+        cout << " [1] Paralyzes" << endl
+             << " [2] Cast a fireball" << endl
+             << " [3] Giant wave" << endl;
+    }
+
+    /**
      * @brief Interact a wizard with an other Hero
      * @param otherHero The other hero
      */

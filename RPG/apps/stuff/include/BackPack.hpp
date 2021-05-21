@@ -23,6 +23,7 @@ namespace HE_Arc::RPG
 
         int getSize() const;
 
+        IObject *top() const;
         IObject *unPack();
 
         void pack(IObject *);

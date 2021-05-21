@@ -21,11 +21,23 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Gets what is on top
+     * @returns The object
+     */
+    IObject *BackPack::top() const
+    {
+        return this->mStack.empty() ? nullptr : this->mStack.top();
+    }
+
+    /**
      * @brief Unpack an object
      * @returns The object
      */
     IObject *BackPack::unPack()
     {
+        if (this->mStack.empty())
+            return nullptr;
+
         IObject *topStack = this->mStack.top();
         this->mStack.pop();
 
