@@ -31,6 +31,9 @@ namespace HE_Arc::RPG
      */
     void Necromancer::displayAttacks() const
     {
+        cout << " [1] Lifesteal" << endl
+             << " [2] Sommon undead" << endl
+             << " [3] Provokes a cataclysm" << endl;
     }
 
     /**

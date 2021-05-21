@@ -40,7 +40,7 @@ namespace HE_Arc::RPG
      */
     void Wizard::displayAttacks() const
     {
-        cout << " [1] Paralyzes" << endl
+        cout << " [1] Dizzy spell" << endl
              << " [2] Cast a fireball" << endl
              << " [3] Giant wave" << endl;
     }

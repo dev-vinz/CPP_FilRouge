@@ -22,6 +22,9 @@ namespace HE_Arc::RPG
      */
     void Warrior::displayAttacks() const
     {
+        cout << " [1] Punch" << endl
+             << " [2] Give a sword strike" << endl
+             << " [3] Provokes an earthquake" << endl;
     }
 
     /**
