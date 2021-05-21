@@ -8,10 +8,8 @@
 #include <nlohmann/json.hpp>
 #include <stdlib.h>
 #include <string>
-#include <winsock2.h> // Sinon ça fout un warning bizarre (cpr)
+#include <time.h>
 #include <windows.h>
-
-#include <cpr/cpr.h>
 
 using namespace std;
 using namespace nlohmann;

@@ -2,14 +2,14 @@
 #include <iostream>
 #include <list>
 
-#include "libs\actors\include\Hero.hpp"
-#include "libs\actors\include\Necromancer.hpp"
-#include "libs\actors\include\Warrior.hpp"
-#include "libs\actors\include\Wizard.hpp"
+#include "apps\actors\include\Hero.hpp"
+#include "apps\actors\include\Necromancer.hpp"
+#include "apps\actors\include\Warrior.hpp"
+#include "apps\actors\include\Wizard.hpp"
 
-#include "libs\stuff\include\Potion.hpp"
-#include "libs\stuff\include\Shield.hpp"
-#include "libs\stuff\include\Sword.hpp"
+#include "apps\stuff\include\Potion.hpp"
+#include "apps\stuff\include\Shield.hpp"
+#include "apps\stuff\include\Sword.hpp"
 // https://medium.com/swlh/c-project-structure-for-cmake-67d60135f6f5
 
 using namespace std;

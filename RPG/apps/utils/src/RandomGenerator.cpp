@@ -75,14 +75,6 @@ namespace HE_Arc::RPG
     {
         const string nameUrl = RandomGenerator::BASE_URL + "/Name?nameType=firstname&quantity=1";
 
-        //cout << RandomGenerator::API_KEY << endl;
-
-        cpr::Url _url{nameUrl};
-        /*cpr::Header _header{ { "x-api-key", RandomGenerator::API_KEY } };
-        cpr::Response _response = cpr::Get(_url, _header);
-
-        cout << _response.status_code << endl;*/
-
         ifstream myKeys(this->projectPath + "\\settings\\Keys.json");
         json jsonKey;
 

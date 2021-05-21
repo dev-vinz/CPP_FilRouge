@@ -4,7 +4,7 @@
 #include <list>
 #include <stdlib.h>
 
-#include "libs\game\include\Game.hpp"
+#include "apps\game\include\Game.hpp"
 
 using namespace std;
 using namespace HE_Arc::RPG;
