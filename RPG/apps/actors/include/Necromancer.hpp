@@ -19,6 +19,7 @@ namespace HE_Arc::RPG
         void riseUndead();
 
         void displayAttacks() const override;
+        void interact(Hero *, char _attack) override;
         void show() const override;
     };
 }

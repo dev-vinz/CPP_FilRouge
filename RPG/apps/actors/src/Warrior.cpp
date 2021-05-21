@@ -30,10 +30,11 @@ namespace HE_Arc::RPG
     /**
      * @brief Interact a warrior with an other Hero
      * @param otherHero The other hero
+     * @param _attack The attack
      */
-    void Warrior::interact(const Hero &otherHero)
+    void Warrior::interact(Hero *otherHero, char _attack)
     {
-        cout << this->name << " punch " << otherHero.getName() << "'s face" << endl;
+        cout << this->name << " punch " << otherHero->getName() << "'s face" << endl;
     }
 
     /**

@@ -68,6 +68,17 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Get a random float number between _min and _max not included
+     * @param _min The minimum number
+     * @param _max The maximum number
+     */
+    double RandomGenerator::getRandomDouble(double _min, double _max)
+    {
+        int bigInt = this->getRandomNumber(_min * 10, _max * 10);
+        return bigInt / 10.0;
+    }
+
+    /**
      * @brief Get a random name made by the generator
      * @returns The random name
      */

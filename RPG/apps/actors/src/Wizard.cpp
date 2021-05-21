@@ -29,10 +29,17 @@ namespace HE_Arc::RPG
 
     /**
      * @brief Cast a spell
+     * @param _hero The other hero
      */
-    void Wizard::castSpell()
+    void Wizard::castSpell(Hero *_hero)
     {
-        cout << this->name << " cast : AVADA KEDAVRA !" << endl;
+        RandomGenerator random;
+        double damage = random.getRandomDouble(10, 16);
+
+        _hero->setHp(_hero->getHp() - damage);
+
+        cout << " You cast a fireball on " << _hero->getName() << endl
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
     }
 
     /**
@@ -48,10 +55,26 @@ namespace HE_Arc::RPG
     /**
      * @brief Interact a wizard with an other Hero
      * @param otherHero The other hero
+     * @param _attack The attack
      */
-    void Wizard::interact(const Hero &anotherHero)
+    void Wizard::interact(Hero *anotherHero, char _attack)
     {
-        cout << this->name << " sent a spell on " << anotherHero.getName() << endl;
+        switch (_attack)
+        {
+        case '1':
+            this->dizzySpell(anotherHero);
+            break;
+        case '2':
+            this->castSpell(anotherHero);
+            break;
+        case '3':
+            this->giantWave(anotherHero);
+            break;
+        default:
+            break;
+            cout << "[ERROR : Wizard::interact()] : Unknown attack (attack = " << _attack << ")" << endl;
+            exit(-1);
+        }
     }
 
     /**
@@ -70,5 +93,38 @@ namespace HE_Arc::RPG
              << "\nCurrent HP :" << this->getHp()
              << "\nStuff : " << this->getStuff()->getName()
              << endl;
+    }
+
+    // =============================================
+    // Private Methods
+    // =============================================
+
+    /**
+     * @brief Dizzy the other hero
+     * @param _hero The other hero
+     */
+    void Wizard::dizzySpell(Hero *_hero)
+    {
+        _hero->setAgility(_hero->getAgility() - 5);
+
+        if (_hero->getAgility() < 0)
+            _hero->setAgility(0);
+
+        cout << " " << _hero->getName() << "'s agility has been reduced to " << _hero->getAgility() << endl;
+    }
+
+    /**
+     * @brief Create a giant wave
+     * @param _hero The other hero
+     */
+    void Wizard::giantWave(Hero *_hero)
+    {
+        RandomGenerator random;
+        double damage = random.getRandomDouble(13, 18);
+
+        _hero->setHp(_hero->getHp() - damage);
+
+        cout << " A giant wave arrives !" << endl
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
     }
 }

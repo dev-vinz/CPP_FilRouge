@@ -9,6 +9,8 @@
 #include "..\..\stuff\include\IObject.hpp"
 #include "..\..\stuff\include\Potion.hpp"
 
+#include "..\..\utils\include\RandomGenerator.hpp"
+
 using namespace std;
 
 namespace HE_Arc::RPG
@@ -53,12 +55,14 @@ namespace HE_Arc::RPG
         int getPosX() const;
         int getPosY() const;
 
+        void setAgility(int);
+        void setHp(double);
         void setPosXY(int, int);
 
         void useObject(IObject *);
 
         void virtual displayAttacks() const = 0;
-        void virtual interact(const Hero &) = 0;
+        void virtual interact(Hero *, char _attack) = 0;
         void virtual show() const = 0;
         void virtual showStatistics() const;
 

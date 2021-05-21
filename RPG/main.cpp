@@ -37,7 +37,7 @@ int oldMain()
     });
 
     myHeroOne->castSpell();
-    myHeroTwo->interact(*myHeroOne);
+    myHeroTwo->interact(myHeroOne, '1');
     myHeroThree->riseUndead();
 
     cout << endl;

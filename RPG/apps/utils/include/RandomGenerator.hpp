@@ -29,6 +29,8 @@ namespace HE_Arc::RPG
         int getRandomNumber(unsigned int _max);
         int getRandomNumber(unsigned int _min, unsigned int _max);
 
+        double getRandomDouble(double _min, double _max);
+
         string getRandomName() const;
     };
 }

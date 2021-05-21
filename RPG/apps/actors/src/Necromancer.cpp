@@ -37,6 +37,16 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Interact a necromancer with an other Hero
+     * @param otherHero The other hero
+     * @param _attack The attack
+     */
+    void Necromancer::interact(Hero *otherHero, char _attack)
+    {
+        cout << this->name << " punch " << otherHero->getName() << "'s face" << endl;
+    }
+
+    /**
      * @brief Show the different attributes of the necromancer
      */
     void Necromancer::show() const

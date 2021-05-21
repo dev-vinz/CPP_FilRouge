@@ -110,6 +110,24 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Set the agility
+     * @param _agility The agility
+     */
+    void Hero::setAgility(int _agility)
+    {
+        this->agility = _agility;
+    }
+
+    /**
+     * @brief Set the current HP
+     * @param _hp The hp
+     */
+    void Hero::setHp(double _hp)
+    {
+        this->currentHp = _hp;
+    }
+
+    /**
      * @brief Set the position X and Y
      * @param _x The position
      * @param _y The position

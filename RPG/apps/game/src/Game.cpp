@@ -138,7 +138,7 @@ namespace HE_Arc::RPG
         for (int k = 0; k < this->nbPotions; k++)
         {
             Type _type = (Type)((start + k) % 3);
-            this->listPotions.push_back(new Potion(random.getRandomNumber(7, 12), _type));
+            this->listPotions.push_back(new Potion(random.getRandomNumber(7, 13), _type));
         }
 
         this->setPositions();

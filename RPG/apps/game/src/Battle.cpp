@@ -188,6 +188,9 @@ namespace HE_Arc::RPG
                 getline(cin, _endLine);
             }
         } while (!this->checkNumber(3, attack));
+
+        cout << " ========================================" << endl;
+        _attacker->interact(_defender, attack);
     }
 
     /**
