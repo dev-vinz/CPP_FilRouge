@@ -3,8 +3,8 @@
         {
             "name": "GCC",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/DEV/.vcpkg/installed/x64-windows/**"
+                "${workspaceFolder}/**"
+                //"C:/DEV/.vcpkg/installed/x64-windows/**"
             ],
             "defines": [
                 "_DEBUG",
