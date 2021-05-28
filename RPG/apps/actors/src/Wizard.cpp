@@ -31,12 +31,15 @@ namespace HE_Arc::RPG
      * @brief Cast a spell
      * @param _hero The other hero
      */
-    void Wizard::castSpell(Hero *_hero)
+    void Wizard::castSpell(Hero *_hero) const
     {
         RandomGenerator random;
-        double damage = random.getRandomDouble(10, 16);
 
-        _hero->setHp(_hero->getHp() - damage);
+        // Power of the magic wand, multiplied by the ratio of intelligence
+        double stuffDamage = this->pStuff->getFeature() * this->getIntelligenceRatio();
+        double damage = random.getRandomDouble(max(stuffDamage - 2, 0.0), stuffDamage + 2, 1);
+
+        _hero->updateHp(-damage);
 
         cout << " You cast a fireball on " << _hero->getName() << endl
              << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
@@ -54,6 +57,7 @@ namespace HE_Arc::RPG
 
     /**
      * @brief Interact a wizard with an other Hero
+     * TODO Use mana to cast spells, otherwise a simple punch
      * @param otherHero The other hero
      * @param _attack The attack
      */
@@ -103,26 +107,37 @@ namespace HE_Arc::RPG
      * @brief Dizzy the other hero
      * @param _hero The other hero
      */
-    void Wizard::dizzySpell(Hero *_hero)
+    void Wizard::dizzySpell(Hero *_hero) const
     {
-        _hero->setAgility(_hero->getAgility() - 5);
+        // The third of the magic wand's power, multiplied by the ratio of strength
+        int reduction = (this->pStuff->getFeature() / 3.0) * ((double)this->getStrength() / MAX_STRENGTH);
+        int fromAgility = _hero->getAgility();
 
-        if (_hero->getAgility() < 0)
-            _hero->setAgility(0);
+        _hero->updateAgility(-reduction);
 
-        cout << " " << _hero->getName() << "'s agility has been reduced to " << _hero->getAgility() << endl;
+        if (Wizard::VJ_DEBUG_LOG)
+        {
+            cout << " Magic Wand's power : " << this->pStuff->getFeature() << endl
+                 << " Strength : " << this->getStrength() << endl
+                 << " Reduction : " << reduction << endl;
+        }
+
+        cout << " " << _hero->getName() << " has been stunned, and its agility has been reduced from " << fromAgility << " to " << _hero->getAgility() << endl;
     }
 
     /**
      * @brief Create a giant wave
      * @param _hero The other hero
      */
-    void Wizard::giantWave(Hero *_hero)
+    void Wizard::giantWave(Hero *_hero) const
     {
         RandomGenerator random;
-        double damage = random.getRandomDouble(13, 18);
 
-        _hero->setHp(_hero->getHp() - damage);
+        // The double of magic wand's power, multiplied by the ratio of intelligence AND strength
+        double wizardDamage = (this->pStuff->getFeature() * 2) * this->getIntelligenceRatio() * this->getStrengthRatio();
+        double damage = random.getRandomDouble(max(wizardDamage - 3, 0.0), wizardDamage + 3, 1);
+
+        _hero->updateHp(-damage);
 
         cout << " A giant wave arrives !" << endl
              << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;

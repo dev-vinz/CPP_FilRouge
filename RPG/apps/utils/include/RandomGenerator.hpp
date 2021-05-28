@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <math.h>
 #include <nlohmann/json.hpp>
 #include <stdlib.h>
 #include <string>
@@ -29,7 +30,7 @@ namespace HE_Arc::RPG
         int getRandomNumber(unsigned int _max);
         int getRandomNumber(unsigned int _min, unsigned int _max);
 
-        double getRandomDouble(double _min, double _max);
+        double getRandomDouble(double _min, double _max, unsigned int _nbRounded);
 
         string getRandomName() const;
     };

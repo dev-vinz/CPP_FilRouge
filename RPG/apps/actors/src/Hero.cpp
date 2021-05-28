@@ -110,6 +110,33 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Get the ratio of agility
+     * @returns The ratio
+     */
+    double Hero::getAgilityRatio() const
+    {
+        return (double)this->getAgility() / MAX_AGILITY;
+    }
+
+    /**
+     * @brief Get the ratio of intelligence
+     * @returns The ratio
+     */
+    double Hero::getIntelligenceRatio() const
+    {
+        return (double)this->getIntelligence() / MAX_INTELLIGENCE;
+    }
+
+    /**
+     * @brief Get the ratio of strength
+     * @returns The ratio
+     */
+    double Hero::getStrengthRatio() const
+    {
+        return (double)this->getStrength() / MAX_STRENGTH;
+    }
+
+    /**
      * @brief Set the agility
      * @param _agility The agility
      */
@@ -139,6 +166,33 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Get and set Agility : New Agility = Agility + _update
+     * @param _update The modification to do
+     */
+    void Hero::updateAgility(int _update)
+    {
+        this->agility = max(min(this->agility + _update, MAX_AGILITY), 0);
+    }
+
+    /**
+     * @brief Get and set HP : New HP = HP + _update
+     * @param _update The modification to do
+     */
+    void Hero::updateHp(double _update)
+    {
+        this->currentHp = min(this->currentHp + _update, this->hp);
+    }
+
+    /**
+     * @brief Get and set Strength : New Strength = Strength + _update
+     * @param _update The modification to do
+     */
+    void Hero::updateStrength(int _update)
+    {
+        this->strength = max(min(this->strength + _update, MAX_STRENGTH), 0);
+    }
+
+    /**
      * @brief Use the object
      * @param _object The object
      */
@@ -148,23 +202,17 @@ namespace HE_Arc::RPG
 
         if (ptrPotion != nullptr)
         {
+            int power = ptrPotion->getFeature();
             switch (ptrPotion->getUtility())
             {
             case Agility:
-                this->agility += ptrPotion->getFeature();
+                this->updateAgility(power);
                 break;
             case Heal:
-                if (this->currentHp + ptrPotion->getFeature() > this->hp)
-                {
-                    this->currentHp = this->hp;
-                }
-                else
-                {
-                    this->currentHp += ptrPotion->getFeature();
-                }
+                this->updateHp(power);
                 break;
             case Strength:
-                this->strength += ptrPotion->getFeature();
+                this->updateStrength(power);
                 break;
             default:
                 cout << "[ERROR : Hero::useObject()] : Unknown potion" << endl;

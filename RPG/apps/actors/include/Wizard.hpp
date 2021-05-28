@@ -14,8 +14,8 @@ namespace HE_Arc::RPG
     protected:
         int mana = 0;
 
-        void dizzySpell(Hero *);
-        void giantWave(Hero *);
+        void dizzySpell(Hero *) const;
+        void giantWave(Hero *) const;
 
     public:
         Wizard() = delete;
@@ -24,11 +24,13 @@ namespace HE_Arc::RPG
 
         int getMana() const;
 
-        void castSpell(Hero * = nullptr);
+        void castSpell(Hero *) const;
 
         virtual void displayAttacks() const override;
         virtual void interact(Hero *, char _attack) override;
         virtual void show() const override;
+
+        static const bool VJ_DEBUG_LOG = false;
     };
 }
 

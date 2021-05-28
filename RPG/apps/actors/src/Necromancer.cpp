@@ -20,10 +20,45 @@ namespace HE_Arc::RPG
 
     /**
      * @brief Rise undead
+     * @param _hero The other hero
      */
-    void Necromancer::riseUndead()
+    void Necromancer::riseUndead(Hero *_hero)
     {
-        cout << this->name << " rise undead" << endl;
+        RandomGenerator random;
+
+        // Scepter power, multiplied by the ratio of agility
+        int necromancerDamage = this->pStuff->getFeature() * this->getAgilityRatio();
+        int nbSummoned = random.getRandomNumber(max(necromancerDamage - 3, 0), necromancerDamage + 3);
+
+        // Among all summoned, a random number are traitors and attack you
+        int nbTraitors = random.getRandomNumber(nbSummoned);
+        int nbAttack = nbSummoned - nbTraitors;
+
+        // Each summons makes 1.2 damage
+        double summonDamage = 1.2;
+
+        double damage = summonDamage * nbAttack;
+        _hero->updateHp(-damage);
+
+        if (Necromancer::VJ_DEBUG_LOG)
+        {
+            cout << " Scepter's power : " << this->pStuff->getFeature() << endl
+                 << " Agility : " << this->getAgility() << endl
+                 << " NecromancerDamage : " << necromancerDamage << endl
+                 << " NbSummoned : " << nbSummoned << endl
+                 << " NbTraitors : " << nbTraitors << endl;
+        }
+
+        cout << " You summons " << nbSummoned << " undead and " << nbAttack << " attack your opponent" << endl
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
+
+        if (nbTraitors)
+        {
+            double ownDamage = damage * nbTraitors;
+            this->updateHp(-ownDamage);
+            cout << " Unfortunately, " << nbTraitors << " of them are traitors, and attack you" << endl
+                 << " You lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
+        }
     }
 
     /**
@@ -38,12 +73,28 @@ namespace HE_Arc::RPG
 
     /**
      * @brief Interact a necromancer with an other Hero
+     * TODO Use mana to cast spells, otherwise a simple punch
      * @param otherHero The other hero
      * @param _attack The attack
      */
     void Necromancer::interact(Hero *otherHero, char _attack)
     {
-        cout << this->name << " punch " << otherHero->getName() << "'s face" << endl;
+        switch (_attack)
+        {
+        case '1':
+            this->lifeSteal(otherHero);
+            break;
+        case '2':
+            this->riseUndead(otherHero);
+            break;
+        case '3':
+            this->cataclysm(otherHero);
+            break;
+        default:
+            break;
+            cout << "[ERROR : Necromancer::interact()] : Unknown attack (attack = " << _attack << ")" << endl;
+            exit(-1);
+        }
     }
 
     /**
@@ -62,5 +113,59 @@ namespace HE_Arc::RPG
              << "\nCurrent HP :" << this->getHp()
              << "\nStuff : " << this->getStuff()->getName()
              << endl;
+    }
+
+    // =============================================
+    // Private Methods
+    // =============================================
+
+    /**
+     * @brief Provokes a cataclysm
+     * @param _hero The other hero
+     */
+    void Necromancer::cataclysm(Hero *_hero)
+    {
+        RandomGenerator random;
+
+        // Default damage : 30
+        // Multiplied by the ratio of agility
+        double necromancerDamage = 30 * this->getAgilityRatio();
+        double damage = random.getRandomDouble(max(necromancerDamage - 1, 0.0), necromancerDamage + 1, 1);
+
+        _hero->updateHp(-damage);
+
+        // You receive half of the damage
+        // TODO An algorithm to reduce damage in function of agility
+        double ratio = 1.0 / 2.0;
+        double ownDamage = damage * ratio;
+        this->updateHp(ownDamage);
+
+        cout << " You provoke a cataclysm, and " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl
+             << " Unfortunately you receive " << fixed << setprecision(2) << ratio * 100 << "\% of the damages, and lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
+    }
+
+    /**
+     * @brief Steal your opponent's life and gains it
+     * @param _hero The other hero
+     */
+    void Necromancer::lifeSteal(Hero *_hero)
+    {
+        RandomGenerator random;
+
+        // Default steal : 10
+        // Multiplied by 2 times the ratio of agility
+        double necromancerDamage = 10 * (2 * this->getAgilityRatio());
+        double damage = random.getRandomDouble(max(necromancerDamage - 5, 0.0), necromancerDamage + 5, 1);
+
+        _hero->updateHp(-damage);
+
+        // You gain half of the life stolen
+        // ! An algorithm do gain other than 1/2
+        double ratio = 1.0 / 2.0;
+        double ownGained = damage * ratio;
+        this->updateHp(ownGained);
+
+        cout << " You stole " << fixed << setprecision(1) << damage << " HP to " << _hero->getName() << endl
+             << " You gained " << fixed << setprecision(1) << ownGained << " HP" << endl;
     }
 }

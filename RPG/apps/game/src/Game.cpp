@@ -93,7 +93,7 @@ namespace HE_Arc::RPG
             this->player = new Wizard(_name, 10, 10, 10, 8, 100, new Potion(900, Agility), true);
             break;
         case 3:
-            this->player = new Necromancer(_name, 9, 9, 9, 9, 90, new Potion(10, Heal), true);
+            this->player = new Necromancer(_name, 9, 9, 9, 9, 90, new Potion(50, Heal), true);
             break;
         default:
             cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;

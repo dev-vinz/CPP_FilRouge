@@ -11,6 +11,8 @@
 
 #include "..\..\utils\include\RandomGenerator.hpp"
 
+#include "..\..\..\settings\Settings.hpp"
+
 using namespace std;
 
 namespace HE_Arc::RPG
@@ -55,9 +57,17 @@ namespace HE_Arc::RPG
         int getPosX() const;
         int getPosY() const;
 
+        double getAgilityRatio() const;
+        double getIntelligenceRatio() const;
+        double getStrengthRatio() const;
+
         void setAgility(int);
         void setHp(double);
         void setPosXY(int, int);
+
+        void updateAgility(int);
+        void updateHp(double);
+        void updateStrength(int);
 
         void useObject(IObject *);
 

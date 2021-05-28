@@ -64,6 +64,9 @@ namespace HE_Arc::RPG
             _max = temp;
         }
 
+        if (_min == _max)
+            return _max;
+
         return rand() % (_max - _min) + _min;
     }
 
@@ -71,11 +74,12 @@ namespace HE_Arc::RPG
      * @brief Get a random float number between _min and _max not included
      * @param _min The minimum number
      * @param _max The maximum number
+     * @param _nbRounded The number after the comma
      */
-    double RandomGenerator::getRandomDouble(double _min, double _max)
+    double RandomGenerator::getRandomDouble(double _min, double _max, unsigned int _nbRounded)
     {
-        int bigInt = this->getRandomNumber(_min * 10, _max * 10);
-        return bigInt / 10.0;
+        int bigInt = this->getRandomNumber(_min * pow(10, _nbRounded), _max * pow(10, _nbRounded));
+        return bigInt / ((double)pow(10, _nbRounded));
     }
 
     /**

@@ -1,0 +1,8 @@
+#ifndef SETTINGS_HPP
+#define SETTINGS_HPP
+
+#define MAX_AGILITY 100
+#define MAX_INTELLIGENCE 100
+#define MAX_STRENGTH 100
+
+#endif
