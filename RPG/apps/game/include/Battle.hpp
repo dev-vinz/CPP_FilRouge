@@ -17,7 +17,8 @@ namespace HE_Arc::RPG
     {
         Null = -1,
         Player = 0,
-        Opponent = 1
+        Opponent = 1,
+        None = 2
     };
 
     class Battle
@@ -39,8 +40,10 @@ namespace HE_Arc::RPG
         void playerTurn();
         void opponentTurn();
 
-        void fight(Hero *, Hero *) const;
+        void concede();
+        void fight(Hero *, Hero *);
         void openBackPack() const;
+        void prepareDodge(Hero *) const;
 
     public:
         Battle() = delete;

@@ -8,7 +8,6 @@
 #include <string>
 #include <unistd.h>
 #include <vector>
-#include <winsock2.h> // Sinon ça fout un warning bizarre (cpr)
 #include <windows.h>
 
 #include "Battle.hpp"
@@ -19,7 +18,9 @@
 #include "..\..\actors\include\Warrior.hpp"
 #include "..\..\actors\include\Wizard.hpp"
 
+#include "..\..\stuff\include\MagicWand.hpp"
 #include "..\..\stuff\include\Potion.hpp"
+#include "..\..\stuff\include\Scepter.hpp"
 #include "..\..\stuff\include\Shield.hpp"
 #include "..\..\stuff\include\Sword.hpp"
 

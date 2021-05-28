@@ -38,13 +38,28 @@ namespace HE_Arc::RPG
             this->nextTurn();
         }
 
-        if (this->winner == Null)
+        Hero *winner = nullptr;
+
+        switch (this->winner)
         {
+        case Null:
             cout << "[ERROR : Battle::getWinner()] : Battle over and don't have a winner" << endl;
+            exit(-1);
+        case Player:
+            winner = this->player;
+            break;
+        case Opponent:
+            winner = this->opponent;
+            break;
+        case None:
+            // Both are dead, return nullptr
+            break;
+        default:
+            cout << "[ERROR : Battle::getWinner()] : Unknown state of winner" << endl;
             exit(-1);
         }
 
-        return (this->winner == Player) ? this->player : this->opponent;
+        return winner;
     }
 
     // =============================================
@@ -60,7 +75,6 @@ namespace HE_Arc::RPG
     bool Battle::checkNumber(int _range, char _number) const
     {
         vector<char> tabNumbers;
-        const int ASCII_ZERO = 48;
 
         for (int k = 1; k <= _range; k++)
             tabNumbers.push_back(k + ASCII_ZERO);
@@ -142,15 +156,15 @@ namespace HE_Arc::RPG
             this->fight(this->player, this->opponent);
             break;
         case '3':
+            this->prepareDodge(this->player);
+            break;
         case '4':
+            this->concede();
             break;
         default:
             cout << "[ERROR : Battle::playerTurn()] : It misses a case in switch of actions (action = " << action << ")" << endl;
             exit(-1);
         }
-
-        this->isOver = true;
-        this->winner = Player;
     }
 
     /**
@@ -158,6 +172,18 @@ namespace HE_Arc::RPG
      */
     void Battle::opponentTurn()
     {
+        cout << " !!! THIS IS OPPONENT'S TURN !!!" << endl;
+    }
+
+    /**
+     * @brief Concede the battle
+     */
+    void Battle::concede()
+    {
+        this->isOver = true;
+        this->winner = Opponent;
+
+        // TODO Penalyse the hero for concede
     }
 
     /**
@@ -165,20 +191,17 @@ namespace HE_Arc::RPG
      * @param _attacker The attacker
      * @param _defender The defender
      */
-    void Battle::fight(Hero *_attacker, Hero *_defender) const
+    void Battle::fight(Hero *_attacker, Hero *_defender)
     {
+        char attack;
+        string _endLine;
+
         if (_attacker->getIsPlayer())
         {
             cout << " ========================================" << endl
                  << " Choose your attack :" << endl;
-        }
 
-        char attack;
-        string _endLine;
-
-        do
-        {
-            if (_attacker->getIsPlayer())
+            do
             {
                 _attacker->displayAttacks();
 
@@ -186,11 +209,52 @@ namespace HE_Arc::RPG
 
                 cin >> attack;
                 getline(cin, _endLine);
-            }
-        } while (!this->checkNumber(3, attack));
+
+            } while (!this->checkNumber(3, attack));
+        }
+        else
+        {
+            RandomGenerator random;
+
+            attack = (char)(ASCII_ZERO + random.getRandomNumber(1, 4));
+        }
 
         cout << " ========================================" << endl;
-        _attacker->interact(_defender, attack);
+
+        if (!_defender->isDodging())
+        {
+            // _attacker attack
+            _attacker->interact(_defender, attack);
+        }
+        else
+        {
+            // _defender dodge the attack
+            if (_defender->getIsPlayer())
+            {
+                cout << " Oof, you dodged the attack" << endl;
+            }
+            else
+            {
+                cout << " Arf, " << _defender->getName() << " dodged your attack, sorry" << endl;
+            }
+        }
+
+        // Now we check who is dead
+        if (_attacker->isDead() && _defender->isDead())
+        {
+            this->isOver = true;
+            this->winner = None;
+        }
+        else if (_defender->isDead())
+        {
+            this->isOver = true;
+            this->winner = (_attacker->getIsPlayer()) ? Player : Opponent;
+        }
+        else if (_attacker->isDead())
+        {
+            this->isOver = true;
+            this->winner = (_defender->getIsPlayer()) ? Player : Opponent;
+        }
     }
 
     /**
@@ -229,5 +293,14 @@ namespace HE_Arc::RPG
                  << " Your backpack is empty, sorry" << endl
                  << " ========================================" << endl;
         }
+    }
+
+    /**
+     * @brief Prepare the hero to dodge next attack
+     * @param _hero The hero
+     */
+    void Battle::prepareDodge(Hero *_hero) const
+    {
+        _hero->switchDodge();
     }
 }

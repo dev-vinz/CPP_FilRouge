@@ -57,15 +57,15 @@ namespace HE_Arc::RPG
      */
     void Warrior::show() const
     {
-        cout << "\n=================\n"
-             << "WARRIOR : " << this->getName()
-             << "\n=================\n"
-             << "\nAgility : " << this->getAgility()
-             << "\nIntelligence : " << this->getIntelligence()
-             << "\nStrength : " << this->getStrength()
-             << "\nHP : " << this->hp
-             << "\nCurrent HP :" << this->getHp()
-             << "\nStuff : " << this->getStuff()->getName()
+        cout << "\n =================\n"
+             << " WARRIOR : " << this->getName()
+             << "\n =================\n"
+             << "\n Agility : " << this->getAgility()
+             << "\n Intelligence : " << this->getIntelligence()
+             << "\n Strength : " << this->getStrength()
+             << "\n Max HP : " << this->hp
+             << "\n Current HP : " << this->getHp()
+             << "\n Stuff : " << this->getStuff()->getName() << ", with a damage of " << this->getStuff()->getFeature()
              << endl;
     }
 
@@ -88,9 +88,9 @@ namespace HE_Arc::RPG
 
         _hero->updateHp(-damage);
 
-        // You receive 1/5 of the damage
-        // TODO An algorithm to dodge it with intelligence and agility, or to receive less than 1/5
-        double ratio = 1.0 / 5.0;
+        // You suffers 3/4 of the damage
+        // TODO An algorithm to dodge it with intelligence and agility, or to receive less than 3/4
+        double ratio = 3.0 / 4.0;
         double ownDamage = damage * ratio;
         this->updateHp(-ownDamage);
 
@@ -106,7 +106,7 @@ namespace HE_Arc::RPG
     {
         RandomGenerator random;
 
-        int strength = this->getStrength();
+        int strength = this->getStrength() / 10;
         double damage = random.getRandomDouble(max(strength - 3, 0), min(strength + 3, MAX_STRENGTH), 1);
 
         _hero->updateHp(-damage);

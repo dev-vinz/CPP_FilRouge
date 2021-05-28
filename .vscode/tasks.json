@@ -12,8 +12,6 @@
 				"${fileDirname}\\apps\\game\\src\\*.cpp",
 				"${fileDirname}\\apps\\stuff\\src\\*.cpp",
 				"${fileDirname}\\apps\\utils\\src\\*.cpp",
-				"-I",
-				"C:\\DEV\\.vcpkg\\installed\\x64-windows\\include",
 				"-o",
 				"${fileDirname}\\bin\\${fileBasenameNoExtension}.exe"
 			],

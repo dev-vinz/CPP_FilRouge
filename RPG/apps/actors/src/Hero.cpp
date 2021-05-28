@@ -166,6 +166,14 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Switch the advantage of dodging
+     */
+    void Hero::switchDodge()
+    {
+        this->dodgeNext = !this->dodgeNext;
+    }
+
+    /**
      * @brief Get and set Agility : New Agility = Agility + _update
      * @param _update The modification to do
      */
@@ -190,6 +198,44 @@ namespace HE_Arc::RPG
     void Hero::updateStrength(int _update)
     {
         this->strength = max(min(this->strength + _update, MAX_STRENGTH), 0);
+    }
+
+    /**
+     * @brief Tells if the hero dodge the attack
+     * @returns True if it is
+     */
+    bool Hero::isDodging()
+    {
+        // Use intelligence and agility
+        double sumStats = this->intelligence + 2 * this->agility;
+
+        // Check if the hero has the advantage
+        if (this->dodgeNext)
+        {
+            sumStats *= 1.2;
+            this->switchDodge();
+        }
+
+        RandomGenerator random;
+
+        int nbDodge = random.getRandomNumber(MAX_INTELLIGENCE + 2 * MAX_AGILITY);
+
+        if (Hero::VJ_DEBUG_LOG)
+        {
+            cout << " sumStats : " << sumStats << endl
+                 << " nbDodge : " << nbDodge << endl;
+        }
+
+        return sumStats > nbDodge;
+    }
+
+    /**
+     * @brief Tells if the hero is dead
+     * @returns True if it is
+     */
+    bool Hero::isDead() const
+    {
+        return this->currentHp <= 0;
     }
 
     /**
@@ -232,8 +278,10 @@ namespace HE_Arc::RPG
     {
         cout << " ========================================" << endl
              << "                        HP : " << fixed << setprecision(1) << this->getHp() << endl
-             << "    " << left << setfill(' ') << setw(20) << this->getName() << "Strength : " << fixed << setprecision(1) << this->getStrength() << endl
              << "                        Agility : " << fixed << setprecision(1) << this->getAgility() << endl
+             << "    " << left << setfill(' ') << setw(20) << this->getName() << "Intelligence : " << fixed << setprecision(1) << this->getIntelligence() << endl
+             << "                        Strength : " << fixed << setprecision(1) << this->getStrength() << endl
+             << "                        " << this->getStuff()->getName() << "'s Power : " << fixed << setprecision(1) << this->getStuff()->getFeature() << endl
              << " ========================================" << endl;
     }
 

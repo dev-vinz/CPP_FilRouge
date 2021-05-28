@@ -86,16 +86,16 @@ namespace HE_Arc::RPG
      */
     void Wizard::show() const
     {
-        cout << "\n=================\n"
-             << "WIZARD : " << this->getName()
-             << "\n=================\n"
-             << "\nAgility : " << this->getAgility()
-             << "\nIntelligence : " << this->getIntelligence()
-             << "\nStrength : " << this->getStrength()
-             << "\nMana : " << this->getMana()
-             << "\nHP : " << this->hp
-             << "\nCurrent HP :" << this->getHp()
-             << "\nStuff : " << this->getStuff()->getName()
+        cout << "\n =================\n"
+             << " WIZARD : " << this->getName()
+             << "\n =================\n"
+             << "\n Agility : " << this->getAgility()
+             << "\n Intelligence : " << this->getIntelligence()
+             << "\n Strength : " << this->getStrength()
+             // << " \nMana : " << this->getMana()
+             << "\n Max HP : " << this->hp
+             << "\n Current HP : " << this->getHp()
+             << "\n Stuff : " << this->getStuff()->getName() << ", with a power of " << this->getStuff()->getFeature()
              << endl;
     }
 
@@ -109,8 +109,8 @@ namespace HE_Arc::RPG
      */
     void Wizard::dizzySpell(Hero *_hero) const
     {
-        // The third of the magic wand's power, multiplied by the ratio of strength
-        int reduction = (this->pStuff->getFeature() / 3.0) * ((double)this->getStrength() / MAX_STRENGTH);
+        // The third of the magic wand's power, multiplied by the ratio of intelligence
+        int reduction = (this->pStuff->getFeature() / 3.0) * this->getIntelligenceRatio();
         int fromAgility = _hero->getAgility();
 
         _hero->updateAgility(-reduction);
@@ -133,8 +133,8 @@ namespace HE_Arc::RPG
     {
         RandomGenerator random;
 
-        // The double of magic wand's power, multiplied by the ratio of intelligence AND strength
-        double wizardDamage = (this->pStuff->getFeature() * 2) * this->getIntelligenceRatio() * this->getStrengthRatio();
+        // The double of magic wand's power, multiplied by the ratio of agility
+        double wizardDamage = (this->pStuff->getFeature() * 2) * this->getAgilityRatio();
         double damage = random.getRandomDouble(max(wizardDamage - 3, 0.0), wizardDamage + 3, 1);
 
         _hero->updateHp(-damage);

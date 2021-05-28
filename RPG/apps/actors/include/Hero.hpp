@@ -32,6 +32,7 @@ namespace HE_Arc::RPG
         IObject *pStuff = nullptr;
 
         bool isPlayer;
+        bool dodgeNext = false;
 
         int posX;
         int posY;
@@ -64,10 +65,14 @@ namespace HE_Arc::RPG
         void setAgility(int);
         void setHp(double);
         void setPosXY(int, int);
+        void switchDodge();
 
         void updateAgility(int);
         void updateHp(double);
         void updateStrength(int);
+
+        bool isDodging();
+        bool isDead() const;
 
         void useObject(IObject *);
 
@@ -77,6 +82,8 @@ namespace HE_Arc::RPG
         void virtual showStatistics() const;
 
         Hero &operator=(const Hero &) = delete;
+
+        static const bool VJ_DEBUG_LOG = false;
     };
 }
 

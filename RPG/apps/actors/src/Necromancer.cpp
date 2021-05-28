@@ -31,7 +31,7 @@ namespace HE_Arc::RPG
         int nbSummoned = random.getRandomNumber(max(necromancerDamage - 3, 0), necromancerDamage + 3);
 
         // Among all summoned, a random number are traitors and attack you
-        int nbTraitors = random.getRandomNumber(nbSummoned);
+        int nbTraitors = random.getRandomNumber(nbSummoned / 2);
         int nbAttack = nbSummoned - nbTraitors;
 
         // Each summons makes 1.2 damage
@@ -54,7 +54,7 @@ namespace HE_Arc::RPG
 
         if (nbTraitors)
         {
-            double ownDamage = damage * nbTraitors;
+            double ownDamage = summonDamage * nbTraitors;
             this->updateHp(-ownDamage);
             cout << " Unfortunately, " << nbTraitors << " of them are traitors, and attack you" << endl
                  << " You lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
@@ -102,16 +102,16 @@ namespace HE_Arc::RPG
      */
     void Necromancer::show() const
     {
-        cout << "\n=================\n"
-             << "NECROMANCER : " << this->getName()
-             << "\n=================\n"
-             << "\nAgility : " << this->getAgility()
-             << "\nIntelligence : " << this->getIntelligence()
-             << "\nStrength : " << this->getStrength()
-             << "\nMana : " << this->getMana()
-             << "\nHP : " << this->hp
-             << "\nCurrent HP :" << this->getHp()
-             << "\nStuff : " << this->getStuff()->getName()
+        cout << "\n =================\n"
+             << " NECROMANCER : " << this->getName()
+             << "\n =================\n"
+             << "\n Agility : " << this->getAgility()
+             << "\n Intelligence : " << this->getIntelligence()
+             << "\n Strength : " << this->getStrength()
+             // << "\n Mana : " << this->getMana()
+             << "\n Max HP : " << this->hp
+             << "\n Current HP : " << this->getHp()
+             << "\n Stuff : " << this->getStuff()->getName() << ", with a power of " << this->getStuff()->getFeature()
              << endl;
     }
 
@@ -134,11 +134,11 @@ namespace HE_Arc::RPG
 
         _hero->updateHp(-damage);
 
-        // You receive half of the damage
+        // You suffers half of the damage
         // TODO An algorithm to reduce damage in function of agility
         double ratio = 1.0 / 2.0;
         double ownDamage = damage * ratio;
-        this->updateHp(ownDamage);
+        this->updateHp(-ownDamage);
 
         cout << " You provoke a cataclysm, and " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl
              << " Unfortunately you receive " << fixed << setprecision(2) << ratio * 100 << "\% of the damages, and lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
@@ -165,7 +165,7 @@ namespace HE_Arc::RPG
         double ownGained = damage * ratio;
         this->updateHp(ownGained);
 
-        cout << " You stole " << fixed << setprecision(1) << damage << " HP to " << _hero->getName() << endl
-             << " You gained " << fixed << setprecision(1) << ownGained << " HP" << endl;
+        cout << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl
+             << " You recovered " << fixed << setprecision(1) << ownGained << " HP" << endl;
     }
 }

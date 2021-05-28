@@ -9,6 +9,7 @@ namespace HE_Arc::RPG
     Game::Game()
     {
         system("CLS");
+        srand(time(nullptr));
 
         this->currentMap = Map();
         this->player = nullptr;
@@ -28,6 +29,7 @@ namespace HE_Arc::RPG
     Game::Game(int _width, int _height, int _nbOpponents) : nbOpponents(_nbOpponents), nbPotions(_nbOpponents + 1)
     {
         system("CLS");
+        srand(time(nullptr));
 
         this->currentMap = Map(_width, _height);
         this->player = nullptr;
@@ -87,13 +89,13 @@ namespace HE_Arc::RPG
         switch (choice)
         {
         case 1:
-            this->player = new Warrior(_name, 1, 1, 10, 100, new Sword(50), true);
+            this->player = new Warrior(_name, 50, 20, 80, 100, new Sword(15), true);
             break;
         case 2:
-            this->player = new Wizard(_name, 10, 10, 10, 8, 100, new Potion(900, Agility), true);
+            this->player = new Wizard(_name, 55, 90, 5, 0, 100, new MagicWand(30), true);
             break;
         case 3:
-            this->player = new Necromancer(_name, 9, 9, 9, 9, 90, new Potion(50, Heal), true);
+            this->player = new Necromancer(_name, 70, 40, 40, 0, 100, new Scepter(30), true);
             break;
         default:
             cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
@@ -131,7 +133,7 @@ namespace HE_Arc::RPG
 
         for (int k = 0; k < this->nbOpponents; k++)
         {
-            this->listOpponents.push_back(new Warrior(random.getRandomName(), k, k, k, k, new Shield(0)));
+            this->listOpponents.push_back(new Warrior(random.getRandomName(), 10, 60, 50, 70, new Shield(0)));
         }
 
         int start = random.getRandomNumber(3);
@@ -310,6 +312,31 @@ namespace HE_Arc::RPG
                     cout << "PLAYER HAS WON" << endl;
                     this->isPlaying = false;
                 }
+            }
+            else if (winner == _opponent)
+            {
+                if (Game::VJ_DEBUG_LOG)
+                {
+                    cout << "OPPONENT HAS WON" << endl
+                         << "GAME OVER" << endl;
+                }
+
+                this->isPlaying = false;
+            }
+            else if (winner == nullptr)
+            {
+                if (Game::VJ_DEBUG_LOG)
+                {
+                    cout << "NOBODY HAS WON" << endl
+                         << "GAME OVER" << endl;
+                }
+
+                this->isPlaying = false;
+            }
+            else
+            {
+                cout << " [ERROR : Game::applyFight()] : Unknown response from Battle::getWinner()" << endl;
+                exit(-1);
             }
         }
     }
