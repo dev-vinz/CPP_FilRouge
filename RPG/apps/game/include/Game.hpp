@@ -14,6 +14,7 @@
 #include "Map.hpp"
 
 #include "..\..\actors\include\Hero.hpp"
+#include "..\..\actors\include\Inferi.hpp"
 #include "..\..\actors\include\Necromancer.hpp"
 #include "..\..\actors\include\Warrior.hpp"
 #include "..\..\actors\include\Wizard.hpp"

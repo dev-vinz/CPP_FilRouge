@@ -239,39 +239,6 @@ namespace HE_Arc::RPG
     }
 
     /**
-     * @brief Use the object
-     * @param _object The object
-     */
-    void Hero::useObject(IObject *_object)
-    {
-        Potion *ptrPotion = dynamic_cast<Potion *>(_object);
-
-        if (ptrPotion != nullptr)
-        {
-            int power = ptrPotion->getFeature();
-            switch (ptrPotion->getUtility())
-            {
-            case Agility:
-                this->updateAgility(power);
-                break;
-            case Heal:
-                this->updateHp(power);
-                break;
-            case Strength:
-                this->updateStrength(power);
-                break;
-            default:
-                cout << "[ERROR : Hero::useObject()] : Unknown potion" << endl;
-                exit(-1);
-            }
-        }
-        else
-        {
-            cout << "[WARNING : Hero::userObject()] : Object is not a potion" << endl;
-        }
-    }
-
-    /**
      * @brief Show the battle statistics
      */
     void Hero::showStatistics() const

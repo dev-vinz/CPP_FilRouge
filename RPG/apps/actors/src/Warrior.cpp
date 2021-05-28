@@ -10,11 +10,9 @@ namespace HE_Arc::RPG
      * @param _strength The strength
      * @param _hp The HP
      * @param _pStuff The stuff
-     * @param _isPlayer Is it the player
      */
-    Warrior::Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer) : Hero(_name, _agility, _intelligence, _strength, _hp, _pStuff, _isPlayer)
+    Warrior::Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff) : Player(_name, _agility, _intelligence, _strength, _hp, _pStuff)
     {
-        this->currentHp = _hp;
     }
 
     /**

@@ -5,6 +5,7 @@
 
 namespace HE_Arc::RPG
 {
+    // TODO Add a potion of intelligence
     enum Type
     {
         Agility = 0,

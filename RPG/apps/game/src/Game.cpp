@@ -89,13 +89,13 @@ namespace HE_Arc::RPG
         switch (choice)
         {
         case 1:
-            this->player = new Warrior(_name, 50, 20, 80, 100, new Sword(15), true);
+            this->player = new Warrior(_name, 50, 20, 80, 100, new Sword(15));
             break;
         case 2:
-            this->player = new Wizard(_name, 55, 90, 5, 0, 100, new MagicWand(30), true);
+            this->player = new Wizard(_name, 55, 90, 5, 0, 100, new MagicWand(30));
             break;
         case 3:
-            this->player = new Necromancer(_name, 70, 40, 40, 0, 100, new Scepter(30), true);
+            this->player = new Necromancer(_name, 70, 40, 40, 0, 100, new Scepter(30));
             break;
         default:
             cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
@@ -133,7 +133,7 @@ namespace HE_Arc::RPG
 
         for (int k = 0; k < this->nbOpponents; k++)
         {
-            this->listOpponents.push_back(new Warrior(random.getRandomName(), 10, 60, 50, 70, new Shield(0)));
+            this->listOpponents.push_back(new Inferi(random.getRandomName(), 10, 60, 50, 70));
         }
 
         int start = random.getRandomNumber(3);

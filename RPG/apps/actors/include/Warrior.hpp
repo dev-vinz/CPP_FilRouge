@@ -3,13 +3,13 @@
 
 #include <iostream>
 
-#include "Hero.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
 namespace HE_Arc::RPG
 {
-    class Warrior : public Hero
+    class Warrior : public Player
     {
     private:
         void earthQuake(Hero *);
@@ -18,7 +18,7 @@ namespace HE_Arc::RPG
 
     public:
         Warrior() = delete;
-        Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer = false);
+        Warrior(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff);
         virtual ~Warrior() override = default;
 
         void displayAttacks() const override;

@@ -3,13 +3,13 @@
 
 #include <iostream>
 
-#include "Hero.hpp"
+#include "Player.hpp"
 
 using namespace std;
 
 namespace HE_Arc::RPG
 {
-    class Wizard : public Hero
+    class Wizard : public Player
     {
     protected:
         int mana = 0;
@@ -19,7 +19,7 @@ namespace HE_Arc::RPG
 
     public:
         Wizard() = delete;
-        Wizard(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff, bool _isPlayer = false);
+        Wizard(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff);
         virtual ~Wizard() override = default;
 
         int getMana() const;

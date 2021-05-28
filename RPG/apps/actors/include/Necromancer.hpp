@@ -17,7 +17,7 @@ namespace HE_Arc::RPG
 
     public:
         Necromancer() = delete;
-        Necromancer(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff, bool _isPlayer = false);
+        Necromancer(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff);
         virtual ~Necromancer() override = default;
 
         void riseUndead(Hero *);

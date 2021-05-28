@@ -11,11 +11,9 @@ namespace HE_Arc::RPG
      * @param _mana The mana
      * @param _hp The HP
      * @param _pStuff The stuff
-     * @param _isPlayer Is it the player
      */
-    Wizard::Wizard(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff, bool _isPlayer) : Hero(_name, _agility, _intelligence, _strength, _hp, _pStuff, _isPlayer), mana(_mana)
+    Wizard::Wizard(string _name, int _agility, int _intelligence, int _strength, int _mana, double _hp, IObject *_pStuff) : Player(_name, _agility, _intelligence, _strength, _hp, _pStuff), mana(_mana)
     {
-        this->currentHp = _hp;
     }
 
     /**

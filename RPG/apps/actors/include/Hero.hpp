@@ -41,7 +41,7 @@ namespace HE_Arc::RPG
 
     public:
         Hero() = delete;
-        Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer = false);
+        Hero(string _name, int _agility, int _intelligence, int _strength, double _hp, IObject *_pStuff, bool _isPlayer);
         Hero(const Hero &) = delete;
         virtual ~Hero();
 
@@ -74,7 +74,7 @@ namespace HE_Arc::RPG
         bool isDodging();
         bool isDead() const;
 
-        void useObject(IObject *);
+        void virtual useObject(IObject *) = 0;
 
         void virtual displayAttacks() const = 0;
         void virtual interact(Hero *, char _attack) = 0;
