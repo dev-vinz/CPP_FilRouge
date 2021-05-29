@@ -172,7 +172,21 @@ namespace HE_Arc::RPG
      */
     void Battle::opponentTurn()
     {
-        cout << " !!! THIS IS OPPONENT'S TURN !!!" << endl;
+        RandomGenerator random;
+        char action = (char)(ASCII_ZERO + random.getRandomNumber(1, 3));
+
+        switch (action)
+        {
+        case '1':
+            this->fight(this->opponent, this->player);
+            break;
+        case '2':
+            this->prepareDodge(this->opponent);
+            break;
+        default:
+            cout << "[ERROR : Battle::opponentTurn] : Problem with the random generator (action = " << action << ")" << endl;
+            exit(-1);
+        }
     }
 
     /**
@@ -219,7 +233,7 @@ namespace HE_Arc::RPG
             attack = (char)(ASCII_ZERO + random.getRandomNumber(1, 4));
         }
 
-        cout << " ========================================" << endl;
+        cout << " " << ConsoleController::getCenter(_attacker->getName(), 41, '=') << endl;
 
         if (!_defender->isDodging())
         {
@@ -301,6 +315,7 @@ namespace HE_Arc::RPG
      */
     void Battle::prepareDodge(Hero *_hero) const
     {
+        cout << " " << _hero->getName() << " is trying to dodge next attack" << endl;
         _hero->switchDodge();
     }
 }

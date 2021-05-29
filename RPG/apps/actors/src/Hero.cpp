@@ -188,6 +188,16 @@ namespace HE_Arc::RPG
      */
     void Hero::updateHp(double _update)
     {
+        if (_update < 0)
+        {
+            Shield *ptrShield = dynamic_cast<Shield *>(this->pStuff);
+
+            if (ptrShield != nullptr)
+            {
+                _update = ptrShield->reduceSolidity(abs(_update));
+            }
+        }
+
         this->currentHp = min(this->currentHp + _update, this->hp);
     }
 

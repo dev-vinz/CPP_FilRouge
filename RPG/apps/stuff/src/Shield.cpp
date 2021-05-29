@@ -19,6 +19,19 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Reduce the solidity
+     * @param _reduction The reduction
+     * @returns The rest of damage
+     */
+    double Shield::reduceSolidity(double _reduction)
+    {
+        double newSolidity = this->solidity - _reduction;
+        this->solidity = max(newSolidity, 0.0);
+
+        return min(newSolidity, 0.0);
+    }
+
+    /**
      * @brief Get the shields' solidity
      * @returns The solidity
      */

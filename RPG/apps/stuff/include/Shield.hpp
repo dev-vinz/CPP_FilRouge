@@ -16,6 +16,8 @@ namespace HE_Arc::RPG
         Shield(const Shield &);
         virtual ~Shield() override = default;
 
+        double reduceSolidity(double);
+
         int getFeature() const override;
 
         string getName() const override;

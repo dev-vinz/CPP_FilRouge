@@ -8,6 +8,7 @@
 #include "..\..\stuff\include\BackPack.hpp"
 #include "..\..\stuff\include\IObject.hpp"
 #include "..\..\stuff\include\Potion.hpp"
+#include "..\..\stuff\include\Shield.hpp"
 
 #include "..\..\utils\include\RandomGenerator.hpp"
 
