@@ -2,30 +2,50 @@
 
 Projet CPP RPG
 
-## Requirements
----
-> With [vcpkg](https://github.com/microsoft/vcpkg) in windows
-- [nhlomann/json](https://github.com/nlohmann/json)
-- [cpr](https://github.com/whoshuu/cpr)
+## Diagram of Hero
 
-## Installation
----
-### vcpkg
----
-Go to `C:\DEV` and then
-```cmd
-> git clone https://github.com/microsoft/vcpkg
-> .\vcpkg\bootstrap-vcpkg.bat
-```
-### nlomann/json
----
-Go now to `C:\DEV\vcpkg` and then
-```cmd
-> .\vcpkg.exe install nlohmann-json:x64-windows
-```
-### cpr
----
-Stay in `C:\DEV\vcpkg` and
-```cmd
-> .\vcpkg.exe install cpr:x64-windows
+```plantuml
+@startuml
+    abstract Hero
+    {
+        #string name
+        ..
+        #int agility
+        #int intelligence
+        #int strength
+        ..
+        #double hp
+        #double currentHp
+        ..
+        #IObject *pStuff
+        ..
+        #bool isPlayer
+        #bool dodgeNext
+        ..
+        #int posX
+        #int posY
+        --
+        +Hero() = delete
+        +Hero(name, agility, intelligence, strength, hp, pStuff, isPlayer)
+        +Hero(const Hero &) = delete
+        +virtual ~Hero()
+        ..
+        +BackPack backPack
+        .. Getters ..
+        +string getName() const
+
+        +int getAgility() const
+        +int getIntelligence() const
+        +int getStrength() const
+
+        +double getHp() const
+
+        +IObject *getStuff() const
+
+        +bool getIsPlayer() const
+
+        +int getPosX() const
+        +int getPosY() const
+    }
+@enduml
 ```

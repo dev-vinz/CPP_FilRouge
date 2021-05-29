@@ -54,7 +54,9 @@ namespace HE_Arc::RPG
         {
             double ownDamage = summonDamage * nbTraitors;
             this->updateHp(-ownDamage);
-            cout << " Unfortunately, " << nbTraitors << " of them are traitors, and attack you" << endl
+
+            cout << endl
+                 << " Unfortunately, " << nbTraitors << " of them are traitors, and attack you" << endl
                  << " You lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
         }
     }

@@ -30,8 +30,8 @@ namespace HE_Arc::RPG
              << " " << ConsoleController::getCenter(this->opponent->getName(), 41, '=') << endl
              << " ========================================" << endl;
 
-        int whoStart = random.getRandomNumber(2);
-        this->turn = (Turn)whoStart;
+        //int whoStart = random.getRandomNumber(2);
+        this->turn = Player;
 
         while (!this->isOver)
         {
@@ -233,6 +233,11 @@ namespace HE_Arc::RPG
             attack = (char)(ASCII_ZERO + random.getRandomNumber(1, 4));
         }
 
+        if (_attacker->getIsPlayer() && !Battle::VJ_DEBUG_LOG)
+        {
+            ConsoleController::displayLoading("Waiting for opponent", 3);
+        }
+
         cout << " " << ConsoleController::getCenter(_attacker->getName(), 41, '=') << endl;
 
         if (!_defender->isDodging())
@@ -243,14 +248,7 @@ namespace HE_Arc::RPG
         else
         {
             // _defender dodge the attack
-            if (_defender->getIsPlayer())
-            {
-                cout << " Oof, you dodged the attack" << endl;
-            }
-            else
-            {
-                cout << " Arf, " << _defender->getName() << " dodged your attack, sorry" << endl;
-            }
+            cout << " Oof, the attack missed " << _defender->getName() << endl;
         }
 
         // Now we check who is dead
@@ -276,6 +274,8 @@ namespace HE_Arc::RPG
      */
     void Battle::openBackPack() const
     {
+        ConsoleController::displayLoading("Opening backpack", 3);
+
         if (this->player->backPack.isNotEmpty())
         {
             string _endLine;
@@ -315,7 +315,14 @@ namespace HE_Arc::RPG
      */
     void Battle::prepareDodge(Hero *_hero) const
     {
-        cout << " " << _hero->getName() << " is trying to dodge next attack" << endl;
+        if (_hero->getIsPlayer() && !Battle::VJ_DEBUG_LOG)
+        {
+            ConsoleController::displayLoading("Waiting for opponent", 3);
+        }
+
+        cout << " " << ConsoleController::getCenter(_hero->getName(), 41, '=') << endl
+             << " " << _hero->getName() << " is trying to dodge next attack" << endl;
+
         _hero->switchDodge();
     }
 }

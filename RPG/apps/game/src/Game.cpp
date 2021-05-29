@@ -112,15 +112,7 @@ namespace HE_Arc::RPG
 
         if (not Game::VJ_DEBUG_LOG)
         {
-            char waiting[] = {'/', '-', '\\', '|'};
-
-            for (int t = 25; t > 0; t--)
-            {
-                usleep(200000);
-                cout << "\r  " << waiting[t % 4] << " Loading ...\r";
-            }
-
-            system("CLS");
+            ConsoleController::displayLoading("Loading", 5);
         }
     }
 

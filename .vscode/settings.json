@@ -1,4 +1,6 @@
 {
+    "plantuml.render": "Local",
+    "plantuml.server": "https://www.plantuml.com/plantuml",
     "files.associations": {
         "iostream": "cpp",
         "ostream": "cpp",

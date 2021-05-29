@@ -33,4 +33,25 @@ namespace HE_Arc::RPG
 
         return myResult;
     }
+
+    /**
+     * @brief Display a loading screen
+     * @param _text The text to show
+     * @param _duration The duration in seconds
+     */
+    void ConsoleController::displayLoading(string _text, unsigned int _duration)
+    {
+        char waiting[] = {'/', '-', '\\', '|'};
+        int nbLoop = _duration * 5;
+
+        cout << endl;
+
+        for (int t = nbLoop; t > 0; t--)
+        {
+            usleep(200000);
+            cout << "\r  " << waiting[t % 4] << " " << _text << " ...\r";
+        }
+
+        system("CLS");
+    }
 }

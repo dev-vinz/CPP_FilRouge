@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <unistd.h>
 #include <string>
 #include <typeinfo>
 #include <vector>
@@ -29,6 +30,8 @@ namespace HE_Arc::RPG
         }
 
         static string getCenter(string _text, int _length, char _decoration = ' ');
+
+        static void displayLoading(string _text, unsigned int _duration);
     };
 }
 

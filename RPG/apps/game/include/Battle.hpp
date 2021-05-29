@@ -51,7 +51,7 @@ namespace HE_Arc::RPG
 
         Hero *getWinner();
 
-        static const bool VJ_DEBUG_LOG = true;
+        static const bool VJ_DEBUG_LOG = false;
     };
 }
 
