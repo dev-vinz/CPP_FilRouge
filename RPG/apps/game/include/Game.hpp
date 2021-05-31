@@ -31,6 +31,14 @@ using namespace std;
 
 namespace HE_Arc::RPG
 {
+    enum Winner
+    {
+        WNull,
+        WPlayer,
+        WOpponent,
+        WNone
+    };
+
     class Game
     {
     private:
@@ -43,6 +51,8 @@ namespace HE_Arc::RPG
         Hero *player;
         vector<Hero *> listOpponents;
         vector<Potion *> listPotions;
+
+        Winner gWinner = Winner::WNull;
 
         bool checkFight(char _fight) const;
         bool checkMovement(char _movement, Hero *) const;
@@ -65,7 +75,7 @@ namespace HE_Arc::RPG
         void initialize();
         void play();
 
-        static const bool VJ_DEBUG_LOG = true;
+        static const bool VJ_DEBUG_LOG = false;
     };
 }
 

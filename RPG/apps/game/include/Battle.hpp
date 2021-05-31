@@ -29,8 +29,8 @@ namespace HE_Arc::RPG
         Hero *player;
         Hero *opponent;
 
-        Turn turn = Player;
-        Turn winner = Null;
+        Turn turn = Turn::Player;
+        Turn winner = Turn::Null;
 
         bool checkNumber(int _range, char _number) const;
         bool checkYesNo(char _yn) const;

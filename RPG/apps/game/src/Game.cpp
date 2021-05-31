@@ -17,7 +17,7 @@ namespace HE_Arc::RPG
         // We fix 4% from the map' size as opponents
         int rndOpp = trunc(0.04 * this->currentMap.getWidth() * this->currentMap.getHeight());
         this->nbOpponents = rndOpp;
-        this->nbPotions = rndOpp + 1;
+        this->nbPotions = rndOpp * 2;
     }
 
     /**
@@ -26,7 +26,7 @@ namespace HE_Arc::RPG
      * @param _height The map's height
      * @param _nbOpponents The number of opponents
      */
-    Game::Game(int _width, int _height, int _nbOpponents) : nbOpponents(_nbOpponents), nbPotions(_nbOpponents + 1)
+    Game::Game(int _width, int _height, int _nbOpponents) : nbOpponents(_nbOpponents), nbPotions(_nbOpponents * 2)
     {
         system("CLS");
         srand(time(nullptr));
@@ -112,7 +112,7 @@ namespace HE_Arc::RPG
 
         if (not Game::VJ_DEBUG_LOG)
         {
-            ConsoleController::displayLoading("Loading", 5);
+            ConsoleController::displayLoading("Loading game", 5);
         }
     }
 
@@ -172,15 +172,12 @@ namespace HE_Arc::RPG
 
                 this->applyFight(fight, opponent);
 
+                if (!this->isPlaying)
+                {
+                    break;
+                }
+
                 this->display();
-            }
-
-            if (!this->isPlaying)
-            {
-                if (!Game::VJ_DEBUG_LOG)
-                    system("CLS");
-
-                break;
             }
 
             char movement;
@@ -195,9 +192,6 @@ namespace HE_Arc::RPG
             } while (not this->checkMovement(movement, this->player));
 
             this->applyMovements(movement);
-
-            cout << endl
-                 << "===========================================================================================" << endl;
         }
     }
 
@@ -295,6 +289,9 @@ namespace HE_Arc::RPG
         if (_fight == 'y')
         {
             Battle anyBattle(this->player, _opponent);
+
+            ConsoleController::displayLoading("Loading battle", 2);
+
             Hero *winner = anyBattle.getWinner();
 
             if (winner == this->player)
@@ -303,6 +300,7 @@ namespace HE_Arc::RPG
                 {
                     cout << "PLAYER HAS WON" << endl;
                     this->isPlaying = false;
+                    this->gWinner = Winner::WPlayer;
                 }
             }
             else if (winner == _opponent)
@@ -314,6 +312,7 @@ namespace HE_Arc::RPG
                 }
 
                 this->isPlaying = false;
+                this->gWinner = Winner::WOpponent;
             }
             else if (winner == nullptr)
             {
@@ -324,12 +323,15 @@ namespace HE_Arc::RPG
                 }
 
                 this->isPlaying = false;
+                this->gWinner = Winner::WNone;
             }
             else
             {
                 cout << " [ERROR : Game::applyFight()] : Unknown response from Battle::getWinner()" << endl;
                 exit(-1);
             }
+
+            ConsoleController::displayLoading("Closing battle", 2);
         }
     }
 

@@ -17,9 +17,6 @@ namespace HE_Arc::RPG
     */
     Hero *Battle::getWinner()
     {
-        if (!Battle::VJ_DEBUG_LOG)
-            system("CLS");
-
         RandomGenerator random;
 
         cout << " ========================================" << endl
@@ -30,7 +27,6 @@ namespace HE_Arc::RPG
              << " " << ConsoleController::getCenter(this->opponent->getName(), 41, '=') << endl
              << " ========================================" << endl;
 
-        //int whoStart = random.getRandomNumber(2);
         this->turn = Player;
 
         while (!this->isOver)
@@ -235,7 +231,7 @@ namespace HE_Arc::RPG
 
         if (_attacker->getIsPlayer() && !Battle::VJ_DEBUG_LOG)
         {
-            ConsoleController::displayLoading("Waiting for opponent", 3);
+            ConsoleController::displayLoading("Waiting for opponent", 2);
         }
 
         cout << " " << ConsoleController::getCenter(_attacker->getName(), 41, '=') << endl;
@@ -274,7 +270,7 @@ namespace HE_Arc::RPG
      */
     void Battle::openBackPack() const
     {
-        ConsoleController::displayLoading("Opening backpack", 3);
+        ConsoleController::displayLoading("Opening backpack", 2);
 
         if (this->player->backPack.isNotEmpty())
         {
@@ -307,6 +303,8 @@ namespace HE_Arc::RPG
                  << " Your backpack is empty, sorry" << endl
                  << " ========================================" << endl;
         }
+
+        ConsoleController::displayLoading("Closing backpack", 2);
     }
 
     /**
@@ -317,7 +315,7 @@ namespace HE_Arc::RPG
     {
         if (_hero->getIsPlayer() && !Battle::VJ_DEBUG_LOG)
         {
-            ConsoleController::displayLoading("Waiting for opponent", 3);
+            ConsoleController::displayLoading("Waiting for opponent", 2);
         }
 
         cout << " " << ConsoleController::getCenter(_hero->getName(), 41, '=') << endl
