@@ -55,9 +55,9 @@ namespace HE_Arc::RPG
      */
     void Warrior::show() const
     {
-        cout << "\n =================\n"
+        cout << "\n ============================================\n"
              << " WARRIOR : " << this->getName()
-             << "\n =================\n"
+             << "\n ============================================\n"
              << "\n Agility : " << this->getAgility()
              << "\n Intelligence : " << this->getIntelligence()
              << "\n Strength : " << this->getStrength()

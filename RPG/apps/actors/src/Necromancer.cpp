@@ -102,9 +102,9 @@ namespace HE_Arc::RPG
      */
     void Necromancer::show() const
     {
-        cout << "\n =================\n"
+        cout << "\n ============================================\n"
              << " NECROMANCER : " << this->getName()
-             << "\n =================\n"
+             << "\n ============================================\n"
              << "\n Agility : " << this->getAgility()
              << "\n Intelligence : " << this->getIntelligence()
              << "\n Strength : " << this->getStrength()
