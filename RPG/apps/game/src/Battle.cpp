@@ -19,13 +19,13 @@ namespace HE_Arc::RPG
     {
         RandomGenerator random;
 
-        cout << " ========================================" << endl
-             << " ============== NEW BATTLE ==============" << endl
-             << " ========================================" << endl
-             << " " << ConsoleController::getCenter(this->player->getName(), 41, '=') << endl
-             << " ================== VS ==================" << endl
-             << " " << ConsoleController::getCenter(this->opponent->getName(), 41, '=') << endl
-             << " ========================================" << endl;
+        cout << " ============================================" << endl
+             << " ================ NEW BATTLE ================" << endl
+             << " ============================================" << endl
+             << " " << ConsoleController::getCenter(this->player->getName(), 45, '=') << endl
+             << " ==================== VS ====================" << endl
+             << " " << ConsoleController::getCenter(this->opponent->getName(), 45, '=') << endl
+             << " ============================================" << endl;
 
         this->turn = Player;
 
@@ -58,9 +58,9 @@ namespace HE_Arc::RPG
         return winner;
     }
 
-    // =============================================
+    // =================================================
     // Private Methods
-    // =============================================
+    // =================================================
 
     /**
      * @brief Check the number
@@ -98,7 +98,7 @@ namespace HE_Arc::RPG
     {
         this->player->showStatistics();
         this->opponent->showStatistics();
-        cout << " ========================================" << endl;
+        cout << " ============================================" << endl;
     }
 
     /**
@@ -208,7 +208,7 @@ namespace HE_Arc::RPG
 
         if (_attacker->getIsPlayer())
         {
-            cout << " ========================================" << endl
+            cout << " ============================================" << endl
                  << " Choose your attack :" << endl;
 
             do
@@ -234,7 +234,7 @@ namespace HE_Arc::RPG
             ConsoleController::displayLoading("Waiting for opponent", 2);
         }
 
-        cout << " " << ConsoleController::getCenter(_attacker->getName(), 41, '=') << endl;
+        cout << " " << ConsoleController::getCenter(_attacker->getName(), 45, '=') << endl;
 
         if (!_defender->isDodging())
         {
@@ -277,7 +277,7 @@ namespace HE_Arc::RPG
             string _endLine;
             char decision;
 
-            cout << " ========================================" << endl
+            cout << " ============================================" << endl
                  << " Here's what's on top of your backpack : " << this->player->backPack.top()->getName() << " with power of " << this->player->backPack.top()->getFeature() << endl
                  << " Do you want to use it ?" << endl;
 
@@ -299,9 +299,9 @@ namespace HE_Arc::RPG
         }
         else
         {
-            cout << " ========================================" << endl
+            cout << " ============================================" << endl
                  << " Your backpack is empty, sorry" << endl
-                 << " ========================================" << endl;
+                 << " ============================================" << endl;
         }
 
         ConsoleController::displayLoading("Closing backpack", 2);
@@ -318,7 +318,7 @@ namespace HE_Arc::RPG
             ConsoleController::displayLoading("Waiting for opponent", 2);
         }
 
-        cout << " " << ConsoleController::getCenter(_hero->getName(), 41, '=') << endl
+        cout << " " << ConsoleController::getCenter(_hero->getName(), 45, '=') << endl
              << " " << _hero->getName() << " is trying to dodge next attack" << endl;
 
         _hero->switchDodge();

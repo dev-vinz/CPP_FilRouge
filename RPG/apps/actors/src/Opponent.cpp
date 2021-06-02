@@ -12,6 +12,6 @@ namespace HE_Arc::RPG
      */
     Opponent::Opponent(string _name, int _agility, int _intelligence, int _strength, double _hp) : Hero(_name, _agility, _intelligence, _strength, _hp, nullptr, false)
     {
-        this->pStuff = new Shield(50);
+        this->pStuff = new Shield(0);
     }
 }

@@ -253,13 +253,13 @@ namespace HE_Arc::RPG
      */
     void Hero::showStatistics() const
     {
-        cout << " ========================================" << endl
+        cout << " ============================================" << endl
              << "                        HP : " << fixed << setprecision(1) << this->getHp() << endl
              << "                        Agility : " << fixed << setprecision(1) << this->getAgility() << endl
              << "    " << left << setfill(' ') << setw(20) << this->getName() << "Intelligence : " << fixed << setprecision(1) << this->getIntelligence() << endl
              << "                        Strength : " << fixed << setprecision(1) << this->getStrength() << endl
              << "                        " << this->getStuff()->getName() << "'s Power : " << fixed << setprecision(1) << this->getStuff()->getFeature() << endl
-             << " ========================================" << endl;
+             << " ============================================" << endl;
     }
 
     /**

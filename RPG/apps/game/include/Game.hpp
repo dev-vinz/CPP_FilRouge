@@ -36,6 +36,7 @@ namespace HE_Arc::RPG
         WNull,
         WPlayer,
         WOpponent,
+        WQuit,
         WNone
     };
 
@@ -72,6 +73,7 @@ namespace HE_Arc::RPG
         vector<Hero *> getOpponents() const;
 
         void choosePlayer(string _name);
+        void end() const;
         void initialize();
         void play();
 

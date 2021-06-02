@@ -117,6 +117,41 @@ namespace HE_Arc::RPG
     }
 
     /**
+     * @brief Announce who has won
+     */
+    void Game::end() const
+    {
+        if (!Game::VJ_DEBUG_LOG)
+            system("CLS");
+
+        cout << " ============================================" << endl;
+
+        switch (this->gWinner)
+        {
+        case Winner::WNone:
+            cout << " " << ConsoleController::getCenter("Game Over", 45, '=') << endl;
+            break;
+        case Winner::WOpponent:
+            cout << " " << ConsoleController::getCenter("Game Over", 45, '=') << endl;
+            break;
+        case Winner::WPlayer:
+            cout << " " << ConsoleController::getCenter("Congratulations", 45, '=') << endl;
+            break;
+        case Winner::WQuit:
+            cout << " " << ConsoleController::getCenter("Quitted", 45, '=') << endl;
+            break;
+        case Winner::WNull:
+            cout << "[ERROR : Game::end()] : Winner is NULL" << endl;
+            exit(-1);
+        default:
+            cout << "[ERROR : Game::end()] : Undefined state of winner" << endl;
+            exit(-1);
+        }
+
+        cout << " ============================================" << endl;
+    }
+
+    /**
      * @brief Initialize the game, the opponents, the potions
      */
     void Game::initialize()
@@ -125,7 +160,7 @@ namespace HE_Arc::RPG
 
         for (int k = 0; k < this->nbOpponents; k++)
         {
-            this->listOpponents.push_back(new Inferi(random.getRandomName(), 10, 60, 50, 70));
+            this->listOpponents.push_back(new Inferi(random.getRandomName(), 10, 60, 50, 50));
         }
 
         int start = random.getRandomNumber(3);
@@ -170,34 +205,36 @@ namespace HE_Arc::RPG
                     fight = tolower(fight, locale());
                 } while (!this->checkFight(fight));
 
+                // isPlaying can only switch to false here
                 this->applyFight(fight, opponent);
 
-                if (!this->isPlaying)
+                if (this->isPlaying)
                 {
-                    break;
+                    this->display();
                 }
-
-                this->display();
             }
 
-            char movement;
-            do
+            if (this->isPlaying)
             {
-                cout << " Choose your movement (w, a, s, d, n, q) : ";
+                char movement;
+                do
+                {
+                    cout << " Choose your movement (w, a, s, d, n, q) : ";
 
-                cin >> movement;
-                getline(cin, _endLine);
+                    cin >> movement;
+                    getline(cin, _endLine);
 
-                movement = tolower(movement, locale());
-            } while (not this->checkMovement(movement, this->player));
+                    movement = tolower(movement, locale());
+                } while (not this->checkMovement(movement, this->player));
 
-            this->applyMovements(movement);
+                this->applyMovements(movement);
+            }
         }
     }
 
-    // =============================================
+    // =================================================
     // Private Methods
-    // =============================================
+    // =================================================
 
     /**
      * @brief Checks if the player wants to fight or not
@@ -290,9 +327,13 @@ namespace HE_Arc::RPG
         {
             Battle anyBattle(this->player, _opponent);
 
-            ConsoleController::displayLoading("Loading battle", 2);
+            if (!Game::VJ_DEBUG_LOG)
+                ConsoleController::displayLoading("Loading battle", 2);
 
             Hero *winner = anyBattle.getWinner();
+
+            if (!Game::VJ_DEBUG_LOG)
+                system("CLS");
 
             if (winner == this->player)
             {
@@ -302,6 +343,30 @@ namespace HE_Arc::RPG
                     this->isPlaying = false;
                     this->gWinner = Winner::WPlayer;
                 }
+
+                vector<Hero *>::iterator iterator = find(this->listOpponents.begin(), this->listOpponents.end(), _opponent);
+                int index = -1;
+
+                if (iterator != this->listOpponents.end())
+                {
+                    index = iterator - this->listOpponents.begin();
+                }
+                else
+                {
+                    cout << "[ERROR : Game::applyFight()] Opponent isn't in list anymore";
+                    exit(-1);
+                }
+
+                this->listOpponents.erase(this->listOpponents.begin() + index);
+                this->currentMap.update(this->listOpponents);
+
+                if (this->listOpponents.empty())
+                {
+                    this->isPlaying = false;
+                    this->gWinner = Winner::WPlayer;
+                }
+
+                cout << " You win against " << _opponent->getName() << " !" << endl;
             }
             else if (winner == _opponent)
             {
@@ -311,8 +376,11 @@ namespace HE_Arc::RPG
                          << "GAME OVER" << endl;
                 }
 
-                this->isPlaying = false;
-                this->gWinner = Winner::WOpponent;
+                if (this->player->isDead())
+                {
+                    this->isPlaying = false;
+                    this->gWinner = Winner::WOpponent;
+                }
             }
             else if (winner == nullptr)
             {
@@ -331,7 +399,8 @@ namespace HE_Arc::RPG
                 exit(-1);
             }
 
-            ConsoleController::displayLoading("Closing battle", 2);
+            if (!Game::VJ_DEBUG_LOG)
+                ConsoleController::displayLoading("Closing battle", 2);
         }
     }
 
@@ -365,9 +434,10 @@ namespace HE_Arc::RPG
             break;
         case 'q':
             this->isPlaying = false;
+            this->gWinner = Winner::WQuit;
             return;
         default:
-            cout << "[ERROR : applyMovements] Houston we have a problem, there's another movement detected (_movement = " << _movement << ")" << endl;
+            cout << "[ERROR : Game::applyMovements] Houston we have a problem, there's another movement detected (_movement = " << _movement << ")" << endl;
             exit(-1);
         }
 
@@ -416,7 +486,7 @@ namespace HE_Arc::RPG
                         isMovementCorrect = this->checkMovement('n', opp);
                         break;
                     default:
-                        cout << "[ERROR : applyMovements] Problem with getRandomNumber(int _max) = " << rndNb << endl;
+                        cout << "[ERROR : Game::applyMovements] Problem with getRandomNumber(int _max) = " << rndNb << endl;
                         exit(-1);
                     }
                 } while (!isMovementCorrect);
@@ -438,7 +508,7 @@ namespace HE_Arc::RPG
                 case 4:
                     break;
                 default:
-                    cout << "[ERROR : applyMovements] Forgot a case in second switch (rndNb = " << rndNb << ")" << endl;
+                    cout << "[ERROR : Game::applyMovements] Forgot a case in second switch (rndNb = " << rndNb << ")" << endl;
                     exit(-1);
                 }
 
@@ -463,7 +533,7 @@ namespace HE_Arc::RPG
 
         if (anyPotion == nullptr)
         {
-            cout << "[ERROR : catchPotion] Potion = nullptr" << endl;
+            cout << "[ERROR : Game::catchPotion] Potion = nullptr" << endl;
             exit(-1);
         }
 
@@ -526,24 +596,9 @@ namespace HE_Arc::RPG
 
         this->currentMap.display(*this->player, this->listOpponents, this->listPotions);
 
-        int width = this->currentMap.getWidth() * 4 + 1;
-        int middle = width / 2;
-
-        cout << " ";
-
-        for (int k = 0; k < width; k++)
-            cout << "=";
-
-        cout << endl
-             << " ";
-
-        for (int k = 0; k < middle - 7; k++)
-            cout << "=";
-
-        cout << " INSTRUCTIONS ";
-
-        for (int k = middle + 7; k < width; k++)
-            cout << "=";
+        cout << " ============================================" << endl
+             << " " << ConsoleController::getCenter("INSTRUCTIONS", 45, '=') << endl
+             << " ============================================" << endl;
 
         cout << endl
              << "           w (up)" << endl
@@ -552,12 +607,7 @@ namespace HE_Arc::RPG
              << " Not moving : n" << endl
              << " Quit the game : q" << endl;
 
-        cout << " ";
-
-        for (int k = 0; k < width; k++)
-            cout << "=";
-
-        cout << endl;
+        cout << " ============================================" << endl;
     }
 
     /**
