@@ -47,8 +47,8 @@ namespace HE_Arc::RPG
                  << " NbTraitors : " << nbTraitors << endl;
         }
 
-        cout << " You summons " << nbSummoned << " undead and " << nbAttack << " attack your opponent" << endl
-             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
+        cout << " You summons " << Color::grey(nbSummoned) << " undead and " << Color::grey(nbAttack) << " attack your opponent" << endl
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl;
 
         if (nbTraitors)
         {
@@ -56,8 +56,8 @@ namespace HE_Arc::RPG
             this->updateHp(-ownDamage);
 
             cout << endl
-                 << " Unfortunately, " << nbTraitors << " of them are traitors, and attack you" << endl
-                 << " You lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
+                 << " Unfortunately, " << Color::grey(nbTraitors) << " of them are traitors, and attack you" << endl
+                 << " You lost " << fixed << setprecision(1) << Color::lightRed(ownDamage) << " HP" << endl;
         }
     }
 
@@ -140,8 +140,8 @@ namespace HE_Arc::RPG
         double ownDamage = damage * ratio;
         this->updateHp(-ownDamage);
 
-        cout << " You provoke a cataclysm, and " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl
-             << " Unfortunately you receive " << fixed << setprecision(2) << ratio * 100 << "\% of the damages, and lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
+        cout << " You provoke a cataclysm, and " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl
+             << " Unfortunately you receive " << fixed << setprecision(2) << Color::grey(ratio * 100) << "\% of the damages, and lost " << fixed << setprecision(1) << Color::lightRed(ownDamage) << " HP" << endl;
     }
 
     /**
@@ -165,7 +165,7 @@ namespace HE_Arc::RPG
         double ownGained = damage * ratio;
         this->updateHp(ownGained);
 
-        cout << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl
-             << " You recovered " << fixed << setprecision(1) << ownGained << " HP" << endl;
+        cout << " " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl
+             << " You recovered " << fixed << setprecision(1) << Color::lightGreen(ownGained) << " HP" << endl;
     }
 }

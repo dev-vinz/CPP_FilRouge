@@ -92,8 +92,8 @@ namespace HE_Arc::RPG
         double ownDamage = damage * ratio;
         this->updateHp(-ownDamage);
 
-        cout << " You provoke an earthquake, and " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl
-             << " Unfortunately you receive " << fixed << setprecision(2) << ratio * 100 << "\% of the damages, and lost " << fixed << setprecision(1) << ownDamage << " HP" << endl;
+        cout << " You provoke an earthquake, and " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl
+             << " Unfortunately you receive " << fixed << setprecision(2) << Color::grey(ratio * 100) << "\% of the damages, and lost " << fixed << setprecision(1) << Color::lightRed(ownDamage) << " HP" << endl;
     }
 
     /**
@@ -110,7 +110,7 @@ namespace HE_Arc::RPG
         _hero->updateHp(-damage);
 
         cout << " You punch " << _hero->getName() << "'s face" << endl
-             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl;
     }
 
     /**
@@ -135,6 +135,6 @@ namespace HE_Arc::RPG
         _hero->updateHp(-damage);
 
         cout << " You give a strike of sword to " << _hero->getName() << endl
-             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl;
     }
 }

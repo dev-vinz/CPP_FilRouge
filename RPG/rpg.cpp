@@ -5,7 +5,6 @@
 #include <stdlib.h>
 
 #include "apps\game\include\Game.hpp"
-#include "apps\utils\include\Color.hpp"
 
 using namespace std;
 using namespace HE_Arc::RPG;
@@ -21,8 +20,6 @@ using namespace HE_Arc::RPG;
 int main()
 {
     Game myGame(10, 9, 3);
-
-    cout << dye::green(" I'm writing in green ") << dye::red("and in red") << endl;
 
     string name;
     cout << " What's your name ? " << endl

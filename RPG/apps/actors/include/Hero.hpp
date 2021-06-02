@@ -9,7 +9,7 @@
 #include "..\..\stuff\include\Potion.hpp"
 #include "..\..\stuff\include\Shield.hpp"
 
-//#include "..\..\utils\include\Color.hpp"
+#include "..\..\utils\include\Color.hpp"
 #include "..\..\utils\include\RandomGenerator.hpp"
 
 #include "..\..\..\settings\Settings.hpp"
@@ -23,12 +23,12 @@ namespace HE_Arc::RPG
     protected:
         string name = "no_name";
 
-        int agility = 0;
+        int agility = 0;        // Purple
         int intelligence = 0;
-        int strength = 0;
+        int strength = 0;       // Yellow
 
         double hp = 0;
-        double currentHp = 0;
+        double currentHp = 0;   // Red
 
         IObject *pStuff = nullptr;
 

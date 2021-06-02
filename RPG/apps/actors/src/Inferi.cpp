@@ -54,7 +54,7 @@ namespace HE_Arc::RPG
         _hero->updateAgility(-reduction);
 
         cout << " " << this->getName() << " blinded you" << endl
-             << " You lost " << reduction << " of agility" << endl;
+             << " You lost " << Color::lightPurple(reduction) << " of agility" << endl;
     }
 
     /**
@@ -75,7 +75,7 @@ namespace HE_Arc::RPG
         _hero->updateStrength(-reduction);
 
         cout << " " << this->getName() << " immobilizes you" << endl
-             << " By dint of struggling, you lost " << reduction << " of strength" << endl;
+             << " By dint of struggling, you lost " << Color::lightYellow(reduction) << " of strength" << endl;
     }
 
     /**
@@ -92,6 +92,6 @@ namespace HE_Arc::RPG
         _hero->updateHp(-damage);
 
         cout << " " << this->getName() << " rushed on you" << endl
-             << " You lost " << fixed << setprecision(1) << damage << " HP" << endl;
+             << " You lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl;
     }
 }

@@ -178,8 +178,6 @@ namespace HE_Arc::RPG
      */
     void Map::display(const Hero &player, const vector<Hero *> opponents, const vector<Potion *> potions) const
     {
-        cout << endl;
-
         int _middle = this->height / 2;
 
         for (int h = 0; h < this->height; h++)
@@ -266,8 +264,7 @@ namespace HE_Arc::RPG
             cout << "+---";
         }
 
-        cout << "+" << endl
-             << endl;
+        cout << "+" << endl;
     }
 
     /**

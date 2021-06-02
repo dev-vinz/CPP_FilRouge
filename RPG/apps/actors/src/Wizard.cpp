@@ -40,7 +40,7 @@ namespace HE_Arc::RPG
         _hero->updateHp(-damage);
 
         cout << " You cast a fireball on " << _hero->getName() << endl
-             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl;
     }
 
     /**
@@ -120,7 +120,7 @@ namespace HE_Arc::RPG
                  << " Reduction : " << reduction << endl;
         }
 
-        cout << " " << _hero->getName() << " has been stunned, and its agility has been reduced from " << fromAgility << " to " << _hero->getAgility() << endl;
+        cout << " " << _hero->getName() << " has been stunned, and its agility has been reduced from " << Color::lightPurple(fromAgility) << " to " << Color::lightPurple(_hero->getAgility()) << endl;
     }
 
     /**
@@ -138,6 +138,6 @@ namespace HE_Arc::RPG
         _hero->updateHp(-damage);
 
         cout << " A giant wave arrives !" << endl
-             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << damage << " HP" << endl;
+             << " " << _hero->getName() << " lost " << fixed << setprecision(1) << Color::lightRed(damage) << " HP" << endl;
     }
 }
