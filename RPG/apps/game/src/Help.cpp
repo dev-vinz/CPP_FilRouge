@@ -49,7 +49,7 @@ namespace HE_Arc::RPG
              << endl
              << "  To start the game, please type : .\\rpg.exe --start" << endl
              << endl
-             << "  2021 © Vincent Jeannin, ISC1c" << endl;
+             << "  (C) 2021 Vincent Jeannin, ISC1c" << endl;
 
         return 0;
     }

@@ -87,7 +87,7 @@ namespace HE_Arc::RPG
         RandomGenerator random;
 
         int strength = this->getStrength() / 10;
-        double damage = random.getRandomDouble(max(strength - 3, 0), min(strength + 3, MAX_STRENGTH), 1);
+        double damage = random.getRandomDouble(max(strength - 3, 1), min(strength + 3, MAX_STRENGTH), 1);
 
         _hero->updateHp(-damage);
 

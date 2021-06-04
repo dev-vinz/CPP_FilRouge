@@ -26,7 +26,7 @@ namespace HE_Arc::RPG
 
         // Scepter power, multiplied by the ratio of agility
         int necromancerDamage = this->pStuff->getFeature() * this->getAgilityRatio();
-        int nbSummoned = random.getRandomNumber(max(necromancerDamage - 3, 0), necromancerDamage + 3);
+        int nbSummoned = random.getRandomNumber(max(necromancerDamage - 3, 1), necromancerDamage + 3);
 
         // Among all summoned, a random number are traitors and attack you
         int nbTraitors = random.getRandomNumber(nbSummoned / 2);
@@ -130,7 +130,7 @@ namespace HE_Arc::RPG
         // Default damage : 30
         // Multiplied by the ratio of agility
         double necromancerDamage = 30 * this->getAgilityRatio();
-        double damage = random.getRandomDouble(max(necromancerDamage - 1, 0.0), necromancerDamage + 1, 1);
+        double damage = random.getRandomDouble(max(necromancerDamage - 1, 1.0), necromancerDamage + 1, 1);
 
         _hero->updateHp(-damage);
 
@@ -155,7 +155,7 @@ namespace HE_Arc::RPG
         // Default steal : 10
         // Multiplied by 2 times the ratio of agility
         double necromancerDamage = 10 * (2 * this->getAgilityRatio());
-        double damage = random.getRandomDouble(max(necromancerDamage - 5, 0.0), necromancerDamage + 5, 1);
+        double damage = random.getRandomDouble(max(necromancerDamage - 5, 1.0), necromancerDamage + 5, 1);
 
         _hero->updateHp(-damage);
 

@@ -14,7 +14,9 @@
 
 #include "..\..\actors\include\Hero.hpp"
 #include "..\..\actors\include\Inferi.hpp"
+#include "..\..\actors\include\Medusa.hpp"
 #include "..\..\actors\include\Necromancer.hpp"
+#include "..\..\actors\include\Vampire.hpp"
 #include "..\..\actors\include\Warrior.hpp"
 #include "..\..\actors\include\Wizard.hpp"
 

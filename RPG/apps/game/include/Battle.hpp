@@ -15,10 +15,10 @@ namespace HE_Arc::RPG
 {
     enum Turn
     {
-        Null = -1,
-        Player = 0,
-        Opponent = 1,
-        None = 2
+        TNull = -1,
+        TPlayer = 0,
+        TOpponent = 1,
+        TNone = 2
     };
 
     class Battle
@@ -29,8 +29,8 @@ namespace HE_Arc::RPG
         Hero *player;
         Hero *opponent;
 
-        Turn turn = Turn::Player;
-        Turn winner = Turn::Null;
+        Turn turn = Turn::TPlayer;
+        Turn winner = Turn::TNull;
 
         bool checkNumber(int _range, char _number) const;
         bool checkYesNo(char _yn) const;

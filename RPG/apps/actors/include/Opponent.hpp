@@ -14,10 +14,9 @@ namespace HE_Arc::RPG
     class Opponent : public Hero
     {
     private:
-        void useObject(IObject *) override{};
-
-        void displayAttacks() const override{};
-        void show() const override{};
+        void useObject(IObject *) override          { cout << "[UNAUTHORIZED] Opponent::useObject()" << endl;          exit(-1); }
+        void displayAttacks() const override        { cout << "[UNAUTHORIZED] Opponent::displayAttacks()" << endl;     exit(-1); }
+        void show() const override                  { cout << "[UNAUTHORIZED] Opponent::show()" << endl;               exit(-1); }
 
     public:
         Opponent() = delete;

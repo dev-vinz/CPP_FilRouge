@@ -198,7 +198,7 @@ namespace HE_Arc::RPG
             {
                 if (player.getPosX() == w && player.getPosY() == h)
                 {
-                    cout << "| X ";
+                    cout << "| " << Color::aqua("X ");
                 }
                 else
                 {
@@ -209,7 +209,7 @@ namespace HE_Arc::RPG
                         if (opp->getPosX() == w && opp->getPosY() == h)
                         {
                             isOpp = true;
-                            cout << "| O ";
+                            cout << "| " << Color::red("O ");
                         }
                     }
 
@@ -218,19 +218,21 @@ namespace HE_Arc::RPG
                         if (potion->getPosX() == w && potion->getPosY() == h)
                         {
                             isPotion = true;
+                            cout << "| ";
+
                             switch (potion->getUtility())
                             {
                             case Agility:
-                                cout << "| A ";
+                                cout << Color::grey("A ");
                                 break;
                             case Heal:
-                                cout << "| H ";
+                                cout << Color::grey("H ");
                                 break;
                             case Strength:
-                                cout << "| S ";
+                                cout << Color::grey("S ");
                                 break;
                             default:
-                                cout << "| ? ";
+                                cout << Color::grey("? ");
                                 break;
                             }
                         }
@@ -244,15 +246,15 @@ namespace HE_Arc::RPG
             cout << "|";
 
             if (h == _middle - 2)
-                cout << "\tX : Player";
+                cout << Color::aqua("\tX : Player");
             if (h == _middle - 1)
-                cout << "\tO : Opponent";
+                cout << Color::red("\tO : Opponent");
             if (h == _middle)
-                cout << "\tA : Potion of Agility";
+                cout << Color::grey("\tA : Potion of Agility");
             if (h == _middle + 1)
-                cout << "\tH : Potion of Heal";
+                cout << Color::grey("\tH : Potion of Heal");
             if (h == _middle + 2)
-                cout << "\tS : Potion of Strength";
+                cout << Color::grey("\tS : Potion of Strength");
 
             cout << endl;
         }

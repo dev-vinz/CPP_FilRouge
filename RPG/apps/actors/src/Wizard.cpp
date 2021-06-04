@@ -35,7 +35,7 @@ namespace HE_Arc::RPG
 
         // Power of the magic wand, multiplied by the ratio of intelligence
         double stuffDamage = this->pStuff->getFeature() * this->getIntelligenceRatio();
-        double damage = random.getRandomDouble(max(stuffDamage - 2, 0.0), stuffDamage + 2, 1);
+        double damage = random.getRandomDouble(max(stuffDamage - 2, 1.0), stuffDamage + 2, 1);
 
         _hero->updateHp(-damage);
 
@@ -133,7 +133,7 @@ namespace HE_Arc::RPG
 
         // The double of magic wand's power, multiplied by the ratio of agility
         double wizardDamage = (this->pStuff->getFeature() * 2) * this->getAgilityRatio();
-        double damage = random.getRandomDouble(max(wizardDamage - 3, 0.0), wizardDamage + 3, 1);
+        double damage = random.getRandomDouble(max(wizardDamage - 3, 1.0), wizardDamage + 3, 1);
 
         _hero->updateHp(-damage);
 

@@ -41,6 +41,9 @@ namespace HE_Arc::RPG
      */
     void ConsoleController::displayLoading(string _text, unsigned int _duration)
     {
+        if (!ConsoleController::VJ_DISPLAY_LOADING)
+            return;
+
         char waiting[] = {'/', '-', '\\', '|'};
         int nbLoop = _duration * 5;
 

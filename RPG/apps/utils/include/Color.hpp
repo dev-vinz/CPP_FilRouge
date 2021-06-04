@@ -71,7 +71,7 @@ namespace HE_Arc::RPG
         template <typename T> ColorItem<T> lightAqua(T _t)      { return ColorItem<T>(_t, "light aqua");     }
         template <typename T> ColorItem<T> lightRed(T _t)       { return ColorItem<T>(_t, "light red");      }
         template <typename T> ColorItem<T> lightPurple(T _t)    { return ColorItem<T>(_t, "light purple");   }
-        template <typename T> ColorItem<T> lightYellow(T _t)    { return ColorItem<T>(_t, "yellow light");   }
+        template <typename T> ColorItem<T> lightYellow(T _t)    { return ColorItem<T>(_t, "light yellow");   }
         template <typename T> ColorItem<T> brightWhite(T _t)    { return ColorItem<T>(_t, "bright white");   }
     }
 }

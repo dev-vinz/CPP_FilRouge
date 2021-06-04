@@ -15,6 +15,9 @@ namespace HE_Arc::RPG
 {
     class ConsoleController
     {
+    private:
+        static const bool VJ_DISPLAY_LOADING = false;
+
     public:
         /**
         * @brief Checks the input

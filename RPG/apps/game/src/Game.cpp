@@ -71,9 +71,9 @@ namespace HE_Arc::RPG
      */
     void Game::choosePlayer(string _name)
     {
-        int choice = -1;
+        char choice;
 
-        while (choice < 1 || choice > 3)
+        while (choice != '1' && choice != '2' && choice != '3')
         {
             cin.clear();
             cout << " Please choose your type of hero with 1, 2 or 3 :" << endl
@@ -88,13 +88,13 @@ namespace HE_Arc::RPG
 
         switch (choice)
         {
-        case 1:
+        case '1':
             this->player = new Warrior(_name, 50, 20, 80, 100, new Sword(15));
             break;
-        case 2:
+        case '2':
             this->player = new Wizard(_name, 55, 90, 5, 0, 100, new MagicWand(30));
             break;
-        case 3:
+        case '3':
             this->player = new Necromancer(_name, 70, 40, 40, 0, 100, new Scepter(30));
             break;
         default:
@@ -160,7 +160,23 @@ namespace HE_Arc::RPG
 
         for (int k = 0; k < this->nbOpponents; k++)
         {
-            this->listOpponents.push_back(new Inferi(random.getRandomName(), 10, 60, 50, 50));
+            int opponent = random.getRandomNumber(3);
+
+            switch (opponent)
+            {
+            case 0:
+                this->listOpponents.push_back(new Inferi(random.getRandomName(), 10, 60, 50, 75));
+                break;
+            case 1:
+                this->listOpponents.push_back(new Vampire(random.getRandomName(), 35, 50, 35, 75));
+                break;
+            case 2:
+                this->listOpponents.push_back(new Medusa(random.getRandomName(), 20, 50, 50, 75));
+                break;
+            default:
+                cout << "[ERROR : Game::initialize] Problem with random.getRandomNumber() = " << opponent;
+                exit(-1);
+            }
         }
 
         int start = random.getRandomNumber(3);
@@ -190,7 +206,7 @@ namespace HE_Arc::RPG
                 Hero *opponent = this->currentMap.getOpponentNear(this->player->getPosX(), this->player->getPosY());
 
                 cout << " There's an opponent nearly !" << endl
-                     << " Do you want to fight " << opponent->getName() << " ?" << endl;
+                     << " Do you want to fight " << opponent->getName() << " ?\a" << endl;
 
                 char fight;
                 do

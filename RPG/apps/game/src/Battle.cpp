@@ -27,7 +27,7 @@ namespace HE_Arc::RPG
              << " " << ConsoleController::getCenter(this->opponent->getName(), 45, '=') << endl
              << " ============================================" << endl;
 
-        this->turn = Player;
+        this->turn = TPlayer;
 
         while (!this->isOver)
         {
@@ -38,16 +38,16 @@ namespace HE_Arc::RPG
 
         switch (this->winner)
         {
-        case Null:
+        case TNull:
             cout << "[ERROR : Battle::getWinner()] : Battle over and don't have a winner" << endl;
             exit(-1);
-        case Player:
+        case TPlayer:
             winner = this->player;
             break;
-        case Opponent:
+        case TOpponent:
             winner = this->opponent;
             break;
-        case None:
+        case TNone:
             // Both are dead, return nullptr
             break;
         default:
@@ -106,15 +106,15 @@ namespace HE_Arc::RPG
      */
     void Battle::nextTurn()
     {
-        if (this->turn == Player)
+        if (this->turn == TPlayer)
         {
             this->playerTurn();
-            this->turn = Opponent;
+            this->turn = TOpponent;
         }
         else
         {
             this->opponentTurn();
-            this->turn = Player;
+            this->turn = TPlayer;
         }
     }
 
@@ -191,7 +191,7 @@ namespace HE_Arc::RPG
     void Battle::concede()
     {
         this->isOver = true;
-        this->winner = Opponent;
+        this->winner = TOpponent;
 
         // TODO Penalyse the hero for concede
     }
@@ -251,17 +251,17 @@ namespace HE_Arc::RPG
         if (_attacker->isDead() && _defender->isDead())
         {
             this->isOver = true;
-            this->winner = None;
+            this->winner = TNone;
         }
         else if (_defender->isDead())
         {
             this->isOver = true;
-            this->winner = (_attacker->getIsPlayer()) ? Player : Opponent;
+            this->winner = (_attacker->getIsPlayer()) ? TPlayer : TOpponent;
         }
         else if (_attacker->isDead())
         {
             this->isOver = true;
-            this->winner = (_defender->getIsPlayer()) ? Player : Opponent;
+            this->winner = (_defender->getIsPlayer()) ? TPlayer : TOpponent;
         }
     }
 

@@ -82,7 +82,7 @@ namespace HE_Arc::RPG
         // Default damage of earthquake : 15
         // Multiplied by 2 times the ratio of strength
         double warriorDamage = 15 * (2 * this->getStrengthRatio());
-        double damage = random.getRandomDouble(max(warriorDamage - 5, 0.0), warriorDamage + 5, 1);
+        double damage = random.getRandomDouble(max(warriorDamage - 5, 1.0), warriorDamage + 5, 1);
 
         _hero->updateHp(-damage);
 
@@ -105,7 +105,7 @@ namespace HE_Arc::RPG
         RandomGenerator random;
 
         int strength = this->getStrength() / 10;
-        double damage = random.getRandomDouble(max(strength - 3, 0), min(strength + 3, MAX_STRENGTH), 1);
+        double damage = random.getRandomDouble(max(strength - 3, 1), min(strength + 3, MAX_STRENGTH), 1);
 
         _hero->updateHp(-damage);
 
@@ -123,7 +123,7 @@ namespace HE_Arc::RPG
 
         // Sword damage, multiplied by the ratio of strength
         double warriorDamage = this->pStuff->getFeature() * this->getStrengthRatio();
-        double damage = random.getRandomDouble(max(warriorDamage - 2, 0.0), warriorDamage + 2, 1);
+        double damage = random.getRandomDouble(max(warriorDamage - 2, 1.0), warriorDamage + 2, 1);
 
         if (Warrior::VJ_DEBUG_LOG)
         {
