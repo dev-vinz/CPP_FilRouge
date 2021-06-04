@@ -260,7 +260,7 @@ namespace HE_Arc::RPG
         if (!_defender->isDodging())
         {
             // _attacker attack
-            _attacker->interact(_defender, attack);
+            _attacker->interact(_defender, (Attack)attack);
         }
         else
         {

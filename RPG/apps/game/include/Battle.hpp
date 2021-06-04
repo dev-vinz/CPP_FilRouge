@@ -43,7 +43,7 @@ namespace HE_Arc::RPG
     public:
         Battle() = delete;
         Battle(Hero *, Hero *);
-        ~Battle();
+        virtual ~Battle();
 
         Hero *getWinner();
 

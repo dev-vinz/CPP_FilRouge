@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <iostream>
 
+#include "..\..\enums\Attack.hpp"
+
 #include "..\..\stuff\include\BackPack.hpp"
 #include "..\..\stuff\include\IObject.hpp"
 #include "..\..\stuff\include\Potion.hpp"
@@ -79,7 +81,7 @@ namespace HE_Arc::RPG
         void virtual useObject(IObject *) = 0;
 
         void virtual displayAttacks() const = 0;
-        void virtual interact(Hero *, char _attack) = 0;
+        void virtual interact(Hero *, Attack _attack) = 0;
         void virtual show() const = 0;
         void virtual showStatistics() const;
 

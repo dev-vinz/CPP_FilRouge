@@ -21,7 +21,7 @@ namespace HE_Arc::RPG
         Vampire(string _name, int _agility, int _intelligence, int _strength, double _hp);
         virtual ~Vampire() override = default;
 
-        void interact(Hero *, char _attack) override;
+        void interact(Hero *, Attack _attack) override;
 
         static const bool VJ_DEBUG_LOG = false;
     };

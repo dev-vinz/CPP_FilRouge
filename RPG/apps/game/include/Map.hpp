@@ -29,7 +29,7 @@ namespace HE_Arc::RPG
     public:
         Map() = default;
         Map(int _width, int _height);
-        ~Map();
+        virtual ~Map();
 
         int getWidth() const;
         int getHeight() const;

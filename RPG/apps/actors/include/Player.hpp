@@ -19,7 +19,7 @@ namespace HE_Arc::RPG
         void useObject(IObject *) override;
 
         void virtual displayAttacks() const override = 0;
-        void virtual interact(Hero *, char _attack) override = 0;
+        void virtual interact(Hero *, Attack _attack) override = 0;
         void virtual show() const override = 0;
 
         static const bool VJ_DEBUG_LOG = false;

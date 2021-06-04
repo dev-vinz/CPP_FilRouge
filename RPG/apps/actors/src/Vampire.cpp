@@ -19,25 +19,25 @@ namespace HE_Arc::RPG
      * @param _otherHero The other hero
      * @param _attack The attack
      */
-    void Vampire::interact(Hero *_otherHero, char _attack)
+    void Vampire::interact(Hero *_otherHero, Attack _attack)
     {
         switch (_attack)
         {
-        case '1':
+        case Attack::AOne:
             Logger::writeBattle(this->getName() + " choose Vampire::scare()");
             this->scare(_otherHero);
             break;
-        case '2':
+        case Attack::ATwo:
             Logger::writeBattle(this->getName() + " choose Vampire::sucks()");
             this->sucks(_otherHero);
             break;
-        case '3':
+        case Attack::AThree:
             Logger::writeBattle(this->getName() + " choose Vampire::batAttack()");
             this->batAttack(_otherHero);
             break;
         default:
             break;
-            cout << "[ERROR : Vampire::interact] Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Vampire::interact] Unknown attack (attack = " << (char)_attack << ")" << endl;
             exit(-1);
         }
     }

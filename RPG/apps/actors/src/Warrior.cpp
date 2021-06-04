@@ -30,25 +30,25 @@ namespace HE_Arc::RPG
      * @param otherHero The other hero
      * @param _attack The attack
      */
-    void Warrior::interact(Hero *otherHero, char _attack)
+    void Warrior::interact(Hero *otherHero, Attack _attack)
     {
         switch (_attack)
         {
-        case '1':
+        case Attack::AOne:
         Logger::writeBattle(this->getName() + " choose Warrior::punch()");
             this->punch(otherHero);
             break;
-        case '2':
+        case Attack::ATwo:
         Logger::writeBattle(this->getName() + " choose Warrior::swordStrike()");
             this->swordStrike(otherHero);
             break;
-        case '3':
+        case Attack::AThree:
         Logger::writeBattle(this->getName() + " choose Warrior::earthQuake()");
             this->earthQuake(otherHero);
             break;
         default:
             break;
-            cout << "[ERROR : Warrior::interact] Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Warrior::interact] Unknown attack (attack = " << (char)_attack << ")" << endl;
             exit(-1);
         }
     }

@@ -64,7 +64,7 @@ namespace HE_Arc::RPG
     public:
         Game();
         Game(int _width, int _height, int _nbOpponents);
-        ~Game();
+        virtual ~Game();
 
         Map getMap() const;
         vector<Hero *> getOpponents() const;

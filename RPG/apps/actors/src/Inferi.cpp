@@ -19,25 +19,25 @@ namespace HE_Arc::RPG
      * @param _otherHero The other hero
      * @param _attack The attack
      */
-    void Inferi::interact(Hero *_otherHero, char _attack)
+    void Inferi::interact(Hero *_otherHero, Attack _attack)
     {
         switch (_attack)
         {
-        case '1':
+        case Attack::AOne:
             Logger::writeBattle(this->getName() + " choose Inferi::onslaught()");
             this->onslaught(_otherHero);
             break;
-        case '2':
+        case Attack::ATwo:
             Logger::writeBattle(this->getName() + " choose Inferi::immobilizes()");
             this->immobilizes(_otherHero);
             break;
-        case '3':
+        case Attack::AThree:
             Logger::writeBattle(this->getName() + " choose Inferi::blindly()");
             this->blindly(_otherHero);
             break;
         default:
             break;
-            cout << "[ERROR : Inferi::interact] Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Inferi::interact] Unknown attack (attack = " << (char)_attack << ")" << endl;
             exit(-1);
         }
     }

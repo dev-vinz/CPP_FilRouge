@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
     if (command != "--start")
         return displayError(command);
 
-    //Logger myLog;
+    Logger myLog;
 
     ConsoleController::displayLoading("Here we go !", 5);
 

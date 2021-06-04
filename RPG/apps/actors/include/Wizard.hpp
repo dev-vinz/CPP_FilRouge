@@ -27,7 +27,7 @@ namespace HE_Arc::RPG
         void castSpell(Hero *) const;
 
         virtual void displayAttacks() const override;
-        virtual void interact(Hero *, char _attack) override;
+        virtual void interact(Hero *, Attack _attack) override;
         virtual void show() const override;
 
         static const bool VJ_DEBUG_LOG = false;

@@ -77,25 +77,25 @@ namespace HE_Arc::RPG
      * @param otherHero The other hero
      * @param _attack The attack
      */
-    void Necromancer::interact(Hero *otherHero, char _attack)
+    void Necromancer::interact(Hero *otherHero, Attack _attack)
     {
         switch (_attack)
         {
-        case '1':
+        case Attack::AOne:
             Logger::writeBattle(this->getName() + " choose Necromancer::lifeSteal()");
             this->lifeSteal(otherHero);
             break;
-        case '2':
+        case Attack::ATwo:
             Logger::writeBattle(this->getName() + " choose Necromancer::riseUndead()");
             this->riseUndead(otherHero);
             break;
-        case '3':
+        case Attack::AThree:
             Logger::writeBattle(this->getName() + " choose Necromancer::cataclysm()");
             this->cataclysm(otherHero);
             break;
         default:
             break;
-            cout << "[ERROR : Necromancer::interact] Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Necromancer::interact] Unknown attack (attack = " << (char)_attack << ")" << endl;
             exit(-1);
         }
     }
