@@ -36,7 +36,7 @@ namespace HE_Arc::RPG
              << " " << ConsoleController::getCenter(this->opponent->getName(), 45, '=') << endl
              << " ============================================" << endl;
 
-        this->turn = TPlayer;
+        this->turn = Turn::TPlayer;
 
         while (!this->isOver)
         {
@@ -47,20 +47,20 @@ namespace HE_Arc::RPG
 
         switch (this->winner)
         {
-        case TNull:
-            cout << "[ERROR : Battle::getWinner()] : Battle over and don't have a winner" << endl;
+        case Turn::TNull:
+            cout << "[ERROR : Battle::getWinner] Battle over and don't have a winner" << endl;
             exit(-1);
-        case TPlayer:
+        case Turn::TPlayer:
             winner = this->player;
             break;
-        case TOpponent:
+        case Turn::TOpponent:
             winner = this->opponent;
             break;
-        case TNone:
+        case Turn::TNone:
             // Both are dead, return nullptr
             break;
         default:
-            cout << "[ERROR : Battle::getWinner()] : Unknown state of winner" << endl;
+            cout << "[ERROR : Battle::getWinner] Unknown state of winner" << endl;
             exit(-1);
         }
 
@@ -116,17 +116,17 @@ namespace HE_Arc::RPG
     void Battle::nextTurn()
     {
         Logger::writeBattle("- - -");
-        if (this->turn == TPlayer)
+        if (this->turn == Turn::TPlayer)
         {
             Logger::writeBattle("Player : " + this->player->getName() + "'s turn");
             this->playerTurn();
-            this->turn = TOpponent;
+            this->turn = Turn::TOpponent;
         }
         else
         {
             Logger::writeBattle("Opponent : " + this->opponent->getName() + "'s turn");
             this->opponentTurn();
-            this->turn = TPlayer;
+            this->turn = Turn::TPlayer;
         }
 
         Logger::writeBattle(this->player->getName() + " :\n\t\t\tHP = " + to_string(this->player->getHp()) + "\n\t\t\tAgility = " + to_string(this->player->getAgility()) + "\n\t\t\tStrength = " + to_string(this->player->getStrength()));
@@ -177,7 +177,7 @@ namespace HE_Arc::RPG
             this->concede();
             break;
         default:
-            cout << "[ERROR : Battle::playerTurn()] : It misses a case in switch of actions (action = " << action << ")" << endl;
+            cout << "[ERROR : Battle::playerTurn] It misses a case in switch of actions (action = " << action << ")" << endl;
             exit(-1);
         }
     }
@@ -201,7 +201,7 @@ namespace HE_Arc::RPG
             this->prepareDodge(this->opponent);
             break;
         default:
-            cout << "[ERROR : Battle::opponentTurn] : Problem with the random generator (action = " << action << ")" << endl;
+            cout << "[ERROR : Battle::opponentTurn] Problem with the random generator (action = " << action << ")" << endl;
             exit(-1);
         }
     }
@@ -212,7 +212,7 @@ namespace HE_Arc::RPG
     void Battle::concede()
     {
         this->isOver = true;
-        this->winner = TOpponent;
+        this->winner = Turn::TOpponent;
 
         // TODO Penalyse the hero for concede
     }
@@ -273,20 +273,20 @@ namespace HE_Arc::RPG
         if (_attacker->isDead() && _defender->isDead())
         {
             this->isOver = true;
-            this->winner = TNone;
+            this->winner = Turn::TNone;
             Logger::writeBattle("Nobody has won");
         }
         else if (_defender->isDead())
         {
             this->isOver = true;
-            this->winner = (_attacker->getIsPlayer()) ? TPlayer : TOpponent;
-            Logger::writeBattle((this->winner == TPlayer) ? "Player : " + this->player->getName() + " has won" : "Opponent : " + this->opponent->getName() + " has won");
+            this->winner = (_attacker->getIsPlayer()) ? Turn::TPlayer : Turn::TOpponent;
+            Logger::writeBattle((this->winner == Turn::TPlayer) ? "Player : " + this->player->getName() + " has won" : "Opponent : " + this->opponent->getName() + " has won");
         }
         else if (_attacker->isDead())
         {
             this->isOver = true;
-            this->winner = (_defender->getIsPlayer()) ? TPlayer : TOpponent;
-            Logger::writeBattle((this->winner == TPlayer) ? "Player : " + this->player->getName() + " has won" : "Opponent : " + this->opponent->getName() + " has won");
+            this->winner = (_defender->getIsPlayer()) ? Turn::TPlayer : Turn::TOpponent;
+            Logger::writeBattle((this->winner == Turn::TPlayer) ? "Player : " + this->player->getName() + " has won" : "Opponent : " + this->opponent->getName() + " has won");
         }
     }
 

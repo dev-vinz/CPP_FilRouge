@@ -112,7 +112,7 @@ namespace HE_Arc::RPG
             Logger::writeGame(_name + " choose a Necromancer");
             break;
         default:
-            cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
+            cout << "[ERROR : Game::choosePlayer] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
             exit(-1);
         }
 
@@ -155,10 +155,10 @@ namespace HE_Arc::RPG
             cout << " " << ConsoleController::getCenter("Quitted", 45, '=') << endl;
             break;
         case Winner::WNull:
-            cout << "[ERROR : Game::end()] : Winner is NULL" << endl;
+            cout << "[ERROR : Game::end] Winner is NULL" << endl;
             exit(-1);
         default:
-            cout << "[ERROR : Game::end()] : Undefined state of winner" << endl;
+            cout << "[ERROR : Game::end] Undefined state of winner" << endl;
             exit(-1);
         }
 
@@ -200,7 +200,7 @@ namespace HE_Arc::RPG
         int start = random.getRandomNumber(3);
         for (int k = 0; k < this->nbPotions; k++)
         {
-            Type _type = (Type)((start + k) % 3);
+            TypePotion _type = (TypePotion)((start + k) % 3);
             this->listPotions.push_back(new Potion(random.getRandomNumber(7, 13), _type));
             Logger::writeGame("New Potion : " + this->listPotions.at(k)->getName());
         }
@@ -260,9 +260,9 @@ namespace HE_Arc::RPG
                     getline(cin, _endLine);
 
                     movement = tolower(movement, locale());
-                } while (not this->checkMovement(movement, this->player));
+                } while (not this->checkMovement((Direction)movement, this->player));
 
-                this->applyMovements(movement);
+                this->applyMovements((Direction)movement);
             }
         }
     }
@@ -291,9 +291,9 @@ namespace HE_Arc::RPG
      * @param _hero The hero
      * @returns True if the check is correct
      */
-    bool Game::checkMovement(char _movement, Hero *_hero) const
+    bool Game::checkMovement(Direction _movement, Hero *_hero) const
     {
-        char tabMovements[] = {'w', 'a', 's', 'd', 'n', 'q'};
+        Direction tabMovements[] = {Direction::Up, Direction::Left, Direction::Down, Direction::Right, Direction::NotMove, Direction::QuitGame};
 
         if (!ConsoleController::checkInput(tabMovements, _movement))
             return false;
@@ -303,27 +303,27 @@ namespace HE_Arc::RPG
 
         switch (_movement)
         {
-        case 'w':
+        case Direction::Up:
             posY--;
             break;
-        case 'a':
+        case Direction::Left:
             posX--;
             break;
-        case 's':
+        case Direction::Down:
             posY++;
             break;
-        case 'd':
+        case Direction::Right:
             posX++;
             break;
-        case 'n':
-        case 'q':
+        case Direction::NotMove:
+        case Direction::QuitGame:
             return true;
         default:
-            cout << "[ERROR : CheckMovement] Houston we have a problem, there's another movement detected (_movement = " << _movement << ")" << endl;
+            cout << "[ERROR : Game::checkMovement] Houston we have a problem, there's another movement detected (_movement = " << (char)_movement << ")" << endl;
             exit(-1);
         }
 
-        if (not this->currentMap.isCaseEmpty(posX, posY) && this->currentMap.whatIs(posX, posY) == _Hero)
+        if (not this->currentMap.isCaseEmpty(posX, posY) && this->currentMap.whatIs(posX, posY) == WHero)
         {
             if (_hero->getIsPlayer())
             {
@@ -343,7 +343,7 @@ namespace HE_Arc::RPG
             return false;
         }
 
-        if (this->currentMap.whatIs(posX, posY) == _Potion && not _hero->getIsPlayer())
+        if (this->currentMap.whatIs(posX, posY) == WPotion && not _hero->getIsPlayer())
         {
             return false;
         }
@@ -389,7 +389,7 @@ namespace HE_Arc::RPG
                 }
                 else
                 {
-                    cout << "[ERROR : Game::applyFight()] Opponent isn't in list anymore";
+                    cout << "[ERROR : Game::applyFight] Opponent isn't in list anymore";
                     exit(-1);
                 }
 
@@ -431,7 +431,7 @@ namespace HE_Arc::RPG
             }
             else
             {
-                cout << " [ERROR : Game::applyFight()] : Unknown response from Battle::getWinner()" << endl;
+                cout << " [ERROR : Game::applyFight] Unknown response from Battle::getWinner()" << endl;
                 exit(-1);
             }
 
@@ -446,7 +446,7 @@ namespace HE_Arc::RPG
      * @brief Apply the player and opponents movements
      * @param _movement The player's movement
      */
-    void Game::applyMovements(char _movement)
+    void Game::applyMovements(Direction _movement)
     {
         vector<Hero *> listHeroes;
         vector<Potion *> listPotions;
@@ -456,26 +456,26 @@ namespace HE_Arc::RPG
 
         switch (_movement)
         {
-        case 'w':
+        case Direction::Up:
             posY--;
             break;
-        case 'a':
+        case Direction::Left:
             posX--;
             break;
-        case 's':
+        case Direction::Down:
             posY++;
             break;
-        case 'd':
+        case Direction::Right:
             posX++;
             break;
-        case 'n':
+        case Direction::NotMove:
             break;
-        case 'q':
+        case Direction::QuitGame:
             this->isPlaying = false;
             this->gWinner = Winner::WQuit;
             return;
         default:
-            cout << "[ERROR : Game::applyMovements] Houston we have a problem, there's another movement detected (_movement = " << _movement << ")" << endl;
+            cout << "[ERROR : Game::applyMovements] Houston we have a problem, there's another movement detected (_movement = " << (char)_movement << ")" << endl;
             exit(-1);
         }
 
@@ -484,7 +484,7 @@ namespace HE_Arc::RPG
         this->player->setPosXY(posX, posY);
         listHeroes.push_back(this->player);
 
-        if (this->currentMap.whatIs(posX, posY) == _Potion)
+        if (this->currentMap.whatIs(posX, posY) == WPotion)
             this->catchPotion(posX, posY);
 
         RandomGenerator random;
@@ -508,19 +508,19 @@ namespace HE_Arc::RPG
                     switch (rndNb)
                     {
                     case 0:
-                        isMovementCorrect = this->checkMovement('w', opp);
+                        isMovementCorrect = this->checkMovement(Direction::Up, opp);
                         break;
                     case 1:
-                        isMovementCorrect = this->checkMovement('a', opp);
+                        isMovementCorrect = this->checkMovement(Direction::Left, opp);
                         break;
                     case 2:
-                        isMovementCorrect = this->checkMovement('s', opp);
+                        isMovementCorrect = this->checkMovement(Direction::Down, opp);
                         break;
                     case 3:
-                        isMovementCorrect = this->checkMovement('d', opp);
+                        isMovementCorrect = this->checkMovement(Direction::Right, opp);
                         break;
                     case 4:
-                        isMovementCorrect = this->checkMovement('n', opp);
+                        isMovementCorrect = this->checkMovement(Direction::NotMove, opp);
                         break;
                     default:
                         cout << "[ERROR : Game::applyMovements] Problem with getRandomNumber(int _max) = " << rndNb << endl;

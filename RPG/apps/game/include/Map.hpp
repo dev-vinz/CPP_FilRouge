@@ -7,6 +7,8 @@
 
 #include "..\..\actors\include\Hero.hpp"
 
+#include "..\..\enums\WhatMap.hpp"
+
 #include "..\..\stuff\include\Potion.hpp"
 
 using namespace std;
@@ -15,13 +17,6 @@ typedef array<int, 2> Coordinates;
 
 namespace HE_Arc::RPG
 {
-    enum What
-    {
-        _None = -1,
-        _Hero = 0,
-        _Potion = 1
-    };
-
     class Map
     {
     private:
@@ -51,7 +46,7 @@ namespace HE_Arc::RPG
         void update(vector<Potion *>);
         void update(vector<Hero *>);
 
-        What whatIs(int _x, int _y) const;
+        WhatMap whatIs(int _x, int _y) const;
 
         static const bool VJ_DEBUG_LOG = false;
     };

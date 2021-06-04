@@ -38,7 +38,7 @@ namespace HE_Arc::RPG
                 this->updateStrength(power);
                 break;
             default:
-                cout << "[ERROR : Player::useObject()] : Unknown potion" << endl;
+                cout << "[ERROR : Player::useObject] Unknown potion" << endl;
                 exit(-1);
             }
 

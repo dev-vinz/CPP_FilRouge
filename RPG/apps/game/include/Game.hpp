@@ -20,6 +20,9 @@
 #include "..\..\actors\include\Warrior.hpp"
 #include "..\..\actors\include\Wizard.hpp"
 
+#include "..\..\enums\Direction.hpp"
+#include "..\..\enums\Winner.hpp"
+
 #include "..\..\stuff\include\MagicWand.hpp"
 #include "..\..\stuff\include\Potion.hpp"
 #include "..\..\stuff\include\Scepter.hpp"
@@ -34,15 +37,6 @@ using namespace std;
 
 namespace HE_Arc::RPG
 {
-    enum Winner
-    {
-        WNull,
-        WPlayer,
-        WOpponent,
-        WQuit,
-        WNone
-    };
-
     class Game
     {
     private:
@@ -59,10 +53,10 @@ namespace HE_Arc::RPG
         Winner gWinner = Winner::WNull;
 
         bool checkFight(char _fight) const;
-        bool checkMovement(char _movement, Hero *) const;
+        bool checkMovement(Direction _movement, Hero *) const;
 
         void applyFight(char _fight, Hero *);
-        void applyMovements(char _movement);
+        void applyMovements(Direction _movement);
         void catchPotion(int _x, int _y);
         void display() const;
         void setPositions();

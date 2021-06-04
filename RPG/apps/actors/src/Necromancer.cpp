@@ -95,7 +95,7 @@ namespace HE_Arc::RPG
             break;
         default:
             break;
-            cout << "[ERROR : Necromancer::interact()] : Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Necromancer::interact] Unknown attack (attack = " << _attack << ")" << endl;
             exit(-1);
         }
     }

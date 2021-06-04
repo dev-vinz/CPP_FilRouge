@@ -108,7 +108,7 @@ namespace HE_Arc::RPG
             fileName = "Opponents.log";
             break;
         default:
-            cout << "[ERROR : Logger::writeMovements()] Unknown _who" << endl;
+            cout << "[ERROR : Logger::writeMovements] Unknown _who" << endl;
             exit(-1);
         }
 
@@ -142,7 +142,7 @@ namespace HE_Arc::RPG
         {
             if (mkdir(_path.c_str()) != 0)
             {
-                cout << "[ERROR : Logger::createFile()] Unable to create folder" << endl
+                cout << "[ERROR : Logger::createFile] Unable to create folder" << endl
                      << "path = " << _path << endl;
                 exit(-1);
             }

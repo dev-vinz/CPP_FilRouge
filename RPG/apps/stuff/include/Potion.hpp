@@ -3,32 +3,26 @@
 
 #include "IObject.hpp"
 
+#include "..\..\enums\TypePotion.hpp"
+
 namespace HE_Arc::RPG
 {
-    // TODO Add a potion of intelligence
-    enum Type
-    {
-        Agility = 0,
-        Heal = 1,
-        Strength = 2
-    };
-
     class Potion : public IObject
     {
     private:
         int power = 0;
-        Type utility = Heal;
+        TypePotion utility = TypePotion::Heal;
 
         string enumToStr[3] = {"Agility", "Heal", "Strength"};
 
     public:
         Potion() = default;
-        Potion(int _power, Type _utility);
+        Potion(int _power, TypePotion _utility);
         Potion(const Potion &);
         virtual ~Potion() override = default;
 
         int getFeature() const override;
-        Type getUtility() const;
+        TypePotion getUtility() const;
 
         string getName() const override;
     };

@@ -6,6 +6,8 @@
 
 #include "..\..\actors\include\Hero.hpp"
 
+#include "..\..\enums\Turn.hpp"
+
 #include "..\..\utils\include\ConsoleController.hpp"
 #include "..\..\utils\include\Logger.hpp"
 #include "..\..\utils\include\RandomGenerator.hpp"
@@ -14,14 +16,6 @@ using namespace std;
 
 namespace HE_Arc::RPG
 {
-    enum Turn
-    {
-        TNull = -1,
-        TPlayer = 0,
-        TOpponent = 1,
-        TNone = 2
-    };
-
     class Battle
     {
     private:

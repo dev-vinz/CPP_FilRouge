@@ -74,15 +74,15 @@ namespace HE_Arc::RPG
      */
     bool Map::isOpponentNear(int _x, int _y) const
     {
-        bool _up = this->whatIs(_x, _y - 1) == _Hero;
-        bool _down = this->whatIs(_x, _y + 1) == _Hero;
-        bool _left = this->whatIs(_x - 1, _y) == _Hero;
-        bool _right = this->whatIs(_x + 1, _y) == _Hero;
+        bool _up = this->whatIs(_x, _y - 1) == WHero;
+        bool _down = this->whatIs(_x, _y + 1) == WHero;
+        bool _left = this->whatIs(_x - 1, _y) == WHero;
+        bool _right = this->whatIs(_x + 1, _y) == WHero;
 
-        bool _upLeft = this->whatIs(_x - 1, _y - 1) == _Hero;
-        bool _upRight = this->whatIs(_x + 1, _y - 1) == _Hero;
-        bool _downLeft = this->whatIs(_x - 1, _y + 1) == _Hero;
-        bool _downRight = this->whatIs(_x + 1, _y + 1) == _Hero;
+        bool _upLeft = this->whatIs(_x - 1, _y - 1) == WHero;
+        bool _upRight = this->whatIs(_x + 1, _y - 1) == WHero;
+        bool _downLeft = this->whatIs(_x - 1, _y + 1) == WHero;
+        bool _downRight = this->whatIs(_x + 1, _y + 1) == WHero;
 
         return _up || _down || _left || _right || _upLeft || _upRight || _downLeft || _downRight;
     }
@@ -97,35 +97,35 @@ namespace HE_Arc::RPG
     {
         Hero *opponent = nullptr;
 
-        if (!this->isCaseEmpty(_x, _y - 1) && this->whatIs(_x, _y - 1) == _Hero)
+        if (!this->isCaseEmpty(_x, _y - 1) && this->whatIs(_x, _y - 1) == WHero)
         {
             opponent = this->whoIs(_x, _y - 1);
         }
-        else if (!this->isCaseEmpty(_x, _y + 1) && this->whatIs(_x, _y + 1) == _Hero)
+        else if (!this->isCaseEmpty(_x, _y + 1) && this->whatIs(_x, _y + 1) == WHero)
         {
             opponent = this->whoIs(_x, _y + 1);
         }
-        else if (!this->isCaseEmpty(_x - 1, _y) && this->whatIs(_x - 1, _y) == _Hero)
+        else if (!this->isCaseEmpty(_x - 1, _y) && this->whatIs(_x - 1, _y) == WHero)
         {
             opponent = this->whoIs(_x - 1, _y);
         }
-        else if (!this->isCaseEmpty(_x + 1, _y) && this->whatIs(_x + 1, _y) == _Hero)
+        else if (!this->isCaseEmpty(_x + 1, _y) && this->whatIs(_x + 1, _y) == WHero)
         {
             opponent = this->whoIs(_x + 1, _y);
         }
-        else if (!this->isCaseEmpty(_x - 1, _y - 1) && this->whatIs(_x - 1, _y - 1) == _Hero)
+        else if (!this->isCaseEmpty(_x - 1, _y - 1) && this->whatIs(_x - 1, _y - 1) == WHero)
         {
             opponent = this->whoIs(_x - 1, _y - 1);
         }
-        else if (!this->isCaseEmpty(_x + 1, _y - 1) && this->whatIs(_x + 1, _y - 1) == _Hero)
+        else if (!this->isCaseEmpty(_x + 1, _y - 1) && this->whatIs(_x + 1, _y - 1) == WHero)
         {
             opponent = this->whoIs(_x + 1, _y - 1);
         }
-        else if (!this->isCaseEmpty(_x - 1, _y + 1) && this->whatIs(_x - 1, _y + 1) == _Hero)
+        else if (!this->isCaseEmpty(_x - 1, _y + 1) && this->whatIs(_x - 1, _y + 1) == WHero)
         {
             opponent = this->whoIs(_x - 1, _y + 1);
         }
-        else if (!this->isCaseEmpty(_x + 1, _y + 1) && this->whatIs(_x + 1, _y + 1) == _Hero)
+        else if (!this->isCaseEmpty(_x + 1, _y + 1) && this->whatIs(_x + 1, _y + 1) == WHero)
         {
             opponent = this->whoIs(_x + 1, _y + 1);
         }
@@ -333,22 +333,22 @@ namespace HE_Arc::RPG
      * @param _y The position Y
      * @returns A Hero, a potion or nothing
      */
-    What Map::whatIs(int _x, int _y) const
+    WhatMap Map::whatIs(int _x, int _y) const
     {
-        What _what = _None;
+        WhatMap _what = WNone;
 
         // Search for Hero
         for (auto &item : this->heroPositions)
         {
             if (item.second[0] == _x && item.second[1] == _y)
-                _what = _Hero;
+                _what = WHero;
         }
 
         // Search for Potion
         for (auto &item : this->potionPositions)
         {
             if (item.second[0] == _x && item.second[1] == _y)
-                _what = _Potion;
+                _what = WPotion;
         }
 
         return _what;

@@ -77,7 +77,7 @@ namespace HE_Arc::RPG
             break;
         default:
             break;
-            cout << "[ERROR : Wizard::interact()] : Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Wizard::interact] Unknown attack (attack = " << _attack << ")" << endl;
             exit(-1);
         }
     }

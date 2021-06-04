@@ -48,7 +48,7 @@ namespace HE_Arc::RPG
             break;
         default:
             break;
-            cout << "[ERROR : Warrior::interact()] : Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Warrior::interact] Unknown attack (attack = " << _attack << ")" << endl;
             exit(-1);
         }
     }

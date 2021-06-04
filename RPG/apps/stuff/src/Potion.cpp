@@ -6,7 +6,7 @@ namespace HE_Arc::RPG
      * @brief Constructor with initializer
      * @param _power The power of the potion
      */
-    Potion::Potion(int _power, Type _utility) : power(_power), utility(_utility)
+    Potion::Potion(int _power, TypePotion _utility) : power(_power), utility(_utility)
     {
     }
 
@@ -31,7 +31,7 @@ namespace HE_Arc::RPG
      * @brief Get the potion's utility
      * @returns The utility
      */
-    Type Potion::getUtility() const
+    TypePotion Potion::getUtility() const
     {
         return this->utility;
     }

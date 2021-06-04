@@ -37,7 +37,7 @@ namespace HE_Arc::RPG
             break;
         default:
             break;
-            cout << "[ERROR : Inferi::interact()] : Unknown attack (attack = " << _attack << ")" << endl;
+            cout << "[ERROR : Inferi::interact] Unknown attack (attack = " << _attack << ")" << endl;
             exit(-1);
         }
     }
