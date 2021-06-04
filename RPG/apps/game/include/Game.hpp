@@ -27,6 +27,7 @@
 #include "..\..\stuff\include\Sword.hpp"
 
 #include "..\..\utils\include\ConsoleController.hpp"
+#include "..\..\utils\include\Logger.hpp"
 #include "..\..\utils\include\RandomGenerator.hpp"
 
 using namespace std;

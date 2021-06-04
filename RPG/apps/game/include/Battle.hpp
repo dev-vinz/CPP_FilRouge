@@ -7,6 +7,7 @@
 #include "..\..\actors\include\Hero.hpp"
 
 #include "..\..\utils\include\ConsoleController.hpp"
+#include "..\..\utils\include\Logger.hpp"
 #include "..\..\utils\include\RandomGenerator.hpp"
 
 using namespace std;
@@ -48,6 +49,7 @@ namespace HE_Arc::RPG
     public:
         Battle() = delete;
         Battle(Hero *, Hero *);
+        ~Battle();
 
         Hero *getWinner();
 

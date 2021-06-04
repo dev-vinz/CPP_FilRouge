@@ -24,12 +24,15 @@ namespace HE_Arc::RPG
         switch (_attack)
         {
         case '1':
+            Logger::writeBattle(this->getName() + " choose Medusa::snakeAttack()");
             this->snakeAttack(_otherHero);
             break;
         case '2':
+            Logger::writeBattle(this->getName() + " choose Medusa::seduce()");
             this->seduce(_otherHero);
             break;
         case '3':
+            Logger::writeBattle(this->getName() + " choose Medusa::petrification()");
             this->petrification(_otherHero);
             break;
         default:

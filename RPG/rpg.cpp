@@ -7,6 +7,8 @@
 #include "apps\game\include\Game.hpp"
 #include "apps\game\include\Help.hpp"
 
+#include "apps\utils\include\Logger.hpp"
+
 using namespace std;
 using namespace HE_Arc::RPG;
 
@@ -24,6 +26,8 @@ int main(int argc, char *argv[])
 
     if (command != "--start")
         return displayError(command);
+
+    //Logger myLog;
 
     ConsoleController::displayLoading("Here we go !", 5);
 

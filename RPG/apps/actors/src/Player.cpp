@@ -41,6 +41,8 @@ namespace HE_Arc::RPG
                 cout << "[ERROR : Player::useObject()] : Unknown potion" << endl;
                 exit(-1);
             }
+
+            Logger::writeObjects(this->getName() + " drunk a " + ptrPotion->getName() + " with power of " + to_string(ptrPotion->getFeature()));
         }
         else
         {

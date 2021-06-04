@@ -31,6 +31,5 @@
 *.out
 *.app
 
-
-# JSON files
-#*.json
+# RPG logs
+RPG/bin/logs/

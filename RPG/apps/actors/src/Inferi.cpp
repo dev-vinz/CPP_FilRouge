@@ -24,12 +24,15 @@ namespace HE_Arc::RPG
         switch (_attack)
         {
         case '1':
+            Logger::writeBattle(this->getName() + " choose Inferi::onslaught()");
             this->onslaught(_otherHero);
             break;
         case '2':
+            Logger::writeBattle(this->getName() + " choose Inferi::immobilizes()");
             this->immobilizes(_otherHero);
             break;
         case '3':
+            Logger::writeBattle(this->getName() + " choose Inferi::blindly()");
             this->blindly(_otherHero);
             break;
         default:

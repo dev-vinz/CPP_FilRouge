@@ -35,12 +35,15 @@ namespace HE_Arc::RPG
         switch (_attack)
         {
         case '1':
+        Logger::writeBattle(this->getName() + " choose Warrior::punch()");
             this->punch(otherHero);
             break;
         case '2':
+        Logger::writeBattle(this->getName() + " choose Warrior::swordStrike()");
             this->swordStrike(otherHero);
             break;
         case '3':
+        Logger::writeBattle(this->getName() + " choose Warrior::earthQuake()");
             this->earthQuake(otherHero);
             break;
         default:

@@ -16,7 +16,7 @@ namespace HE_Arc::RPG
     class ConsoleController
     {
     private:
-        static const bool VJ_DISPLAY_LOADING = false;
+        static const bool VJ_DISPLAY_LOADING = true;
 
     public:
         /**

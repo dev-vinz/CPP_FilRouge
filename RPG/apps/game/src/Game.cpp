@@ -18,6 +18,11 @@ namespace HE_Arc::RPG
         int rndOpp = trunc(0.04 * this->currentMap.getWidth() * this->currentMap.getHeight());
         this->nbOpponents = rndOpp;
         this->nbPotions = rndOpp * 2;
+
+        // Log
+        Logger::writeGame("Game successfully created with default constructor");
+        Logger::writeGame("  Map' size : " + to_string(this->currentMap.getWidth()) + " x " + to_string(this->currentMap.getHeight()));
+        Logger::writeGame("  Number of opponents : " + to_string(this->nbOpponents));
     }
 
     /**
@@ -33,6 +38,10 @@ namespace HE_Arc::RPG
 
         this->currentMap = Map(_width, _height);
         this->player = nullptr;
+
+        Logger::writeGame("Game successfully created with constructor with initialization");
+        Logger::writeGame("  Map' size : " + to_string(this->currentMap.getWidth()) + " x " + to_string(this->currentMap.getHeight()));
+        Logger::writeGame("  Number of opponents : " + to_string(this->nbOpponents));
     }
 
     /**
@@ -45,6 +54,8 @@ namespace HE_Arc::RPG
             delete this->player;
             this->player = nullptr;
         }
+
+        Logger::writeGame("Game successfully ended");
     }
 
     /**
@@ -90,12 +101,15 @@ namespace HE_Arc::RPG
         {
         case '1':
             this->player = new Warrior(_name, 50, 20, 80, 100, new Sword(15));
+            Logger::writeGame(_name + " choose a Warrior");
             break;
         case '2':
             this->player = new Wizard(_name, 55, 90, 5, 0, 100, new MagicWand(30));
+            Logger::writeGame(_name + " choose a Wizard");
             break;
         case '3':
             this->player = new Necromancer(_name, 70, 40, 40, 0, 100, new Scepter(30));
+            Logger::writeGame(_name + " choose a Necromancer");
             break;
         default:
             cout << "[ERROR] Houston we have a problem, choice can be only 1 2 or 3 (choice = " << choice << ")" << endl;
@@ -161,17 +175,21 @@ namespace HE_Arc::RPG
         for (int k = 0; k < this->nbOpponents; k++)
         {
             int opponent = random.getRandomNumber(3);
+            string name = random.getRandomName();
 
             switch (opponent)
             {
             case 0:
-                this->listOpponents.push_back(new Inferi(random.getRandomName(), 10, 60, 50, 75));
+                this->listOpponents.push_back(new Inferi(name, 10, 60, 50, 75));
+                Logger::writeGame("New Opponent : Inferi (" + name + ")");
                 break;
             case 1:
-                this->listOpponents.push_back(new Vampire(random.getRandomName(), 35, 50, 35, 75));
+                this->listOpponents.push_back(new Vampire(name, 35, 50, 35, 75));
+                Logger::writeGame("New Opponent : Vampire (" + name + ")");
                 break;
             case 2:
-                this->listOpponents.push_back(new Medusa(random.getRandomName(), 20, 50, 50, 75));
+                this->listOpponents.push_back(new Medusa(name, 20, 50, 50, 75));
+                Logger::writeGame("New Opponent : Medusa (" + name + ")");
                 break;
             default:
                 cout << "[ERROR : Game::initialize] Problem with random.getRandomNumber() = " << opponent;
@@ -184,6 +202,7 @@ namespace HE_Arc::RPG
         {
             Type _type = (Type)((start + k) % 3);
             this->listPotions.push_back(new Potion(random.getRandomNumber(7, 13), _type));
+            Logger::writeGame("New Potion : " + this->listPotions.at(k)->getName());
         }
 
         this->setPositions();
@@ -342,6 +361,7 @@ namespace HE_Arc::RPG
         if (_fight == 'y')
         {
             Battle anyBattle(this->player, _opponent);
+            Logger::writeGame("New battle against " + _opponent->getName());
 
             if (!Game::VJ_DEBUG_LOG)
                 ConsoleController::displayLoading("Loading battle", 2);
@@ -417,6 +437,8 @@ namespace HE_Arc::RPG
 
             if (!Game::VJ_DEBUG_LOG)
                 ConsoleController::displayLoading("Closing battle", 2);
+
+            Logger::writeGame("Battle against " + _opponent->getName() + " ended");
         }
     }
 
@@ -457,6 +479,8 @@ namespace HE_Arc::RPG
             exit(-1);
         }
 
+        Logger::writeMovements(this->player->getName() + " moved from (" + to_string(this->player->getPosX()) + "; " + to_string(this->player->getPosY()) + ") to (" + to_string(posX) + "; " + to_string(posY) + ")", LPlayer);
+
         this->player->setPosXY(posX, posY);
         listHeroes.push_back(this->player);
 
@@ -467,7 +491,6 @@ namespace HE_Arc::RPG
 
         for (Hero *opp : this->listOpponents)
         {
-            int count = 0;
             bool isMovementCorrect = false;
             int rndNb;
 
@@ -481,8 +504,6 @@ namespace HE_Arc::RPG
 
                     posX = opp->getPosX();
                     posY = opp->getPosY();
-
-                    count++;
 
                     switch (rndNb)
                     {
@@ -527,9 +548,10 @@ namespace HE_Arc::RPG
                     cout << "[ERROR : Game::applyMovements] Forgot a case in second switch (rndNb = " << rndNb << ")" << endl;
                     exit(-1);
                 }
-
-                opp->setPosXY(posX, posY);
             } while (!this->currentMap.isCaseEmpty(posX, posY));
+
+            Logger::writeMovements(opp->getName() + " moved from (" + to_string(opp->getPosX()) + "; " + to_string(opp->getPosY()) + ") to (" + to_string(posX) + "; " + to_string(posY) + ")");
+            opp->setPosXY(posX, posY);
 
             listHeroes.push_back(opp);
         }
@@ -600,6 +622,8 @@ namespace HE_Arc::RPG
                  << "BackPack After :" << endl;
             this->player->backPack.show(Game::VJ_DEBUG_LOG);
         }
+
+        Logger::writeObjects(this->player->getName() + " collected a " + anyPotion->getName() + " with power of" + to_string(anyPotion->getFeature()));
     }
 
     /**

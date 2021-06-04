@@ -64,12 +64,15 @@ namespace HE_Arc::RPG
         switch (_attack)
         {
         case '1':
+            Logger::writeBattle(this->getName() + " choose Wizard::dizzySpell()");
             this->dizzySpell(anotherHero);
             break;
         case '2':
+            Logger::writeBattle(this->getName() + " choose Wizard::castSpell()");
             this->castSpell(anotherHero);
             break;
         case '3':
+            Logger::writeBattle(this->getName() + " choose Wizard::giantWave()");
             this->giantWave(anotherHero);
             break;
         default:

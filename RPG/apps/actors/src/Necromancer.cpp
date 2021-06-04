@@ -82,12 +82,15 @@ namespace HE_Arc::RPG
         switch (_attack)
         {
         case '1':
+            Logger::writeBattle(this->getName() + " choose Necromancer::lifeSteal()");
             this->lifeSteal(otherHero);
             break;
         case '2':
+            Logger::writeBattle(this->getName() + " choose Necromancer::riseUndead()");
             this->riseUndead(otherHero);
             break;
         case '3':
+            Logger::writeBattle(this->getName() + " choose Necromancer::cataclysm()");
             this->cataclysm(otherHero);
             break;
         default:

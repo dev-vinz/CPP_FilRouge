@@ -24,12 +24,15 @@ namespace HE_Arc::RPG
         switch (_attack)
         {
         case '1':
+            Logger::writeBattle(this->getName() + " choose Vampire::scare()");
             this->scare(_otherHero);
             break;
         case '2':
+            Logger::writeBattle(this->getName() + " choose Vampire::sucks()");
             this->sucks(_otherHero);
             break;
         case '3':
+            Logger::writeBattle(this->getName() + " choose Vampire::batAttack()");
             this->batAttack(_otherHero);
             break;
         default:

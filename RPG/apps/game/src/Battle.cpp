@@ -9,6 +9,15 @@ namespace HE_Arc::RPG
      */
     Battle::Battle(Hero *_player, Hero *_opponent) : player(_player), opponent(_opponent)
     {
+        Logger::writeBattle("Battle successfully created", _opponent->getName() + ".log");
+    }
+
+    /**
+     * @brief Destructor
+     */
+    Battle::~Battle()
+    {
+        Logger::writeBattle("Battle is ended");
     }
 
     /**
@@ -106,16 +115,22 @@ namespace HE_Arc::RPG
      */
     void Battle::nextTurn()
     {
+        Logger::writeBattle("- - -");
         if (this->turn == TPlayer)
         {
+            Logger::writeBattle("Player : " + this->player->getName() + "'s turn");
             this->playerTurn();
             this->turn = TOpponent;
         }
         else
         {
+            Logger::writeBattle("Opponent : " + this->opponent->getName() + "'s turn");
             this->opponentTurn();
             this->turn = TPlayer;
         }
+
+        Logger::writeBattle(this->player->getName() + " :\n\t\t\tHP = " + to_string(this->player->getHp()) + "\n\t\t\tAgility = " + to_string(this->player->getAgility()) + "\n\t\t\tStrength = " + to_string(this->player->getStrength()));
+        Logger::writeBattle(this->opponent->getName() + " :\n\t\t\tHP = " + to_string(this->opponent->getHp()) + "\n\t\t\tAgility = " + to_string(this->opponent->getAgility()) + "\n\t\t\tStrength = " + to_string(this->opponent->getStrength()));
     }
 
     /**
@@ -145,16 +160,20 @@ namespace HE_Arc::RPG
         switch (action)
         {
         case '1':
+            Logger::writeBattle(this->player->getName() + " opened his backpack");
             this->openBackPack();
             this->playerTurn();
             break;
         case '2':
+            Logger::writeBattle(this->player->getName() + " choose to fight");
             this->fight(this->player, this->opponent);
             break;
         case '3':
+            Logger::writeBattle(this->player->getName() + " prepared to dodge");
             this->prepareDodge(this->player);
             break;
         case '4':
+            Logger::writeBattle(this->player->getName() + " has concede");
             this->concede();
             break;
         default:
@@ -174,9 +193,11 @@ namespace HE_Arc::RPG
         switch (action)
         {
         case '1':
+            Logger::writeBattle(this->opponent->getName() + " choose to fight");
             this->fight(this->opponent, this->player);
             break;
         case '2':
+            Logger::writeBattle(this->opponent->getName() + " prepared to dodge");
             this->prepareDodge(this->opponent);
             break;
         default:
@@ -245,6 +266,7 @@ namespace HE_Arc::RPG
         {
             // _defender dodge the attack
             cout << " Oof, the attack missed " << _defender->getName() << endl;
+            Logger::writeBattle(_defender->getName() + " dodged the attack");
         }
 
         // Now we check who is dead
@@ -252,16 +274,19 @@ namespace HE_Arc::RPG
         {
             this->isOver = true;
             this->winner = TNone;
+            Logger::writeBattle("Nobody has won");
         }
         else if (_defender->isDead())
         {
             this->isOver = true;
             this->winner = (_attacker->getIsPlayer()) ? TPlayer : TOpponent;
+            Logger::writeBattle((this->winner == TPlayer) ? "Player : " + this->player->getName() + " has won" : "Opponent : " + this->opponent->getName() + " has won");
         }
         else if (_attacker->isDead())
         {
             this->isOver = true;
             this->winner = (_defender->getIsPlayer()) ? TPlayer : TOpponent;
+            Logger::writeBattle((this->winner == TPlayer) ? "Player : " + this->player->getName() + " has won" : "Opponent : " + this->opponent->getName() + " has won");
         }
     }
 

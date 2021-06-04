@@ -10,6 +10,7 @@
 #include "..\..\stuff\include\Shield.hpp"
 
 #include "..\..\utils\include\Color.hpp"
+#include "..\..\utils\include\Logger.hpp"
 #include "..\..\utils\include\RandomGenerator.hpp"
 
 #include "..\..\..\settings\Settings.hpp"
