@@ -28,13 +28,13 @@ namespace HE_Arc::RPG
             int power = ptrPotion->getFeature();
             switch (ptrPotion->getUtility())
             {
-            case Agility:
+            case TypePotion::Agility:
                 this->updateAgility(power);
                 break;
-            case Heal:
+            case TypePotion::Heal:
                 this->updateHp(power);
                 break;
-            case Strength:
+            case TypePotion::Strength:
                 this->updateStrength(power);
                 break;
             default:

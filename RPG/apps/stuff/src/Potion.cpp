@@ -42,6 +42,6 @@ namespace HE_Arc::RPG
      */
     string Potion::getName() const
     {
-        return "Potion of " + this->enumToStr[this->utility];
+        return "Potion of " + this->enumToStr.at(this->getUtility());
     }
 }

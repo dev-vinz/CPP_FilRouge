@@ -1,6 +1,8 @@
 #ifndef POTION_HPP
 #define POTION_HPP
 
+#include <map>
+
 #include "IObject.hpp"
 
 #include "..\..\enums\TypePotion.hpp"
@@ -13,7 +15,11 @@ namespace HE_Arc::RPG
         int power = 0;
         TypePotion utility = TypePotion::Heal;
 
-        string enumToStr[3] = {"Agility", "Heal", "Strength"};
+        map<char, string> enumToStr = {
+            {'a', "Agility"},
+            {'h', "Heal"},
+            {'s', "Strength"}
+        };
 
     public:
         Potion() = default;

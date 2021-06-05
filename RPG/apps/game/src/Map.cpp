@@ -218,23 +218,7 @@ namespace HE_Arc::RPG
                         if (potion->getPosX() == w && potion->getPosY() == h)
                         {
                             isPotion = true;
-                            cout << "| ";
-
-                            switch (potion->getUtility())
-                            {
-                            case Agility:
-                                cout << Color::grey("A ");
-                                break;
-                            case Heal:
-                                cout << Color::grey("H ");
-                                break;
-                            case Strength:
-                                cout << Color::grey("S ");
-                                break;
-                            default:
-                                cout << Color::grey("? ");
-                                break;
-                            }
+                            cout << "| " << Color::grey((char)toupper((char)(potion->getUtility()))) << ' ';
                         }
                     }
 

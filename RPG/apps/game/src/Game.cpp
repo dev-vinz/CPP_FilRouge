@@ -197,10 +197,11 @@ namespace HE_Arc::RPG
             }
         }
 
-        int start = random.getRandomNumber(3);
+        TypePotion array[] = {TypePotion::Agility, TypePotion::Heal, TypePotion::Strength};
+        int start = random.getRandomNumber(sizeof(array) / sizeof(array[0]));
         for (int k = 0; k < this->nbPotions; k++)
         {
-            TypePotion _type = (TypePotion)((start + k) % 3);
+            TypePotion _type = array[(start + k) % 3];
             this->listPotions.push_back(new Potion(random.getRandomNumber(7, 13), _type));
             Logger::writeGame("New Potion : " + this->listPotions.at(k)->getName());
         }
@@ -623,7 +624,7 @@ namespace HE_Arc::RPG
             this->player->backPack.show(Game::VJ_DEBUG_LOG);
         }
 
-        Logger::writeObjects(this->player->getName() + " collected a " + anyPotion->getName() + " with power of" + to_string(anyPotion->getFeature()));
+        Logger::writeObjects(this->player->getName() + " collected a " + anyPotion->getName() + " with power of " + to_string(anyPotion->getFeature()));
     }
 
     /**
