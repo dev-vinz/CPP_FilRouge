@@ -280,7 +280,7 @@
         +MagicWand() = default
         +MagicWand(int)
         +MagicWand(const MagicWand &)
-        +{abstract} ~MagicWand() = default
+        +{abstract} ~MagicWand() override = default
         ..
         +int getFeature() const override
         +int getName() const override
@@ -319,7 +319,7 @@
         +Scepter() = default
         +Scepter(int)
         +Scepter(const Scepter &)
-        +{abstract} ~Scepter() = default
+        +{abstract} ~Scepter() override = default
         ..
         +int getFeature() const override
         +string getName() const override
@@ -375,7 +375,7 @@
 
     class Battle
     {
-        -isOver
+        -bool isOver
         -Hero *player
         -Hero *opponent
         -Turn turn

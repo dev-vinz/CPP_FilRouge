@@ -20,6 +20,7 @@
 #include "..\..\actors\include\Warrior.hpp"
 #include "..\..\actors\include\Wizard.hpp"
 
+#include "..\..\enums\Character.hpp"
 #include "..\..\enums\Direction.hpp"
 #include "..\..\enums\Winner.hpp"
 

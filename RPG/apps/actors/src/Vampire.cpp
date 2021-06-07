@@ -67,7 +67,7 @@ namespace HE_Arc::RPG
         _hero->updateHp(-damage);
 
         cout << " " << this->getName() << " summons " << Color::grey(nbSummoned) << " bats, and " << Color::grey(nbAttack) << " atttack you" << endl
-             << " You lost " << Color::red(damage) << " HP" << endl;
+             << " You lost " << Color::lightRed(damage) << " HP" << endl;
     }
 
     /**

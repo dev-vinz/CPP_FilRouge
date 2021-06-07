@@ -98,17 +98,17 @@ namespace HE_Arc::RPG
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
 
-        switch (choice)
+        switch ((Character)choice)
         {
-        case '1':
+        case Character::eWarrior:
             this->player = new Warrior(_name, 50, 20, 80, 100, new Sword(15));
             Logger::writeGame(_name + " choose a Warrior");
             break;
-        case '2':
+        case Character::eWizard:
             this->player = new Wizard(_name, 55, 90, 5, 0, 100, new MagicWand(30));
             Logger::writeGame(_name + " choose a Wizard");
             break;
-        case '3':
+        case Character::eNecromancer:
             this->player = new Necromancer(_name, 70, 40, 40, 0, 100, new Scepter(30));
             Logger::writeGame(_name + " choose a Necromancer");
             break;
@@ -178,17 +178,17 @@ namespace HE_Arc::RPG
             int opponent = random.getRandomNumber(3);
             string name = random.getRandomName();
 
-            switch (opponent)
+            switch ((Character)opponent)
             {
-            case 0:
+            case Character::eInferi:
                 this->listOpponents.push_back(new Inferi(name, 10, 60, 50, 75));
                 Logger::writeGame("New Opponent : Inferi (" + name + ")");
                 break;
-            case 1:
+            case Character::eVampire:
                 this->listOpponents.push_back(new Vampire(name, 35, 50, 35, 75));
                 Logger::writeGame("New Opponent : Vampire (" + name + ")");
                 break;
-            case 2:
+            case Character::eMedusa:
                 this->listOpponents.push_back(new Medusa(name, 20, 50, 50, 75));
                 Logger::writeGame("New Opponent : Medusa (" + name + ")");
                 break;
