@@ -83,8 +83,9 @@ namespace HE_Arc::RPG
     void Game::choosePlayer(string _name)
     {
         char choice;
+        char tabChoices[] =  {'1', '2', '3'};
 
-        while (choice != '1' && choice != '2' && choice != '3')
+        while (!ConsoleController::checkInput(tabChoices, choice))
         {
             cin.clear();
             cout << " Please choose your type of hero with 1, 2 or 3 :" << endl
