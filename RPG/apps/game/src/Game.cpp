@@ -83,7 +83,7 @@ namespace HE_Arc::RPG
     void Game::choosePlayer(string _name)
     {
         char choice;
-        char tabChoices[] =  {'1', '2', '3'};
+        char tabChoices[] = {'1', '2', '3'};
 
         while (!ConsoleController::checkInput(tabChoices, choice))
         {
@@ -145,15 +145,20 @@ namespace HE_Arc::RPG
         {
         case Winner::WNone:
             cout << " " << ConsoleController::getCenter("Game Over", 45, '=') << endl;
+            cout << " " << ConsoleController::getCenter("You both died at the same time, sorry", 45) << endl;
             break;
         case Winner::WOpponent:
             cout << " " << ConsoleController::getCenter("Game Over", 45, '=') << endl;
+            cout << " " << ConsoleController::getCenter("Fortunately, you don't hear your opponent", 45) << endl;
+            cout << " " << ConsoleController::getCenter("laughing at you, you're dead", 45) << endl;
             break;
         case Winner::WPlayer:
             cout << " " << ConsoleController::getCenter("Congratulations", 45, '=') << endl;
+            cout << " " << ConsoleController::getCenter("You are the champion", 45) << endl;
             break;
         case Winner::WQuit:
             cout << " " << ConsoleController::getCenter("Quitted", 45, '=') << endl;
+            cout << " " << ConsoleController::getCenter("You left the game", 45) << endl;
             break;
         case Winner::WNull:
             cout << "[ERROR : Game::end] Winner is NULL" << endl;
@@ -164,6 +169,8 @@ namespace HE_Arc::RPG
         }
 
         cout << " ============================================" << endl;
+        this->displayGameDuration();
+        cout << endl;
     }
 
     /**
@@ -700,5 +707,20 @@ namespace HE_Arc::RPG
             listPotions.push_back(potion);
         }
         this->currentMap.update(listPotions);
+    }
+
+    /**
+     * @brief Display the duration's game
+     */
+    void Game::displayGameDuration() const
+    {
+        time_t endGame = time(0);
+
+        time_t duration = endGame - this->startGame;
+
+        int minutes = duration / 60;
+        int seconds = duration % 60;
+
+        cout << " Game duration : " << right << setfill('0') << setw(2) << minutes << " minutes and " << right << setfill('0') << setw(2) << seconds << " seconds." << endl;
     }
 }

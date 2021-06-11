@@ -52,6 +52,7 @@ namespace HE_Arc::RPG
         vector<Potion *> listPotions;
 
         Winner gWinner = Winner::WNull;
+        time_t startGame = time(0);
 
         bool checkFight(char _fight) const;
         bool checkMovement(Direction _movement, Hero *) const;
@@ -61,6 +62,8 @@ namespace HE_Arc::RPG
         void catchPotion(int _x, int _y);
         void display() const;
         void setPositions();
+
+        void displayGameDuration() const;
 
     public:
         Game();
