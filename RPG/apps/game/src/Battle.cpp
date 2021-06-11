@@ -188,15 +188,16 @@ namespace HE_Arc::RPG
     void Battle::opponentTurn()
     {
         RandomGenerator random;
-        char action = (char)(ASCII_ZERO + random.getRandomNumber(1, 3));
+        char action = (char)(ASCII_ZERO + random.getRandomNumber(1, 4));
 
         switch (action)
         {
         case '1':
+        case '2':
             Logger::writeBattle(this->opponent->getName() + " choose to fight");
             this->fight(this->opponent, this->player);
             break;
-        case '2':
+        case '3':
             Logger::writeBattle(this->opponent->getName() + " prepared to dodge");
             this->prepareDodge(this->opponent);
             break;
