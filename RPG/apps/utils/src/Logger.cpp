@@ -48,7 +48,16 @@ namespace HE_Arc::RPG
 
         Logger::isOk = true;
 
-        Logger::writeGame("Initialization completed");
+        try
+        {
+            Logger::writeGame("Initialization completed");
+        }
+        catch (exception e)
+        {
+            Logger::isOk = false;
+            cout << Color::lightRed("[EXCEPTION] Cannot create logs") << endl;
+            cout << e.what() << endl;
+        }
     }
 
     /**
@@ -144,7 +153,7 @@ namespace HE_Arc::RPG
             {
                 cout << "[ERROR : Logger::createFile] Unable to create folder" << endl
                      << "path = " << _path << endl;
-                exit(-1);
+                Logger::isOk = false;
             }
         }
 

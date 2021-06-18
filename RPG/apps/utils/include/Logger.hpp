@@ -2,14 +2,15 @@
 #define LOGGER_HPP
 
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <stdlib.h>
 #include <string>
 #include <ctime>
+#include <sys/stat.h>
 #include <windows.h>
 
-#include <sys/stat.h>
-#include <iomanip>
+#include "Color.hpp"
 
 using namespace std;
 
